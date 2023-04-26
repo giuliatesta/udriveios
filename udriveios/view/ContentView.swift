@@ -7,20 +7,25 @@
 
 import SwiftUI
 
+func signin() {
+    print("ciao")
+}
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Image("steering_wheel")
+            Text("uDrive").foregroundColor(Color.pink)
         }
+        
         .padding()
     }
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.light)
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C68243E829F9792300E9E0B0 /* home.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243E729F9792300E9E0B0 /* home.swift */; };
+		C68243EC29F97B4900E9E0B0 /* myViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243EB29F97B4900E9E0B0 /* myViewModifier.swift */; };
 		C6D2B65329F966BE0030A8AC /* udriveiosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */; };
 		C6D2B65529F966BE0030A8AC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B65429F966BE0030A8AC /* ContentView.swift */; };
 		C6D2B65729F966BF0030A8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D2B65629F966BF0030A8AC /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C68243E729F9792300E9E0B0 /* home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = home.swift; sourceTree = "<group>"; };
+		C68243EB29F97B4900E9E0B0 /* myViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myViewModifier.swift; sourceTree = "<group>"; };
 		C6D2B64F29F966BE0030A8AC /* udriveios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = udriveios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = udriveiosApp.swift; sourceTree = "<group>"; };
 		C6D2B65429F966BE0030A8AC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +75,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C68243E629F9790200E9E0B0 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				C6D2B65429F966BE0030A8AC /* ContentView.swift */,
+				C68243E729F9792300E9E0B0 /* home.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		C68243E929F9795E00E9E0B0 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		C68243EA29F97B2A00E9E0B0 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				C68243EB29F97B4900E9E0B0 /* myViewModifier.swift */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
 		C6D2B64629F966BE0030A8AC = {
 			isa = PBXGroup;
 			children = (
@@ -94,8 +122,10 @@
 		C6D2B65129F966BE0030A8AC /* udriveios */ = {
 			isa = PBXGroup;
 			children = (
+				C68243EA29F97B2A00E9E0B0 /* controller */,
 				C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */,
-				C6D2B65429F966BE0030A8AC /* ContentView.swift */,
+				C68243E929F9795E00E9E0B0 /* model */,
+				C68243E629F9790200E9E0B0 /* view */,
 				C6D2B65629F966BF0030A8AC /* Assets.xcassets */,
 				C6D2B65829F966BF0030A8AC /* Preview Content */,
 			);
@@ -258,7 +288,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6D2B65529F966BE0030A8AC /* ContentView.swift in Sources */,
+				C68243E829F9792300E9E0B0 /* home.swift in Sources */,
 				C6D2B65329F966BE0030A8AC /* udriveiosApp.swift in Sources */,
+				C68243EC29F97B4900E9E0B0 /* myViewModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
