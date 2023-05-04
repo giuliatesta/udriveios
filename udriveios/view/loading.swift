@@ -8,22 +8,26 @@
 import SwiftUI
 
 struct LoadingView: View {
-    var body: some View {
+    @State private var isRotating = 0.0
+      var body: some View {
         VStack {
-            Text("uDrive")
-                .fontWeight(Font.Weight.semibold)
-                .font(.system(size: 40))
             Image("car-steering-wheel-svgrepo-com")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .padding(40)
-            
+                .padding([.horizontal], 70)
+                .rotationEffect(.degrees(isRotating))
+                .onAppear() {
+                    withAnimation(.linear(duration: 1).speed(0.25).repeatForever(autoreverses: false)) {
+                        isRotating = 360.0
+                    }
+                }
+                .invertColorModifier()
+
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-    }
-    
+      }
 }
+
 
 struct LoadingView_Previews: PreviewProvider {
     static var previews: some View {

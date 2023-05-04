@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		C614A34029FA844700A05F29 /* loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = C614A33F29FA844700A05F29 /* loading.swift */; };
 		C68243E829F9792300E9E0B0 /* home.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243E729F9792300E9E0B0 /* home.swift */; };
-		C68243EC29F97B4900E9E0B0 /* myViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243EB29F97B4900E9E0B0 /* myViewModifier.swift */; };
+		C68243EC29F97B4900E9E0B0 /* InvertColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243EB29F97B4900E9E0B0 /* InvertColorModifier.swift */; };
 		C6D2B65329F966BE0030A8AC /* udriveiosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */; };
 		C6D2B65529F966BE0030A8AC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B65429F966BE0030A8AC /* ContentView.swift */; };
 		C6D2B65729F966BF0030A8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D2B65629F966BF0030A8AC /* Assets.xcassets */; };
@@ -39,7 +39,7 @@
 /* Begin PBXFileReference section */
 		C614A33F29FA844700A05F29 /* loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loading.swift; sourceTree = "<group>"; };
 		C68243E729F9792300E9E0B0 /* home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = home.swift; sourceTree = "<group>"; };
-		C68243EB29F97B4900E9E0B0 /* myViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myViewModifier.swift; sourceTree = "<group>"; };
+		C68243EB29F97B4900E9E0B0 /* InvertColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertColorModifier.swift; sourceTree = "<group>"; };
 		C6D2B64F29F966BE0030A8AC /* udriveios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = udriveios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = udriveiosApp.swift; sourceTree = "<group>"; };
 		C6D2B65429F966BE0030A8AC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		C68243EA29F97B2A00E9E0B0 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				C68243EB29F97B4900E9E0B0 /* myViewModifier.swift */,
+				C68243EB29F97B4900E9E0B0 /* InvertColorModifier.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -294,7 +294,7 @@
 				C68243E829F9792300E9E0B0 /* home.swift in Sources */,
 				C6D2B65329F966BE0030A8AC /* udriveiosApp.swift in Sources */,
 				C614A34029FA844700A05F29 /* loading.swift in Sources */,
-				C68243EC29F97B4900E9E0B0 /* myViewModifier.swift in Sources */,
+				C68243EC29F97B4900E9E0B0 /* InvertColorModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

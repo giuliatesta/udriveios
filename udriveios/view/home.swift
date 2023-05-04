@@ -15,7 +15,7 @@ struct HomePage: View {
                 .navigationTitle("uDrive")
                 .toolbar(.visible)
         }
-        .myViewModifier()
+        
     }
 }
 
