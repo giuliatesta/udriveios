@@ -9,11 +9,23 @@ import Foundation
 import SwiftUI
  
 struct HomePage: View {
+    @State private var showingAlert = false
+    
     var body: some View {
         NavigationView {
-            Text("Ciao")
+            VStack{
+                Text("Inizia")
                 .navigationTitle("uDrive")
-                .toolbar(.visible)
+                //.toolbar(.visible)
+                Button(action: {
+                    self.showingAlert = true
+                }) {
+                    Text("Button")
+                }
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Titolo"), message: Text("Testo"), dismissButton: .default(Text("OK!")))
+                }
+            }
         }
         
     }
