@@ -38,6 +38,8 @@ class AccelerometerValues{
             
             // Add the timer to the current run loop.
             RunLoop.current.add(self.timer, forMode: .default)
+        }else{
+            print("Nessun accelerometro trovato")
         }
     }
     

@@ -22,6 +22,13 @@ struct InvertColorModifier : ViewModifier{
     
 }
 
+extension Image {
+
+    func fillImageModifier() -> some View {
+        self.resizable()
+            .aspectRatio(contentMode: .fill)
+    }
+}
 
 extension View {
     func invertColorModifier() -> some View {

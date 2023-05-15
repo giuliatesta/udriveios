@@ -53,8 +53,8 @@
 		C6D2B66929F966C00030A8AC /* udriveiosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = udriveiosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D2B66D29F966C00030A8AC /* udriveiosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = udriveiosUITests.swift; sourceTree = "<group>"; };
 		C6D2B66F29F966C00030A8AC /* udriveiosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = udriveiosUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		F5B5E1CD2A0926F400C7730F /* AccelerometerValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccelerometerValues.swift; path = udriveios/AccelerometerValues.swift; sourceTree = SOURCE_ROOT; };
-		F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CMMotionManager.swift; path = udriveios/CMMotionManager.swift; sourceTree = SOURCE_ROOT; };
+		F5B5E1CD2A0926F400C7730F /* AccelerometerValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccelerometerValues.swift; path = udriveios/model/model/AccelerometerValues.swift; sourceTree = SOURCE_ROOT; };
+		F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CMMotionManager.swift; path = udriveios/model/model/CMMotionManager.swift; sourceTree = SOURCE_ROOT; };
 		F5C65DCA2A125B8D00A1D906 /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,15 +93,6 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		C68243E929F9795E00E9E0B0 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */,
-				F5B5E1CD2A0926F400C7730F /* AccelerometerValues.swift */,
-			);
-			path = model;
-			sourceTree = "<group>";
-		};
 		C68243EA29F97B2A00E9E0B0 /* controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,7 +127,7 @@
 			children = (
 				C68243EA29F97B2A00E9E0B0 /* controller */,
 				C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */,
-				C68243E929F9795E00E9E0B0 /* model */,
+				F564549C2A127B3000E881FF /* model */,
 				C68243E629F9790200E9E0B0 /* view */,
 				C6D2B65629F966BF0030A8AC /* Assets.xcassets */,
 				C6D2B65829F966BF0030A8AC /* Preview Content */,
@@ -167,6 +158,16 @@
 				C6D2B66F29F966C00030A8AC /* udriveiosUITestsLaunchTests.swift */,
 			);
 			path = udriveiosUITests;
+			sourceTree = "<group>";
+		};
+		F564549C2A127B3000E881FF /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */,
+				F5B5E1CD2A0926F400C7730F /* AccelerometerValues.swift */,
+			);
+			name = model;
+			path = model/model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
