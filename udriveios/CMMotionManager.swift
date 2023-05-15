@@ -16,7 +16,6 @@ class MyCMMotionManager : CMMotionManager {
     private override init(){
         
     }
-    
-    
+        
 }
 

@@ -10,11 +10,12 @@ import SwiftUI
  
 struct HomePage: View {
     @State private var showingAlert = false
+    private var accelerometerValues = AccelerometerValues()
     
     var body: some View {
         NavigationView {
             VStack{
-                Text("Inizia")
+                Text(self.accelerometerValues.getValuesToString())
                 .navigationTitle("uDrive")
                 //.toolbar(.visible)
                 Button(action: {
@@ -26,8 +27,9 @@ struct HomePage: View {
                     Alert(title: Text("Titolo"), message: Text("Testo"), dismissButton: .default(Text("OK!")))
                 }
             }
+        }.viewDidLoadModifier{
+            self.accelerometerValues.startAccelerometers()
         }
-        
     }
 }
 

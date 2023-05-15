@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
 class AccelerometerValues{
     
     let motion = MyCMMotionManager.instance
     var timer = Timer()
+    @State var accelerometerValues : (Double, Double, Double) = (0.0,0.0,0.0)
     
     func startAccelerometers() {
         // Make sure the accelerometer hardware is available.
@@ -27,7 +29,9 @@ class AccelerometerValues{
                     let y = data.acceleration.y
                     let z = data.acceleration.z
                     
-                    print(x,y,z)
+                    self.accelerometerValues = ((Double(x)),
+                                                (Double(y)),
+                                                (Double(z)))
                     // Use the accelerometer data in your app.
                 }
             })
@@ -35,5 +39,23 @@ class AccelerometerValues{
             // Add the timer to the current run loop.
             RunLoop.current.add(self.timer, forMode: .default)
         }
+    }
+    
+    func getValuesToString() -> String {
+        return "x:" + accelerometerValues.0.toString() + " ; " +
+                "y:" + accelerometerValues.1.toString() + " ; " +
+                "z:" + accelerometerValues.2.toString()
+    }
+}
+
+extension Double {
+    /// Rounds the double to decimal places value
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+    
+    func toString() -> String {
+        return "\(self.rounded(toPlaces :3))"
     }
 }
