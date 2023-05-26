@@ -7,16 +7,17 @@
 
 import Foundation
 import SwiftUI
+import CoreMotion
 
 class AccelerometerValues{
     
-    let motion = MyCMMotionManager.instance
+    let motion = CMMotionManager.init()
     var timer = Timer()
     @State var accelerometerValues : (Double, Double, Double) = (0.0,0.0,0.0)
     
     func startAccelerometers() {
         // Make sure the accelerometer hardware is available.
-        if self.motion.isAccelerometerAvailable {
+        if self.motion.isDeviceMotionAvailable {
             self.motion.accelerometerUpdateInterval = 1.0 / 60.0  // 60 Hz
             self.motion.startAccelerometerUpdates()
             
@@ -47,17 +48,5 @@ class AccelerometerValues{
         return "x:" + accelerometerValues.0.toString() + " ; " +
                 "y:" + accelerometerValues.1.toString() + " ; " +
                 "z:" + accelerometerValues.2.toString()
-    }
-}
-
-extension Double {
-    /// Rounds the double to decimal places value
-    func rounded(toPlaces places:Int) -> Double {
-        let divisor = pow(10.0, Double(places))
-        return (self * divisor).rounded() / divisor
-    }
-    
-    func toString() -> String {
-        return "\(self.rounded(toPlaces :3))"
     }
 }
