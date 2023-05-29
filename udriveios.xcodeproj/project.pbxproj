@@ -18,6 +18,7 @@
 		C6D2B66E29F966C00030A8AC /* udriveiosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B66D29F966C00030A8AC /* udriveiosUITests.swift */; };
 		C6D2B67029F966C00030A8AC /* udriveiosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B66F29F966C00030A8AC /* udriveiosUITestsLaunchTests.swift */; };
 		F547D7942A20ED7B00B23FD4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F547D7932A20ED7B00B23FD4 /* Utils.swift */; };
+		F59997F22A24DBAE005D2677 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59997F12A24DBAE005D2677 /* AlertView.swift */; };
 		F5B5E1CE2A0926F400C7730F /* AccelerometerValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B5E1CD2A0926F400C7730F /* AccelerometerValues.swift */; };
 		F5B5E1D02A09293C00C7730F /* CMMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */; };
 		F5C65DCB2A125B8D00A1D906 /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C65DCA2A125B8D00A1D906 /* ViewDidLoadModifier.swift */; };
@@ -55,6 +56,7 @@
 		C6D2B66D29F966C00030A8AC /* udriveiosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = udriveiosUITests.swift; sourceTree = "<group>"; };
 		C6D2B66F29F966C00030A8AC /* udriveiosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = udriveiosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F547D7932A20ED7B00B23FD4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		F59997F12A24DBAE005D2677 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		F5B5E1CD2A0926F400C7730F /* AccelerometerValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccelerometerValues.swift; path = udriveios/model/model/AccelerometerValues.swift; sourceTree = SOURCE_ROOT; };
 		F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CMMotionManager.swift; path = udriveios/model/model/CMMotionManager.swift; sourceTree = SOURCE_ROOT; };
 		F5C65DCA2A125B8D00A1D906 /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				C6D2B65429F966BE0030A8AC /* ContentView.swift */,
+				F59997F12A24DBAE005D2677 /* AlertView.swift */,
 				C68243E729F9792300E9E0B0 /* home.swift */,
 				C614A33F29FA844700A05F29 /* loading.swift */,
 			);
@@ -308,6 +311,7 @@
 				C68243E829F9792300E9E0B0 /* home.swift in Sources */,
 				C6D2B65329F966BE0030A8AC /* udriveiosApp.swift in Sources */,
 				F547D7942A20ED7B00B23FD4 /* Utils.swift in Sources */,
+				F59997F22A24DBAE005D2677 /* AlertView.swift in Sources */,
 				F5B5E1D02A09293C00C7730F /* CMMotionManager.swift in Sources */,
 				C614A34029FA844700A05F29 /* loading.swift in Sources */,
 				C68243EC29F97B4900E9E0B0 /* InvertColorModifier.swift in Sources */,
@@ -479,7 +483,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -511,7 +515,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

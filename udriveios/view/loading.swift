@@ -12,8 +12,7 @@ struct LoadingView: View {
       var body: some View {
         VStack {
             Image("car-steering-wheel-svgrepo-com")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
+                .fitImageModifier()
                 .padding([.horizontal], 70)
                 .rotationEffect(.degrees(isRotating))
                 .onAppear() {

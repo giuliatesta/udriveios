@@ -13,12 +13,15 @@ let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 let utils = Utils()
 
 struct HomePage: View {
-    @State private var showingAlert = false
+    @State private var showAlert = false
+    
     var motionManager = CMMotionManager()
     @State private var accelerometerX : Double = 0
     @State private var accelerometerY : Double = 0
     @State private var accelerometerZ : Double = 0
     @State private var riskyBehaviour = true
+    
+    @State var direction = Direction.NONE
     
     var arrowRightColour: Color{
         if self.accelerometerX > 0.0{
@@ -35,14 +38,14 @@ struct HomePage: View {
         }
     }
     var arrowTopColour: Color{
-        if self.accelerometerY > 0.0{
+        if self.accelerometerZ < 0.0{
             return .blue
         }else{
             return .black
         }
     }
     var arrowBottomColour: Color{
-        if self.accelerometerY < 0.0{
+        if self.accelerometerZ > 0.0{
             return .blue
         }else{
             return .black
@@ -77,35 +80,38 @@ struct HomePage: View {
                      + utils.getValueToString(value: self.accelerometerY)
                      + utils.getValueToString(value: self.accelerometerZ))
                 .navigationTitle("uDrive")
-                //.toolbar(.visible)
+                .toolbar(.visible)
                 Button(action: {
-                    self.showingAlert = true
+                    showAlert.toggle()
                 }) {
-                    Text("Button")
-                }
-                .alert(isPresented: $showingAlert) {
-                    Alert(title: Text("Titolo"), message: Text("Testo"), dismissButton: .default(Text("OK!")))
+                    Text("ShowAlert").font(.largeTitle).monospacedDigit().foregroundColor(.blue)
                 }
             }
             /*.alert(isPresented: $riskyBehaviour) {
                 Alert(title: Text("Attenzione, pericolo"))
             }*/
         }
+        .viewDidLoadModifier(){
+            motionManager.startAccelerometerUpdates()
+            motionManager.accelerometerUpdateInterval = 1 // seconds
+        }
         .onReceive(timer) { input in
-            print(motionManager.isDeviceMotionAvailable)
-            if motionManager.isDeviceMotionAvailable {
-                motionManager.deviceMotionUpdateInterval = 0.3
-                motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { data,error in
-                    accelerometerX = data?.userAcceleration.x ?? 0
-                    accelerometerY = data?.userAcceleration.y ?? 0
-                    accelerometerZ = data?.userAcceleration.z ?? 0
-                    print("User Acceleration")
-                    print(data?.userAcceleration.x ?? 0)
-                    print(data?.userAcceleration.y ?? 0)
-                    print(data?.userAcceleration.z ?? 0)
+            if motionManager.isAccelerometerActive {
+                motionManager.startAccelerometerUpdates(to: OperationQueue.main) { data,error in
+                    accelerometerX = data?.acceleration.x ?? 0
+                    accelerometerY = data?.acceleration.y ?? 0
+                    accelerometerZ = data?.acceleration.z ?? 0
+                    print("Acceleration values")
+                    print(data?.acceleration.x ?? 0)
+                    print(data?.acceleration.y ?? 0)
+                    print(data?.acceleration.z ?? 0)
                 }
             }
         }
+        
+        //NavigationLink(destination: AlertView(direction: $direction)){
+        //    EmptyView()
+        //}
     }
 }
 

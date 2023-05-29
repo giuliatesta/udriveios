@@ -28,6 +28,11 @@ extension Image {
         self.resizable()
             .aspectRatio(contentMode: .fill)
     }
+    
+    func fitImageModifier() -> some View {
+        self.resizable()
+            .aspectRatio(contentMode: .fit)
+    }
 }
 
 extension View {

@@ -26,3 +26,18 @@ extension Double {
         return "\(self.rounded(toPlaces :3))"
     }
 }
+
+
+/**
+ Enum class representing the car's directions
+ */
+enum Direction{
+    /**
+     * BACKWARD: reverse gear
+     * FORWARD: forward gear
+     * LEFT: left turn
+     * RIGHT: right turn
+     * NONE:  no movement is being performed
+     */
+    case BACKWARD, FORWARD, LEFT, RIGHT, NONE
+}
