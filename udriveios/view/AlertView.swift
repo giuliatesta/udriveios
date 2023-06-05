@@ -10,8 +10,8 @@ import SwiftUI
 let blinkTimer = Timer.publish(every: 0.3, on: .main, in: .common).autoconnect()
 
 struct AlertView : View{
-    //@Binding var direction: Direction
-    var direction: Direction
+    @Binding var direction: Direction
+    //var direction: Direction
     @State var backgroundColor = Color.red
     @State private var showHome = false
 
@@ -21,17 +21,21 @@ struct AlertView : View{
                 ZStack(alignment: .center){
                     switch direction {
                     case .BACKWARD:
-                        Image(systemName: "arrow.up")
+                        Image(systemName: "arrow.down")
                             .fitImageModifier()
+                            .padding([.horizontal], 70)
                     case .FORWARD:
                         Image(systemName: "arrow.up")
                             .fitImageModifier()
+                            .padding([.horizontal], 70)
                     case .LEFT:
-                        Image(systemName: "arrow.up")
+                        Image(systemName: "arrow.left")
                             .fitImageModifier()
+                            .padding([.horizontal], 70)
                     case .RIGHT:
-                        Image(systemName: "arrow.up")
+                        Image(systemName: "arrow.right")
                             .fitImageModifier()
+                            .padding([.horizontal], 70)
                     case .NONE:
                         Image(systemName: "arrow.up")
                             .fitImageModifier()
@@ -57,8 +61,8 @@ struct AlertView : View{
     }
 }
 
-struct AlertView_Previews: PreviewProvider {
-    static var previews: some View {
-        AlertView(direction: Direction.NONE)
-    }
-}
+//struct AlertView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AlertView(direction: Direction.NONE)
+//    }
+//}

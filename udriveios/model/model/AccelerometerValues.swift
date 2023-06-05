@@ -10,38 +10,38 @@ import SwiftUI
 import CoreMotion
 
 class AccelerometerValues{
+    var accelerometerValues : (Double, Double, Double) = (0.0,0.0,0.0)
     
-    let motion = CMMotionManager.init()
-    var timer = Timer()
-    @State var accelerometerValues : (Double, Double, Double) = (0.0,0.0,0.0)
+    init(accelerometerValues: (Double, Double, Double)) {
+        self.accelerometerValues = accelerometerValues
+    }
     
-    func startAccelerometers() {
-        // Make sure the accelerometer hardware is available.
-        if self.motion.isDeviceMotionAvailable {
-            self.motion.accelerometerUpdateInterval = 1.0 / 60.0  // 60 Hz
-            self.motion.startAccelerometerUpdates()
-            
-            // Configure a timer to fetch the data.
-            self.timer = Timer(fire: Date(), interval: (1.0/60.0),
-                               repeats: true, block: { (timer) in
-                // Get the accelerometer data.
-                if let data = self.motion.accelerometerData {
-                    let x = data.acceleration.x
-                    let y = data.acceleration.y
-                    let z = data.acceleration.z
-                    
-                    self.accelerometerValues = ((Double(x)),
-                                                (Double(y)),
-                                                (Double(z)))
-                    // Use the accelerometer data in your app.
-                }
-            })
-            
-            // Add the timer to the current run loop.
-            RunLoop.current.add(self.timer, forMode: .default)
-        }else{
-            print("Nessun accelerometro trovato")
-        }
+    func setValues(_ val : (Double,Double,Double)){
+        self.accelerometerValues = val
+    }
+    
+    func getAccelerometerX() -> Double {
+        return self.accelerometerValues.0
+    }
+
+    func getAccelerometerY() -> Double {
+        return self.accelerometerValues.1
+    }
+    
+    func getAccelerometerZ() -> Double {
+        return self.accelerometerValues.2
+    }
+    
+    func setAccelerometerX(_ val: Double){
+        self.accelerometerValues.0 = val
+    }
+
+    func setAccelerometerY(_ val: Double){
+        self.accelerometerValues.1 = val
+    }
+    
+    func setAccelerometerZ(_ val: Double){
+        self.accelerometerValues.2 = val
     }
     
     func getValuesToString() -> String {

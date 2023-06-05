@@ -16,22 +16,28 @@ struct HomePage: View {
     @State private var showAlert = false
     
     var motionManager = CMMotionManager()
+    @State private var accelerometerValues = AccelerometerValues(accelerometerValues: (0,0,0))
     @State private var accelerometerX : Double = 0
     @State private var accelerometerY : Double = 0
     @State private var accelerometerZ : Double = 0
-    @State private var riskyBehaviour = true
     
-    @State var direction = Direction.NONE
+    @State var direction = Direction.BACKWARD
+    var threshold : Double = 100
+    @State var thresholdSurpassed = false
+    var classifier = Classifier()
+    
+    @State private var showStopAlert = false
+
     
     var arrowRightColour: Color{
-        if self.accelerometerX > 0.0{
+        if self.accelerometerValues.getAccelerometerX() > 0.0{
             return .blue
         }else{
             return .black
         }
     }
     var arrowLeftColour: Color{
-        if self.accelerometerX < 0.0{
+        if self.accelerometerValues.getAccelerometerX() < 0.0{
             return .blue
         }else{
             return .black
@@ -76,21 +82,32 @@ struct HomePage: View {
                         .padding([.horizontal], 150)
                 }.padding(100)
                 
-                Text(utils.getValueToString(value: self.accelerometerX)
-                     + utils.getValueToString(value: self.accelerometerY)
-                     + utils.getValueToString(value: self.accelerometerZ))
-                .navigationTitle("uDrive")
-                .toolbar(.visible)
-                Button(action: {
-                    showAlert.toggle()
-                }) {
-                    Text("ShowAlert").font(.largeTitle).monospacedDigit().foregroundColor(.blue)
+                Button("STOP"){
+                    showStopAlert = true
+                }.alert(isPresented: $showStopAlert){
+                    Alert(
+                        title: Text("Sei sicuro di voler terminare la guida?"),
+                        primaryButton: Alert.Button.default(Text("OK")),
+                        secondaryButton: Alert.Button.destructive(Text("Annulla"))
+                    )
                 }
+                
+                Text(accelerometerValues.getValuesToString())
+                
+                
+                NavigationLink(destination: AlertView(direction: $direction),
+                    isActive: $thresholdSurpassed
+                ){
+                    EmptyView()
+                }
+
+                
             }
-            /*.alert(isPresented: $riskyBehaviour) {
-                Alert(title: Text("Attenzione, pericolo"))
-            }*/
+            .navigationTitle("uDrive")
+            .toolbar(.visible)
+            .padding(10)
         }
+
         .viewDidLoadModifier(){
             motionManager.startAccelerometerUpdates()
             motionManager.accelerometerUpdateInterval = 1 // seconds
@@ -98,20 +115,13 @@ struct HomePage: View {
         .onReceive(timer) { input in
             if motionManager.isAccelerometerActive {
                 motionManager.startAccelerometerUpdates(to: OperationQueue.main) { data,error in
-                    accelerometerX = data?.acceleration.x ?? 0
-                    accelerometerY = data?.acceleration.y ?? 0
-                    accelerometerZ = data?.acceleration.z ?? 0
-                    print("Acceleration values")
-                    print(data?.acceleration.x ?? 0)
-                    print(data?.acceleration.y ?? 0)
-                    print(data?.acceleration.z ?? 0)
+                    self.accelerometerValues.setValues((data?.acceleration.x ?? 0,
+                                                        data?.acceleration.y ?? 0,
+                                                        data?.acceleration.z ?? 0))
+                    thresholdSurpassed = classifier.classify(values: accelerometerValues, threshold: threshold)
                 }
             }
         }
-        
-        //NavigationLink(destination: AlertView(direction: $direction)){
-        //    EmptyView()
-        //}
     }
 }
 
