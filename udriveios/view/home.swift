@@ -14,23 +14,20 @@ let utils = Utils()
 
 struct HomePage: View {
     @State private var showAlert = false
-    
+    //Con una variabile per valore di accelerometro funzionava
     var motionManager = CMMotionManager()
     @State private var accelerometerValues = AccelerometerValues(accelerometerValues: (0,0,0))
-    @State private var accelerometerX : Double = 0
-    @State private var accelerometerY : Double = 0
-    @State private var accelerometerZ : Double = 0
     
-    @State var direction = Direction.BACKWARD
+    @State var direction : Direction = Direction.NONE
     var threshold : Double = 100
     @State var thresholdSurpassed = false
     var classifier = Classifier()
     
     @State private var showStopAlert = false
 
-    
     var arrowRightColour: Color{
         if self.accelerometerValues.getAccelerometerX() > 0.0{
+            print("BLUE RIGHT")
             return .blue
         }else{
             return .black
@@ -38,20 +35,23 @@ struct HomePage: View {
     }
     var arrowLeftColour: Color{
         if self.accelerometerValues.getAccelerometerX() < 0.0{
+            print("BLUE LEFT")
             return .blue
         }else{
             return .black
         }
     }
     var arrowTopColour: Color{
-        if self.accelerometerZ < 0.0{
+        if self.accelerometerValues.getAccelerometerZ() < 0.0{
+            print("BLUE TOP")
             return .blue
         }else{
             return .black
         }
     }
     var arrowBottomColour: Color{
-        if self.accelerometerZ > 0.0{
+        if self.accelerometerValues.getAccelerometerZ() > 0.0{
+            print("BLUE RIGHT")
             return .blue
         }else{
             return .black
@@ -94,21 +94,18 @@ struct HomePage: View {
                 
                 Text(accelerometerValues.getValuesToString())
                 
-                
                 NavigationLink(destination: AlertView(direction: $direction),
                     isActive: $thresholdSurpassed
                 ){
                     EmptyView()
                 }
-
-                
             }
             .navigationTitle("uDrive")
-            .toolbar(.visible)
             .padding(10)
         }
-
+        .navigationBarBackButtonHidden(true)
         .viewDidLoadModifier(){
+            print("LOADED VIEW")
             motionManager.startAccelerometerUpdates()
             motionManager.accelerometerUpdateInterval = 1 // seconds
         }
@@ -118,6 +115,7 @@ struct HomePage: View {
                     self.accelerometerValues.setValues((data?.acceleration.x ?? 0,
                                                         data?.acceleration.y ?? 0,
                                                         data?.acceleration.z ?? 0))
+                    print(accelerometerValues.getValuesToString())
                     thresholdSurpassed = classifier.classify(values: accelerometerValues, threshold: threshold)
                 }
             }

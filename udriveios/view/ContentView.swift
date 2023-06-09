@@ -8,10 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject private var launchScreenState: LaunchScreenStateManager
+    
     var body: some View {
-        HomePage()
+        StartView()
+        .task {
+            try? await getDataFromApi()
+            try? await Task.sleep(for: Duration.seconds(1))
+            self.launchScreenState.dismiss()
+        }
     }
     
+    fileprivate func getDataFromApi() async throws {
+        let googleURL = URL(string: "https://www.google.com")!
+        let (_,response) = try await URLSession.shared.data(from: googleURL)
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
