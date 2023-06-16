@@ -21,7 +21,7 @@ struct ContentView: View {
     
     fileprivate func getDataFromApi() async throws {
         let googleURL = URL(string: "https://www.google.com")!
-        let (_,response) = try await URLSession.shared.data(from: googleURL)
+        let (_,_) = try await URLSession.shared.data(from: googleURL)
     }
 }
 
