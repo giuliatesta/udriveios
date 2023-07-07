@@ -16,7 +16,8 @@ struct HomePage: View {
     @State private var showAlert = false
     //Con una variabile per valore di accelerometro funzionava
     var motionManager = CMMotionManager()
-    @State private var accelerometerValues = AccelerometerValues(accelerometerValues: (0,0,0))
+    @State private var accelerometerValues = SensorValues(sensorValues: (0,0,0))
+    @State private var gyroscopeValues = SensorValues(sensorValues: (0,0,0))
     
     @State var direction : Direction = Direction.NONE
     var threshold : Double = 100
@@ -25,62 +26,16 @@ struct HomePage: View {
     
     @State private var showStopAlert = false
 
-    var arrowRightColour: Color{
-        if self.accelerometerValues.getAccelerometerX() > 0.0{
-            print("BLUE RIGHT")
-            return .blue
-        }else{
-            return .black
-        }
-    }
-    var arrowLeftColour: Color{
-        if self.accelerometerValues.getAccelerometerX() < 0.0{
-            print("BLUE LEFT")
-            return .blue
-        }else{
-            return .black
-        }
-    }
-    var arrowTopColour: Color{
-        if self.accelerometerValues.getAccelerometerZ() < 0.0{
-            print("BLUE TOP")
-            return .blue
-        }else{
-            return .black
-        }
-    }
-    var arrowBottomColour: Color{
-        if self.accelerometerValues.getAccelerometerZ() > 0.0{
-            print("BLUE RIGHT")
-            return .blue
-        }else{
-            return .black
-        }
-    }
-    
     var body: some View {
         NavigationView {
             VStack{
                 VStack{
-                    Image(systemName: "arrow.up")
+
+                    Image(systemName: "timer")
                         .fillImageModifier()
-                        .foregroundColor(arrowTopColour)
                         .padding([.horizontal], 150)
-                    HStack{
-                        Image(systemName: "arrow.left")
-                            .fillImageModifier()
-                            .foregroundColor(arrowLeftColour)
-                        Image(systemName: "triangle")
-                            .fillImageModifier()
-                        Image(systemName: "arrow.right")
-                            .fillImageModifier()
-                            .foregroundColor(arrowRightColour)
-                    }.padding(20)
-                    Image(systemName: "arrow.down")
-                        .fillImageModifier()
-                        .foregroundColor(arrowBottomColour)
-                        .padding([.horizontal], 150)
-                }.padding(100)
+                    
+                }.padding(200)
                 
                 Button("STOP"){
                     showStopAlert = true

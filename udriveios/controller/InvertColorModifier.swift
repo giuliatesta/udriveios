@@ -42,3 +42,5 @@ extension View {
     }
 }
 
+// Using system font "San Francisco"
+let fontSystem = Font.system(size: 30.0)

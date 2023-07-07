@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C614A34029FA844700A05F29 /* loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = C614A33F29FA844700A05F29 /* loading.swift */; };
+		C6246FDE2A585CBC00402F6C /* rotate_phone.gif in Resources */ = {isa = PBXBuildFile; fileRef = C6246FDD2A585CBC00402F6C /* rotate_phone.gif */; };
+		C6246FE02A585D8700402F6C /* GifImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6246FDF2A585D8700402F6C /* GifImage.swift */; };
+		C6246FE42A58766100402F6C /* timer.gif in Resources */ = {isa = PBXBuildFile; fileRef = C6246FE32A58766100402F6C /* timer.gif */; };
 		C68243E829F9792300E9E0B0 /* home.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243E729F9792300E9E0B0 /* home.swift */; };
 		C68243EC29F97B4900E9E0B0 /* InvertColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243EB29F97B4900E9E0B0 /* InvertColorModifier.swift */; };
 		C6D2B65329F966BE0030A8AC /* udriveiosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */; };
@@ -20,7 +23,7 @@
 		F547D7942A20ED7B00B23FD4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F547D7932A20ED7B00B23FD4 /* Utils.swift */; };
 		F59997F22A24DBAE005D2677 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59997F12A24DBAE005D2677 /* AlertView.swift */; };
 		F5A043EA2A2E2BFD00D647E1 /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A043E92A2E2BFD00D647E1 /* Classifier.swift */; };
-		F5B5E1CE2A0926F400C7730F /* AccelerometerValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B5E1CD2A0926F400C7730F /* AccelerometerValues.swift */; };
+		F5B5E1CE2A0926F400C7730F /* SensorValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B5E1CD2A0926F400C7730F /* SensorValues.swift */; };
 		F5B5E1D02A09293C00C7730F /* CMMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */; };
 		F5C65DCB2A125B8D00A1D906 /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C65DCA2A125B8D00A1D906 /* ViewDidLoadModifier.swift */; };
 		F5FE2B292A3362B5002A1ED2 /* LaunchScreenStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FE2B282A3362B5002A1ED2 /* LaunchScreenStep.swift */; };
@@ -47,6 +50,9 @@
 
 /* Begin PBXFileReference section */
 		C614A33F29FA844700A05F29 /* loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loading.swift; sourceTree = "<group>"; };
+		C6246FDD2A585CBC00402F6C /* rotate_phone.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = rotate_phone.gif; sourceTree = "<group>"; };
+		C6246FDF2A585D8700402F6C /* GifImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifImage.swift; sourceTree = "<group>"; };
+		C6246FE32A58766100402F6C /* timer.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = timer.gif; sourceTree = "<group>"; };
 		C68243E729F9792300E9E0B0 /* home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = home.swift; sourceTree = "<group>"; };
 		C68243EB29F97B4900E9E0B0 /* InvertColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertColorModifier.swift; sourceTree = "<group>"; };
 		C6D2B64F29F966BE0030A8AC /* udriveios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = udriveios.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,7 +68,7 @@
 		F547D7932A20ED7B00B23FD4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F59997F12A24DBAE005D2677 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		F5A043E92A2E2BFD00D647E1 /* Classifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
-		F5B5E1CD2A0926F400C7730F /* AccelerometerValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccelerometerValues.swift; path = udriveios/model/model/AccelerometerValues.swift; sourceTree = SOURCE_ROOT; };
+		F5B5E1CD2A0926F400C7730F /* SensorValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SensorValues.swift; path = udriveios/model/model/SensorValues.swift; sourceTree = SOURCE_ROOT; };
 		F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CMMotionManager.swift; path = udriveios/model/model/CMMotionManager.swift; sourceTree = SOURCE_ROOT; };
 		F5C65DCA2A125B8D00A1D906 /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
 		F5FE2B282A3362B5002A1ED2 /* LaunchScreenStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenStep.swift; sourceTree = "<group>"; };
@@ -103,6 +109,7 @@
 				C68243E729F9792300E9E0B0 /* home.swift */,
 				C614A33F29FA844700A05F29 /* loading.swift */,
 				F5FE2B2C2A336A54002A1ED2 /* StartView.swift */,
+				C6246FDF2A585D8700402F6C /* GifImage.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -123,6 +130,8 @@
 		C6D2B64629F966BE0030A8AC = {
 			isa = PBXGroup;
 			children = (
+				C6246FE32A58766100402F6C /* timer.gif */,
+				C6246FDD2A585CBC00402F6C /* rotate_phone.gif */,
 				C6D2B65129F966BE0030A8AC /* udriveios */,
 				C6D2B66229F966C00030A8AC /* udriveiosTests */,
 				C6D2B66C29F966C00030A8AC /* udriveiosUITests */,
@@ -182,7 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */,
-				F5B5E1CD2A0926F400C7730F /* AccelerometerValues.swift */,
+				F5B5E1CD2A0926F400C7730F /* SensorValues.swift */,
 			);
 			name = model;
 			path = model/model;
@@ -292,7 +301,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6246FDE2A585CBC00402F6C /* rotate_phone.gif in Resources */,
 				C6D2B65A29F966BF0030A8AC /* Preview Assets.xcassets in Resources */,
+				C6246FE42A58766100402F6C /* timer.gif in Resources */,
 				C6D2B65729F966BF0030A8AC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,7 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6D2B65529F966BE0030A8AC /* ContentView.swift in Sources */,
-				F5B5E1CE2A0926F400C7730F /* AccelerometerValues.swift in Sources */,
+				F5B5E1CE2A0926F400C7730F /* SensorValues.swift in Sources */,
 				F5FE2B292A3362B5002A1ED2 /* LaunchScreenStep.swift in Sources */,
 				C68243E829F9792300E9E0B0 /* home.swift in Sources */,
 				C6D2B65329F966BE0030A8AC /* udriveiosApp.swift in Sources */,
@@ -332,6 +343,7 @@
 				C68243EC29F97B4900E9E0B0 /* InvertColorModifier.swift in Sources */,
 				F5C65DCB2A125B8D00A1D906 /* ViewDidLoadModifier.swift in Sources */,
 				F5FE2B2D2A336A54002A1ED2 /* StartView.swift in Sources */,
+				C6246FE02A585D8700402F6C /* GifImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,7 +502,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"udriveios/Preview Content\"";
-				DEVELOPMENT_TEAM = 2YLCDUHPNV;
+				DEVELOPMENT_TEAM = 48JSG55QLH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
@@ -522,7 +534,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"udriveios/Preview Content\"";
-				DEVELOPMENT_TEAM = 2YLCDUHPNV;
+				DEVELOPMENT_TEAM = 48JSG55QLH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";

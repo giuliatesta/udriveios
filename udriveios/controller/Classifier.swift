@@ -9,7 +9,7 @@ import Foundation
 
 class Classifier{
     
-    func classify(values: AccelerometerValues, threshold: Double) -> Bool {
+    func classify(values: SensorValues, threshold: Double) -> Bool {
         return false
     }
 }
