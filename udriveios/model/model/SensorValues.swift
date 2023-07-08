@@ -10,14 +10,21 @@ import SwiftUI
 import CoreMotion
 
 class SensorValues{
-    @State var sensorValues : (Double, Double, Double) = (0.0,0.0,0.0)
+    private var _sensorValues :(Double, Double, Double)
     
-    init(sensorValues: (Double, Double, Double)) {
-        self.sensorValues = sensorValues
+    public var sensorValues : (Double, Double, Double){
+        get {
+            // possibly modify the return value
+            return self._sensorValues
+        }
+        set {
+            // possibly modify the value being stored
+            self._sensorValues = newValue
+        }
     }
     
-    func setValues(_ val : (Double,Double,Double)){
-        self.sensorValues = val
+    init(sensorValues: (Double, Double, Double)) {
+        self._sensorValues = sensorValues
     }
     
     func getSensorX() -> Double {

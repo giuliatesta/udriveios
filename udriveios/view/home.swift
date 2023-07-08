@@ -13,13 +13,13 @@ let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 let utils = Utils()
 
 struct HomePage: View {
-    @State private var showAlert = false
+    @State private var endDrive = false
     //Con una variabile per valore di accelerometro funzionava
     var motionManager = CMMotionManager()
     @State private var accelerometerValues = SensorValues(sensorValues: (0,0,0))
     @State private var gyroscopeValues = SensorValues(sensorValues: (0,0,0))
     
-    @State var direction : Direction = Direction.NONE
+    @State var direction : Direction = Direction.LEFT
     var threshold : Double = 100
     @State var thresholdSurpassed = false
     var classifier = Classifier()
@@ -34,20 +34,30 @@ struct HomePage: View {
                     Image(systemName: "timer")
                         .fillImageModifier()
                         .padding([.horizontal], 150)
-                    
-                }.padding(200)
+                        .frame(width: 500,height: 300)
+                    TimerView().padding([.top],30)
+                }.frame(height: 500)
                 
-                Button("STOP"){
-                    showStopAlert = true
-                }.alert(isPresented: $showStopAlert){
+                Button(action: {showStopAlert = true}){
+                    HStack{
+                        Image(systemName: "stop.fill")
+                        Text("STOP")
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+                .alert(isPresented: $showStopAlert){
                     Alert(
                         title: Text("Sei sicuro di voler terminare la guida?"),
-                        primaryButton: Alert.Button.default(Text("OK")),
+                        primaryButton: Alert.Button.default(Text("OK"), action: {endDrive = true}),
                         secondaryButton: Alert.Button.destructive(Text("Annulla"))
                     )
                 }
                 
-                Text(accelerometerValues.getValuesToString())
+                NavigationLink(destination: ReportView(),
+                    isActive: $endDrive
+                ){
+                    EmptyView()
+                }
                 
                 NavigationLink(destination: AlertView(direction: $direction),
                     isActive: $thresholdSurpassed
@@ -60,20 +70,34 @@ struct HomePage: View {
         }
         .navigationBarBackButtonHidden(true)
         .viewDidLoadModifier(){
-            print("LOADED VIEW")
             motionManager.startAccelerometerUpdates()
-            motionManager.accelerometerUpdateInterval = 1 // seconds
+            motionManager.startGyroUpdates()
+            // Updates are expressed in seconds
+            motionManager.accelerometerUpdateInterval = 1
+            motionManager.gyroUpdateInterval = 1
+
         }
         .onReceive(timer) { input in
             if motionManager.isAccelerometerActive {
                 motionManager.startAccelerometerUpdates(to: OperationQueue.main) { data,error in
-                    self.accelerometerValues.setValues((data?.acceleration.x ?? 0,
+                    self.accelerometerValues.sensorValues = ((data?.acceleration.x ?? 0,
                                                         data?.acceleration.y ?? 0,
                                                         data?.acceleration.z ?? 0))
-                    print(accelerometerValues.getValuesToString())
-                    thresholdSurpassed = classifier.classify(values: accelerometerValues, threshold: threshold)
+                    print("ACC:" + accelerometerValues.getValuesToString())
                 }
             }
+            
+            if motionManager.isGyroActive{
+                motionManager.startGyroUpdates(to: OperationQueue.main){
+                    data,error in
+                    self.gyroscopeValues.sensorValues = ((data?.rotationRate.x ?? 0,
+                                                            data?.rotationRate.y ?? 0,
+                                                            data?.rotationRate.z ?? 0))
+                        print("GYR:" + gyroscopeValues.getValuesToString())
+                }
+            }
+            //TODO add sliding window technique
+            //thresholdSurpassed = classifier.classify(values: accelerometerValues, threshold: threshold)
         }
     }
 }

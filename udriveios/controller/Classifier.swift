@@ -10,6 +10,6 @@ import Foundation
 class Classifier{
     
     func classify(values: SensorValues, threshold: Double) -> Bool {
-        return false
+        return true
     }
 }
