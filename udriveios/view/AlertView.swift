@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AudioToolbox
+import AVFoundation
 
 
 let blinkTimer = Timer.publish(every: 0.3, on: .main, in: .common).autoconnect()
@@ -60,6 +62,16 @@ struct AlertView : View{
                     backgroundColor = .white
                 }else{
                     backgroundColor = .red
+                }
+            }
+            .onAppear {
+                let url = URL(fileURLWithPath: "/System/Library/Audio/UISounds/sms-received4.caf")
+                
+                do {
+                    let reps_sound_effect = try AVAudioPlayer(contentsOf: url)
+                    reps_sound_effect.play()
+                } catch {
+                    print("Error!: \(error)")
                 }
             }
     }

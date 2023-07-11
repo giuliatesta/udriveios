@@ -97,7 +97,7 @@ struct HomePage: View {
                 }
             }
             //TODO add sliding window technique
-            //thresholdSurpassed = classifier.classify(values: accelerometerValues, threshold: threshold)
+            thresholdSurpassed = classifier.classify(values: accelerometerValues, threshold: threshold)
         }
     }
 }
