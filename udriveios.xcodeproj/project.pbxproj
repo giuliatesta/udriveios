@@ -17,6 +17,8 @@
 		C68243E829F9792300E9E0B0 /* home.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243E729F9792300E9E0B0 /* home.swift */; };
 		C68243EC29F97B4900E9E0B0 /* InvertColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243EB29F97B4900E9E0B0 /* InvertColorModifier.swift */; };
 		C6A16F4A2A5D9AA4005AED63 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A16F492A5D9AA4005AED63 /* AudioToolbox.framework */; };
+		C6A16F4E2A5D9F28005AED63 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A16F4C2A5D9F28005AED63 /* CoreLocation.framework */; };
+		C6A16F4F2A5D9F28005AED63 /* CoreLocationUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A16F4D2A5D9F28005AED63 /* CoreLocationUI.framework */; };
 		C6D2B65329F966BE0030A8AC /* udriveiosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */; };
 		C6D2B65529F966BE0030A8AC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B65429F966BE0030A8AC /* ContentView.swift */; };
 		C6D2B65729F966BF0030A8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D2B65629F966BF0030A8AC /* Assets.xcassets */; };
@@ -63,6 +65,9 @@
 		C68243E729F9792300E9E0B0 /* home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = home.swift; sourceTree = "<group>"; };
 		C68243EB29F97B4900E9E0B0 /* InvertColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertColorModifier.swift; sourceTree = "<group>"; };
 		C6A16F492A5D9AA4005AED63 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		C6A16F4B2A5D9BC5005AED63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C6A16F4C2A5D9F28005AED63 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C6A16F4D2A5D9F28005AED63 /* CoreLocationUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocationUI.framework; path = System/Library/Frameworks/CoreLocationUI.framework; sourceTree = SDKROOT; };
 		C6D2B64F29F966BE0030A8AC /* udriveios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = udriveios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = udriveiosApp.swift; sourceTree = "<group>"; };
 		C6D2B65429F966BE0030A8AC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -89,6 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6A16F4E2A5D9F28005AED63 /* CoreLocation.framework in Frameworks */,
+				C6A16F4F2A5D9F28005AED63 /* CoreLocationUI.framework in Frameworks */,
 				C6A16F4A2A5D9AA4005AED63 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +149,8 @@
 		C6A16F482A5D9AA4005AED63 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C6A16F4C2A5D9F28005AED63 /* CoreLocation.framework */,
+				C6A16F4D2A5D9F28005AED63 /* CoreLocationUI.framework */,
 				C6A16F492A5D9AA4005AED63 /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
@@ -173,6 +182,7 @@
 		C6D2B65129F966BE0030A8AC /* udriveios */ = {
 			isa = PBXGroup;
 			children = (
+				C6A16F4B2A5D9BC5005AED63 /* Info.plist */,
 				C68243EA29F97B2A00E9E0B0 /* controller */,
 				C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */,
 				F564549C2A127B3000E881FF /* model */,
@@ -529,6 +539,7 @@
 				DEVELOPMENT_TEAM = 48JSG55QLH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = udriveios/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -561,6 +572,7 @@
 				DEVELOPMENT_TEAM = 48JSG55QLH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = udriveios/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
