@@ -32,12 +32,15 @@ struct StartView: View {
     @State private var locationAuthorized : Bool = false;
     
     var body: some View {
-        
         NavigationView{
             VStack{
                 Text("Rotate your phone vertically").font(fontSystem)
                 GifImage("rotate_phone").frame(width: 150, height: 150, alignment: .center)
-                    Button(action: {
+                NavigationLink(destination: HomePage(), label: {
+                    Text("Start Driving!").font(.largeTitle)
+                })
+                .padding()
+                /*    Button(action: {
                         let locationManager = CLLocationManager();
                         locationAuthorized = locationManagerDidChangeAuthorization(locationManager)
                         print(locationAuthorized)
@@ -50,7 +53,7 @@ struct StartView: View {
                     isActive: $locationAuthorized
                 ){
                     EmptyView()
-                }
+                }*/
             }
         }
         .navigationBarTitle("")

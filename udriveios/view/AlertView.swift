@@ -9,14 +9,17 @@ import SwiftUI
 import AudioToolbox
 import AVFoundation
 
-
 let blinkTimer = Timer.publish(every: 0.3, on: .main, in: .common).autoconnect()
+
+let soundUrl = URL(string: "/System/Library/Audio/UISounds/alarm.caf")
 
 struct AlertView : View{
     @Binding var direction: Direction
     //var direction: Direction
     @State var backgroundColor = Color.red
     @State private var showHome = false
+    
+    let soundPlayer: SoundPlayer = SoundPlayer(soundUrl: soundUrl, silenceDuration: 3)
 
     var body: some View {
         NavigationView {
@@ -65,14 +68,10 @@ struct AlertView : View{
                 }
             }
             .onAppear {
-                let url = URL(fileURLWithPath: "/System/Library/Audio/UISounds/sms-received4.caf")
-                
-                do {
-                    let reps_sound_effect = try AVAudioPlayer(contentsOf: url)
-                    reps_sound_effect.play()
-                } catch {
-                    print("Error!: \(error)")
-                }
+                soundPlayer.play()
+            }
+            .onDisappear {
+                soundPlayer.stop()
             }
     }
 }

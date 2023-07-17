@@ -37,6 +37,10 @@ struct TimerView: View {
     func startTimer() {
         self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     }
+    
+    func getDuration() -> Int {
+        return self.duration;
+    }
 }
 
 struct TimerView_Previews: PreviewProvider {
