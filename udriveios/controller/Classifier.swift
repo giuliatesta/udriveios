@@ -7,9 +7,20 @@
 
 import Foundation
 
-class Classifier{
+class Classifier {
+    
+    var danger: Bool
+    
+    init(danger: Bool = true) {
+        self.danger = danger
+    }
     
     func classify(values: SensorValues, threshold: Double) -> Bool {
-        return true
+        danger = true;
+        var timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { timer in
+            self.danger = false;
+            timer.invalidate()
+        })
+        return danger;
     }
 }

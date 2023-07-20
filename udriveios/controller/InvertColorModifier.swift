@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 
-
 struct InvertColorModifier : ViewModifier{
     @Environment (\.colorScheme) var colorScheme
     func body(content: Content) -> some View {

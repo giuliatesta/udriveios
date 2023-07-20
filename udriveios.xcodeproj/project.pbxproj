@@ -16,6 +16,7 @@
 		C63603142A597514001A2084 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63603132A597514001A2084 /* ReportView.swift */; };
 		C68243E829F9792300E9E0B0 /* home.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243E729F9792300E9E0B0 /* home.swift */; };
 		C68243EC29F97B4900E9E0B0 /* InvertColorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243EB29F97B4900E9E0B0 /* InvertColorModifier.swift */; };
+		C698FC142A6978B90061ABE7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C698FC132A6978B90061ABE7 /* LocationManager.swift */; };
 		C6A16F4A2A5D9AA4005AED63 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A16F492A5D9AA4005AED63 /* AudioToolbox.framework */; };
 		C6A16F4E2A5D9F28005AED63 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A16F4C2A5D9F28005AED63 /* CoreLocation.framework */; };
 		C6A16F4F2A5D9F28005AED63 /* CoreLocationUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A16F4D2A5D9F28005AED63 /* CoreLocationUI.framework */; };
@@ -65,6 +66,7 @@
 		C63603132A597514001A2084 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		C68243E729F9792300E9E0B0 /* home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = home.swift; sourceTree = "<group>"; };
 		C68243EB29F97B4900E9E0B0 /* InvertColorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertColorModifier.swift; sourceTree = "<group>"; };
+		C698FC132A6978B90061ABE7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		C6A16F492A5D9AA4005AED63 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C6A16F4B2A5D9BC5005AED63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C6A16F4C2A5D9F28005AED63 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -145,6 +147,7 @@
 				F547D7932A20ED7B00B23FD4 /* Utils.swift */,
 				F5A043E92A2E2BFD00D647E1 /* Classifier.swift */,
 				C6FCD6422A657FE200700AD9 /* SoundPlayer.swift */,
+				C698FC132A6978B90061ABE7 /* LocationManager.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				F59997F22A24DBAE005D2677 /* AlertView.swift in Sources */,
 				C63603122A595C40001A2084 /* ButtonsView.swift in Sources */,
 				F5B5E1D02A09293C00C7730F /* CMMotionManager.swift in Sources */,
+				C698FC142A6978B90061ABE7 /* LocationManager.swift in Sources */,
 				F5A043EA2A2E2BFD00D647E1 /* Classifier.swift in Sources */,
 				C614A34029FA844700A05F29 /* loading.swift in Sources */,
 				C68243EC29F97B4900E9E0B0 /* InvertColorModifier.swift in Sources */,
