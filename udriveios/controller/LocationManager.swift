@@ -11,12 +11,14 @@ import SwiftUI
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
+    var coreDataManager : CoreDataManager;
     @Binding var authorizationDenied : Bool;
     @Binding var authorizationGranted : Bool;
 
     init(authorizationDenied : Binding<Bool>, authorizationGranted : Binding<Bool>) {
         _authorizationDenied = authorizationDenied          // must be done BEFORE calling super
         _authorizationGranted = authorizationGranted
+        coreDataManager = CoreDataManager.getInstance();
         super.init()
         locationManager.delegate = self     // must be done AFTER calling super
         
@@ -49,5 +51,21 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         handleAuthorizationStatus(status)
-       }
+    }
+    
+    func startRecordingLocations() {
+        locationManager.startUpdatingLocation();
+    }
+    
+    func stopRecordingPositions() {
+        locationManager.stopUpdatingLocation();
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        coreDataManager.saveLocations(locations: locations)
+    }
+    
+    
+    
 }

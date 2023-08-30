@@ -25,6 +25,8 @@ struct HomePage: View {
     var classifier = Classifier()
     
     @State private var showStopAlert = false
+    @State var locationManager : LocationManager!;
+
 
     var body: some View {
         NavigationView {
@@ -48,7 +50,10 @@ struct HomePage: View {
                 .alert(isPresented: $showStopAlert){
                     Alert(
                         title: Text("Sei sicuro di voler terminare la guida?"),
-                        primaryButton: Alert.Button.default(Text("OK"), action: {endDrive = true}),
+                        primaryButton: Alert.Button.default(Text("OK"), action: {
+                            endDrive = true
+                            locationManager.stopRecordingPositions()
+                        }),
                         secondaryButton: Alert.Button.destructive(Text("Annulla"))
                     )
                 }

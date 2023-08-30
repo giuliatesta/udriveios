@@ -14,6 +14,8 @@ struct StartView: View {
 
     @State var locationManager : LocationManager!;
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
     var body: some View {
         NavigationView{
             VStack{
@@ -25,6 +27,11 @@ struct StartView: View {
                 .padding()*/
                    Button(action: {
                        locationManager.requestLocationAuthorization()
+                       if(authorizationGranted) {
+                           // TODO check assignment
+                           CoreDataManager.getInstance().context = viewContext
+                           locationManager.startRecordingLocations()
+                       }
                     })
                     {
                         Text("Start Driving!")
@@ -44,7 +51,6 @@ struct StartView: View {
                     secondaryButton: .cancel()
                 )
             }
-            
         }
         .onAppear() {
             locationManager = LocationManager(authorizationDenied: $authorizationDenied, authorizationGranted: $authorizationGranted);
