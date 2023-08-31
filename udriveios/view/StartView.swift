@@ -11,6 +11,8 @@ struct StartView: View {
     @State private var showStopAlert = false;
     @State var authorizationGranted: Bool = false;
     @State var authorizationDenied : Bool = false;
+    
+    @State var canProceed : Bool = false;
 
     @State var locationManager : LocationManager!;
     
@@ -31,13 +33,18 @@ struct StartView: View {
                            // TODO check assignment
                            CoreDataManager.getInstance().context = viewContext
                            locationManager.startRecordingLocations()
+                           print("autorizationGranted -> startRecordingLocations")
+                           canProceed = true;
+                       } else {
+                           canProceed = false;
                        }
+                       
                     })
                     {
                         Text("Start Driving!")
                     }
                     .padding()
-                NavigationLink(destination: HomePage(), isActive: $authorizationGranted) {
+                NavigationLink(destination: HomePage(), isActive: $canProceed) {
                     EmptyView()
                 }
             }
@@ -53,7 +60,7 @@ struct StartView: View {
             }
         }
         .onAppear() {
-            locationManager = LocationManager(authorizationDenied: $authorizationDenied, authorizationGranted: $authorizationGranted);
+            locationManager = LocationManager.getInstance(authorizationDenied: $authorizationDenied, authorizationGranted: $authorizationGranted);
         }
         .navigationBarTitle("")
         .navigationBarHidden(true)

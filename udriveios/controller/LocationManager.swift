@@ -15,14 +15,27 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     @Binding var authorizationDenied : Bool;
     @Binding var authorizationGranted : Bool;
 
-    init(authorizationDenied : Binding<Bool>, authorizationGranted : Binding<Bool>) {
+    private init(authorizationDenied : Binding<Bool>, authorizationGranted : Binding<Bool>) {
         _authorizationDenied = authorizationDenied          // must be done BEFORE calling super
         _authorizationGranted = authorizationGranted
         coreDataManager = CoreDataManager.getInstance();
         super.init()
-        locationManager.delegate = self     // must be done AFTER calling super
-        
+        locationManager.delegate = self     // must be done AFTER calling supe
     }
+    
+    static private var instance : LocationManager?;
+    
+    static func getInstance(authorizationDenied : Binding<Bool>, authorizationGranted : Binding<Bool>) -> LocationManager {
+        if(instance == nil) {
+            instance = LocationManager(authorizationDenied: authorizationDenied, authorizationGranted: authorizationGranted);
+        }
+        return instance!;
+    }
+    
+    static func getInstance() -> LocationManager {
+        return instance!; 
+    }
+    
 
     func requestLocationAuthorization() {
         if locationManager.authorizationStatus == .notDetermined {
@@ -63,6 +76,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("didUpdateLocations")
         coreDataManager.saveLocations(locations: locations)
     }
     

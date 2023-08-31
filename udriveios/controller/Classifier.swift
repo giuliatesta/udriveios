@@ -16,7 +16,7 @@ class Classifier {
     }
     
     func classify(values: SensorValues, threshold: Double) -> Bool {
-        danger = true;
+        danger = false;
         var timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { timer in
             self.danger = false;
             timer.invalidate()

@@ -25,8 +25,6 @@ struct HomePage: View {
     var classifier = Classifier()
     
     @State private var showStopAlert = false
-    @State var locationManager : LocationManager!;
-
 
     var body: some View {
         NavigationView {
@@ -52,7 +50,7 @@ struct HomePage: View {
                         title: Text("Sei sicuro di voler terminare la guida?"),
                         primaryButton: Alert.Button.default(Text("OK"), action: {
                             endDrive = true
-                            locationManager.stopRecordingPositions()
+                            LocationManager.getInstance().stopRecordingPositions()
                         }),
                         secondaryButton: Alert.Button.destructive(Text("Annulla"))
                     )
@@ -88,7 +86,7 @@ struct HomePage: View {
                     self.accelerometerValues.sensorValues = ((data?.acceleration.x ?? 0,
                                                         data?.acceleration.y ?? 0,
                                                         data?.acceleration.z ?? 0))
-                    print("ACC:" + accelerometerValues.getValuesToString())
+                    //print("ACC:" + accelerometerValues.getValuesToString())
                 }
             }
             
@@ -98,7 +96,7 @@ struct HomePage: View {
                     self.gyroscopeValues.sensorValues = ((data?.rotationRate.x ?? 0,
                                                             data?.rotationRate.y ?? 0,
                                                             data?.rotationRate.z ?? 0))
-                        print("GYR:" + gyroscopeValues.getValuesToString())
+                        //print("GYR:" + gyroscopeValues.getValuesToString())
                 }
             }
             //TODO add sliding window technique

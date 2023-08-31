@@ -12,7 +12,9 @@ import CoreLocation
 
 class CoreDataManager : ObservableObject {
     static private let instance = CoreDataManager()
-    private init() {}
+    private init() {
+        self._context = persistentContainer.viewContext
+    }
     
     static func getInstance() -> CoreDataManager {
         return instance
@@ -28,19 +30,21 @@ class CoreDataManager : ObservableObject {
         }
     }
     
+    var _context : NSManagedObjectContext;
+    
     var context: NSManagedObjectContext {
         get {
             return persistentContainer.viewContext
         }
         set {
-            self.context = newValue
+            self._context = newValue
         }
     }
     
     func saveContext() {
-            if context.hasChanges {
+            if _context.hasChanges {
                 do {
-                    try context.save()
+                    try _context.save()
                 } catch {
                     print("Error saving context: \(error)")
                 }
@@ -50,18 +54,14 @@ class CoreDataManager : ObservableObject {
     
     func saveLocations(locations: [CLLocation]) {
         for location in locations {
-            let newLocationEntity = Location(entity: NSEntityDescription.entity(forEntityName: "Location", in: context) ?? NSEntityDescription(), insertInto: context)
+            let newLocationEntity = Location(entity: NSEntityDescription.entity(forEntityName: "Location", in: _context) ?? NSEntityDescription(), insertInto: _context)
         
             newLocationEntity.latitude = location.coordinate.latitude
             newLocationEntity.longitude = location.coordinate.longitude
             newLocationEntity.timestamp = location.timestamp
-            do {
-                try context.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            saveContext()
         }
+        print("Saved following locations: \(locations)");
     }
     
 }
