@@ -1,26 +1,30 @@
-//
-//  Classifier.swift
-//  udriveios
-//
-//  Created by Sara Regali on 05/06/23.
-//
-
 import Foundation
+import CoreML
 
 class Classifier {
     
     var danger: Bool
+    let model : UdriveClassifier;
     
     init(danger: Bool = true) {
-        self.danger = danger
+        self.danger = danger;
+        do {
+            //TODO check configuration and try?
+            self.model = UdriveClassifier();
+        } catch {
+            fatalError("Failed to load Core ML model")
+        }
+        
     }
     
+    // TODO change parameter values into (SensorValues, SensorValues)
     func classify(values: SensorValues, threshold: Double) -> Bool {
         danger = false;
-        var timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { timer in
-            self.danger = false;
-            timer.invalidate()
-        })
+        /*var input : UdriveClassifierInput = UdriveClassifierInput(conv1d_input: M)
+        guard let prediction = try? model.prediction(input: values) else {
+            fatalError("Failed to make prediction")
+        }
+        print(prediction.output)*/
         return danger;
     }
 }

@@ -16,11 +16,12 @@ struct FinalMapView: UIViewRepresentable {
         let region = MKCoordinateRegion(center: regionParameters.0, span: regionParameters.1)
         mapView.setRegion(region, animated: false)
         
+        // TODO filter the dangerous locations
         for location in locations {
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             
-            // mapView.addAnnotation(annotation)
+            //mapView.addAnnotation(annotation)
         }
         
         let coordinates = locations.map { location in
