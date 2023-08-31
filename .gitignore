@@ -1,0 +1,6 @@
+/project.pbxproj/
+/xcuserdata/
+/xcdebugger/
+
+*+CoreDataClass.swift
+*+CoreDataProperties.swift
