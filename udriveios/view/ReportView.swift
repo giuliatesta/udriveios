@@ -11,7 +11,7 @@ struct ReportView: View {
     var body: some View {
         NavigationView(){
             VStack{
-                FinalMapView()
+                MapView()
             }
         }.navigationBarBackButtonHidden(true)
         .navigationTitle("uDrive")

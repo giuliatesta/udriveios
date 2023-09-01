@@ -42,14 +42,14 @@ class CoreDataManager : ObservableObject {
     }
     
     func saveContext() {
-            if _context.hasChanges {
-                do {
-                    try _context.save()
-                } catch {
-                    print("Error saving context: \(error)")
-                }
+        if _context.hasChanges {
+            do {
+                try _context.save()
+            } catch {
+                print("Error saving context: \(error)")
             }
         }
+    }
 
     
     func saveLocations(locations: [CLLocation]) {
@@ -62,6 +62,20 @@ class CoreDataManager : ObservableObject {
             saveContext()
         }
         print("Saved following locations: \(locations)");
+    }
+    
+    func deleteEntity(entityName: String) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        fetchRequest.returnsObjectsAsFaults = false     // their property data resides in the row cache until the fault is fired - lazy
+        do {
+            let results = try _context.fetch(fetchRequest)
+            for object in results {
+            guard let objectData = object as? NSManagedObject else {continue}
+                _context.delete(objectData)
+            }
+        } catch let error {
+            print("Delete all data in \(entityName) error :", error)
+        }
     }
     
 }

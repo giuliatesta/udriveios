@@ -23,10 +23,6 @@ struct StartView: View {
             VStack{
                 Text("Rotate your phone vertically").font(fontSystem)
                 GifImage("rotate_phone").frame(width: 150, height: 150, alignment: .center)
-                /*NavigationLink(destination: HomePage(), label: {
-                    Text("Start Driving!").font(.largeTitle)
-                })
-                .padding()*/
                    Button(action: {
                        locationManager.requestLocationAuthorization()
                        if(authorizationGranted) {

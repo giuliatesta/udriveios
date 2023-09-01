@@ -16,7 +16,9 @@ struct ContentView: View {
             try? await getDataFromApi()
             try? await Task.sleep(for: Duration.seconds(1))
             self.launchScreenState.dismiss()
-            CoreDataManager.getInstance().initManager()   // initialises the database
+            let coreDataManager = CoreDataManager.getInstance();
+            coreDataManager.initManager()   // initialises the database
+            coreDataManager.deleteEntity(entityName: "Location") // empties the locations table -> only the current session is saved
         }
     }
     

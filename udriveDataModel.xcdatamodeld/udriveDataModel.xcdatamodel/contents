@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22C65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DangerousLocation" representedClassName=".DangerousLocation" syncable="YES" codeGenerationType="class">
+        <attribute name="direction" optional="YES" attributeType="String"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="locations" toMany="YES" minCount="1" deletionRule="Cascade" destinationEntity="Location"/>
+    </entity>
     <entity name="Location" representedClassName=".Location" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
