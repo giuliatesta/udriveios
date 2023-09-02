@@ -52,16 +52,33 @@ class CoreDataManager : ObservableObject {
     }
 
     
-    func saveLocations(locations: [CLLocation]) {
+    func saveEntityLocations(locations: [CLLocation]) {
         for location in locations {
-            let newLocationEntity = Location(entity: NSEntityDescription.entity(forEntityName: "Location", in: _context) ?? NSEntityDescription(), insertInto: _context)
-        
-            newLocationEntity.latitude = location.coordinate.latitude
-            newLocationEntity.longitude = location.coordinate.longitude
-            newLocationEntity.timestamp = location.timestamp
+            createLocationEntity(location: location)
             saveContext()
         }
         print("Saved following locations: \(locations)");
+    }
+    
+    func createLocationEntity(location : CLLocation) -> Location {
+        let newLocationEntity = Location(entity: NSEntityDescription.entity(forEntityName: "Location", in: _context) ?? NSEntityDescription(), insertInto: _context)
+        newLocationEntity.latitude = location.coordinate.latitude
+        newLocationEntity.longitude = location.coordinate.longitude
+        newLocationEntity.timestamp = location.timestamp
+        return newLocationEntity;
+    }
+    
+    func saveEntityDangerousLocation(locations: [CLLocation], direction: Direction, duration: Int) {
+        let locationEntities : [Location] = locations.map { location in
+            createLocationEntity(location: location)
+        }
+        
+        let newDangerousLocationEntity = DangerousLocation(entity: NSEntityDescription.entity(forEntityName: "DangerousLocation", in: _context) ?? NSEntityDescription(), insertInto: _context)
+        newDangerousLocationEntity.locations = NSSet(array: locationEntities)
+        newDangerousLocationEntity.direction = Int64(direction.getInt()) //check int or string
+        newDangerousLocationEntity.duration = Int64(duration)
+        saveContext()
+        print("Saved following dangerous location: \(newDangerousLocationEntity)");
     }
     
     func deleteEntity(entityName: String) {

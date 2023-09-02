@@ -29,7 +29,6 @@ struct StartView: View {
                            // TODO check assignment
                            CoreDataManager.getInstance().context = viewContext
                            locationManager.startRecordingLocations()
-                           print("autorizationGranted -> startRecordingLocations")
                            canProceed = true;
                        } else {
                            canProceed = false;

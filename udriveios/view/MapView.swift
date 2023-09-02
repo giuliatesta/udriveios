@@ -40,7 +40,6 @@ struct MapView: UIViewRepresentable {
                 CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             }
             
-                
             let coordinates2 = [
                 defaultLocation,
                 CLLocationCoordinate2D(latitude: 45.44587, longitude: 9.213108),

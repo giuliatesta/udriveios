@@ -19,7 +19,7 @@ class Classifier {
     
     // TODO change parameter values into (SensorValues, SensorValues)
     func classify(values: SensorValues, threshold: Double) -> Bool {
-        danger = false;
+        danger = true;
         /*var input : UdriveClassifierInput = UdriveClassifierInput(conv1d_input: )
         guard let prediction = try? model.prediction(input: values) else {
             fatalError("Failed to make prediction")

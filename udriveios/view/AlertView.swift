@@ -15,11 +15,16 @@ let soundUrl = URL(string: "/System/Library/Audio/UISounds/alarm.caf")
 
 struct AlertView : View{
     @Binding var direction: Direction
-    //var direction: Direction
+    @State var duration: Int = 0;
+    
     @State var backgroundColor = Color.red
     @State private var showHome = false
     
     let soundPlayer: SoundPlayer = SoundPlayer(soundUrl: soundUrl, silenceDuration: 3)
+    
+    @State var dangerousLocationManager = DangerousLocationManager.getInstance();
+
+    @Environment(\.managedObjectContext) private var viewContext
 
     var body: some View {
         NavigationView {
@@ -27,11 +32,11 @@ struct AlertView : View{
                 ZStack(alignment: .center){
                     VStack{
                         switch direction {
-                            case .BACKWARD:
+                            case .BREAK:
                                 Image(systemName: "arrow.down")
                                     .fitImageModifier()
                                     .padding([.horizontal], 70)
-                            case .FORWARD:
+                            case .ACCELERATION:
                                 Image(systemName: "arrow.up")
                                     .fitImageModifier()
                                     .padding([.horizontal], 70)
@@ -50,7 +55,7 @@ struct AlertView : View{
                         }
                     }.frame(height: 300)
                     VStack{
-                        TimerView().bold()
+                        TimerView(duration: $duration).bold()
                         Text("CAREFUL!").font(.largeTitle).bold().monospacedDigit()
                     }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                         .padding([.bottom], 50)
@@ -58,7 +63,7 @@ struct AlertView : View{
                 }
                 .background(backgroundColor)
             }
-            .navigationBarBackButtonHidden(true)
+            //.navigationBarBackButtonHidden(true)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onReceive(blinkTimer) { input in
                 if backgroundColor == .red {
@@ -68,10 +73,17 @@ struct AlertView : View{
                 }
             }
             .onAppear {
+                
                 soundPlayer.play()
+                
+                CoreDataManager.getInstance().context = viewContext
+                dangerousLocationManager.startRecordingDangerousLocations();
+                
             }
+            // TODO check if it works
             .onDisappear {
                 soundPlayer.stop()
+                dangerousLocationManager.stopRecordingDangerousLocations(direction: direction, duration: duration)
             }
     }
 }

@@ -10,13 +10,12 @@ import SwiftUI
 //Timer view to be used in Home and Alert Views
 struct TimerView: View {
     @State var isTimerRunning = false
-    @State private var startTime =  Date()
-    @State var duration: Int = 0
+    @State private var startTime =  Date()  // seconds already passed from the start of TimerView
+    @Binding var duration: Int;
     @State private var timerString = "00:00:00"
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
-
         Text(self.duration.formatted(allowedUnits: [.hour, .minute, .second]) ?? "")
             .font(fontSystem)
             .onReceive(self.timer) { _ in
@@ -25,6 +24,10 @@ struct TimerView: View {
             .onAppear() {
                 // no need for UI updates at startup
                 self.stopTimer()
+            }
+            .onDisappear() {
+                // reset timer 
+                startTime = Date();
             }
     }
     
@@ -40,12 +43,6 @@ struct TimerView: View {
     
     func getDuration() -> Int {
         return self.duration;
-    }
-}
-
-struct TimerView_Previews: PreviewProvider {
-    static var previews: some View {
-        TimerView()
     }
 }
 

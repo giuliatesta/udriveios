@@ -20,6 +20,7 @@ struct HomePage: View {
     @State private var gyroscopeValues = SensorValues(sensorValues: (0,0,0))
     
     @State var direction : Direction = Direction.LEFT
+    @State var duration : Int = 0; 
     var threshold : Double = 100
     @State var thresholdSurpassed = false
     var classifier = Classifier()
@@ -30,12 +31,11 @@ struct HomePage: View {
         NavigationView {
             VStack{
                 VStack{
-
                     Image(systemName: "timer")
                         .fillImageModifier()
                         .padding([.horizontal], 150)
                         .frame(width: 500,height: 300)
-                    TimerView().padding([.top],30)
+                    TimerView(duration: $duration).padding([.top],30)
                 }.frame(height: 500)
                 
                 Button(action: {showStopAlert = true}){
@@ -50,7 +50,7 @@ struct HomePage: View {
                         title: Text("Sei sicuro di voler terminare la guida?"),
                         primaryButton: Alert.Button.default(Text("OK"), action: {
                             endDrive = true
-                            LocationManager.getInstance().stopRecordingPositions()
+                            LocationManager.getInstance().stopRecordingLocations()
                         }),
                         secondaryButton: Alert.Button.destructive(Text("Annulla"))
                     )
@@ -62,6 +62,7 @@ struct HomePage: View {
                     EmptyView()
                 }
                 
+                //
                 NavigationLink(destination: AlertView(direction: $direction),
                     isActive: $thresholdSurpassed
                 ){

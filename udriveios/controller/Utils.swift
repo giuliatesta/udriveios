@@ -34,11 +34,26 @@ extension Double {
  */
 enum Direction{
     /**
-     * BACKWARD: reverse gear
-     * FORWARD: forward gear
-     * LEFT: left turn
-     * RIGHT: right turn
-     * NONE:  no movement is being performed
+     * BREAK: sudden break
+     * ACCELERATION: sudden acceleration
+     * LEFT: sudden left turn
+     * RIGHT: sudden right turn
+     * NONE:  no sudden movement is being performed
      */
-    case BACKWARD, FORWARD, LEFT, RIGHT, NONE
+    case BREAK, ACCELERATION, LEFT, RIGHT, NONE
+
+    func getInt() -> Int {
+        switch self {
+        case .ACCELERATION:
+            return 0;
+        case .RIGHT:
+            return 1;
+        case .LEFT:
+            return 2;
+        case .BREAK:
+            return 3;
+        case .NONE:
+            return 4;
+        }
+    }
 }
