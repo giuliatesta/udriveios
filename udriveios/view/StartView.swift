@@ -1,10 +1,3 @@
-//
-//  StartView.swift
-//  udriveios
-//
-//  Created by Sara Regali on 09/06/23.
-//
-
 import SwiftUI
 
 struct StartView: View {

@@ -1,10 +1,3 @@
-//
-//  GifImage.swift
-//  udriveios
-//
-//  Created by Giulia Testa on 07/07/23.
-//
-
 import SwiftUI
 import WebKit
 

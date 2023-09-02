@@ -1,10 +1,3 @@
-//
-//  CMMotionManager.swift
-//  udriveios
-//
-//  Created by Sara Regali on 08/05/23.
-//
-
 import Foundation
 import CoreMotion
 

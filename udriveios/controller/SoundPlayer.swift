@@ -1,10 +1,3 @@
-//
-//  SoundPlayer.swift
-//  udriveios
-//
-//  Created by Giulia Testa on 17/07/23.
-//
-
 import Foundation
 import AVFoundation
 
@@ -56,38 +49,3 @@ class SoundPlayer: NSObject, AVAudioPlayerDelegate {
     }
     
 }
-
-/*
-class SoundPlayer: AVAudioPlayerDelegate {
-    var audioPlayer: AVAudioPlayer?
-
-    func playSound(withFileName fileName: String, loopCount: Int, silenceDuration: TimeInterval) {
-        guard let soundURL = Bundle.main.url(forResource: fileName, withExtension: nil) else {
-            print("Sound file not found.")
-            return
-        }
-
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-            audioPlayer?.numberOfLoops = loopCount - 1 // Set the number of loops, subtracting 1 to account for initial play
-            audioPlayer?.delegate = self
-            audioPlayer?.play()
-        } catch {
-            print("Error playing sound: \(error.localizedDescription)")
-        }
-    }
-
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if player.numberOfLoops > 0 {
-            // Pause for the specified silence duration between loops
-            DispatchQueue.main.asyncAfter(deadline: .now() + silenceDuration) {
-                player.play()
-            }
-        }
-    }
-
-    func stopSound() {
-        audioPlayer?.stop()
-    }
-}
-*/

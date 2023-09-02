@@ -1,59 +1,39 @@
-//
-//  SensorValues.swift
-//  udriveios
-//
-//  Created by Sara Regali on 08/05/23.
-//
-
 import Foundation
 import SwiftUI
 import CoreMotion
 
-class SensorValues{
-    private var _sensorValues :(Double, Double, Double)
+class SensorValues {
+    var accelerometerX : Double;
+    var accelerometerY : Double;
+    var accelerometerZ : Double;
+    var gyroscopeX : Double;
+    var gyroscopeY : Double;
+    var gyroscopeZ : Double;
     
-    public var sensorValues : (Double, Double, Double){
-        get {
-            // possibly modify the return value
-            return self._sensorValues
-        }
-        set {
-            // possibly modify the value being stored
-            self._sensorValues = newValue
-        }
-    }
-    
-    init(sensorValues: (Double, Double, Double)) {
-        self._sensorValues = sensorValues
-    }
-    
-    func getSensorX() -> Double {
-        return self.sensorValues.0
-    }
-
-    func getSensorY() -> Double {
-        return self.sensorValues.1
+    init(accelerometerX: Double, accelerometerY: Double, accelerometerZ: Double, gyroscopeX: Double, gyroscopeY: Double, gyroscopeZ: Double) {
+        self.accelerometerX = accelerometerX
+        self.accelerometerY = accelerometerY
+        self.accelerometerZ = accelerometerZ
+        self.gyroscopeX = gyroscopeX
+        self.gyroscopeY = gyroscopeY
+        self.gyroscopeZ = gyroscopeZ
     }
     
-    func getSensorZ() -> Double {
-        return self.sensorValues.2
+    init(accelerometer : (Double, Double, Double), gyroscope: (Double, Double, Double)) {
+        self.accelerometerX = accelerometer.0
+        self.accelerometerY = accelerometer.1
+        self.accelerometerZ = accelerometer.2
+        self.gyroscopeX = gyroscope.0
+        self.gyroscopeY = gyroscope.1
+        self.gyroscopeZ = gyroscope.2
     }
     
-    func setSensorX(_ val: Double){
-        self.sensorValues.0 = val
-    }
-
-    func setSensorY(_ val: Double){
-        self.sensorValues.1 = val
-    }
-    
-    func setSensorZ(_ val: Double){
-        self.sensorValues.2 = val
-    }
-    
-    func getValuesToString() -> String {
-        return "x:" + sensorValues.0.toString() + " ; " +
-                "y:" + sensorValues.1.toString() + " ; " +
-                "z:" + sensorValues.2.toString()
+    func toString() -> String {
+        return "acc_x:" + accelerometerX.toString() + " ; " +
+        "acc_y:" + accelerometerY.toString() + " ; " +
+        "acc_z:" + accelerometerZ.toString() +
+        "gyro_x:" + gyroscopeX.toString() + " ; " +
+        "gyro_y:" + gyroscopeY.toString() + " ; " +
+        "gyro_z:" + gyroscopeZ.toString()
     }
 }

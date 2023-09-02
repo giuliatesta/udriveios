@@ -1,10 +1,3 @@
-//
-//  Timer.swift
-//  udriveios
-//
-//  Created by Giulia Testa on 08/07/23.
-//
-
 import SwiftUI
 
 //Timer view to be used in Home and Alert Views
@@ -26,11 +19,12 @@ struct TimerView: View {
                 self.stopTimer()
             }
             .onDisappear() {
-                // reset timer 
+                // reset timer
                 startTime = Date();
             }
     }
     
+    // TODO check if isTimerRunning is necessary
     func stopTimer() {
         if(isTimerRunning){
             self.timer.upstream.connect().cancel()

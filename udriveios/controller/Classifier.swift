@@ -1,31 +1,76 @@
 import Foundation
 import CoreML
 
+let WINDOW_SIZE : Int = 14;
+
 class Classifier {
-    
-    var danger: Bool
     let model : UdriveClassifier;
+    var slidingWindow : SlidingWindow = SlidingWindow();
     
-    init(danger: Bool = true) {
-        self.danger = danger;
+    init() {
         do {
             //TODO check configuration and try?
             self.model = UdriveClassifier();
         } catch {
             fatalError("Failed to load Core ML model")
         }
-        
     }
     
-    // TODO change parameter values into (SensorValues, SensorValues)
-    func classify(values: SensorValues, threshold: Double) -> Bool {
-        danger = true;
-        /*var input : UdriveClassifierInput = UdriveClassifierInput(conv1d_input: )
-        guard let prediction = try? model.prediction(input: values) else {
-            fatalError("Failed to make prediction")
-        }
-        print(prediction.output)
-         */
-        return danger;
+    func insert(sensorValues : SensorValues) {
+        slidingWindow.add(newData: sensorValues)
     }
+    
+    private func createInput() -> MLMultiArray? {
+        let multiArray = try! MLMultiArray(shape: [NSNumber(1), NSNumber(value: WINDOW_SIZE), NSNumber(6)], dataType: .double)
+        if(slidingWindow.window.count == WINDOW_SIZE) {
+            for (index, sensorValues) in slidingWindow.window.enumerated() {
+                multiArray[index * 6 + 0] = NSNumber(value: sensorValues.accelerometerX)
+                multiArray[index * 6 + 1] = NSNumber(value: sensorValues.accelerometerY)
+                multiArray[index * 6 + 2] = NSNumber(value: sensorValues.accelerometerZ)
+                multiArray[index * 6 + 3] = NSNumber(value: sensorValues.gyroscopeX)
+                multiArray[index * 6 + 4] = NSNumber(value: sensorValues.gyroscopeY)
+                multiArray[index * 6 + 5] = NSNumber(value: sensorValues.gyroscopeZ)
+            }
+            return multiArray
+        } else {
+            return nil;
+        }
+    }
+    
+    func classify() -> Int64 {
+        let multiArray : MLMultiArray? = createInput();
+        if(multiArray != nil) {
+        let input : UdriveClassifierInput = UdriveClassifierInput(conv1d_input: multiArray!);
+            guard let prediction = try? model.prediction(input: input) else {
+                fatalError("Failed to make prediction")
+            }
+            print(prediction.classLabel)
+            return prediction.classLabel;
+        } else {
+            return Int64(Direction.NONE.getInt());
+        }
+    }
+   
+
+}
+
+class SlidingWindow {
+    private var _window: [SensorValues] = [];
+    
+    var window : [SensorValues] {
+        if(_window.count == WINDOW_SIZE) {
+            return _window;
+        } else {
+            return [];
+        }
+    }
+
+    
+    func add(newData : SensorValues) {
+        if(_window.count >= WINDOW_SIZE) {
+            _window.remove(at: 0)   // removes the first inserted
+        }
+        _window.append(newData);
+    }
+    
 }

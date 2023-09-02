@@ -1,10 +1,3 @@
-//
-//  myViewModifier.swift
-//  udriveios
-//
-//  Created by Giulia Testa on 26/04/23.
-//
-
 import Foundation
 import SwiftUI
 

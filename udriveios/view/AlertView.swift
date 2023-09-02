@@ -1,10 +1,3 @@
-//
-//  AlertView.swift
-//  udriveios
-//
-//  Created by Sara Regali on 29/05/23.
-//
-
 import SwiftUI
 import AudioToolbox
 import AVFoundation
@@ -63,7 +56,7 @@ struct AlertView : View{
                 }
                 .background(backgroundColor)
             }
-            //.navigationBarBackButtonHidden(true)
+            .navigationBarBackButtonHidden(true)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onReceive(blinkTimer) { input in
                 if backgroundColor == .red {

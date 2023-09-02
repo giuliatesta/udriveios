@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  udriveios
-//
-//  Created by Giulia Testa on 26/04/23.
-//
-
 import SwiftUI
 
 struct ContentView: View {

@@ -1,10 +1,3 @@
-//
-//  DbManager.swift
-//  udriveios
-//
-//  Created by Giulia Testa on 24/08/23.
-//
-
 import Foundation
 import CoreData
 import CoreLocation

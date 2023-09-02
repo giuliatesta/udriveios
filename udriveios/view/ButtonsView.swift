@@ -1,10 +1,3 @@
-//
-//  ButtonsView.swift
-//  udriveios
-//
-//  Created by Giulia Testa on 08/07/23.
-//
-
 import SwiftUI
 
 struct StopButton: ButtonStyle {

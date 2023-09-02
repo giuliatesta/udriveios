@@ -1,10 +1,3 @@
-//
-//  ViewDidLoadModifier.swift
-//  udriveios
-//
-//  Created by Sara Regali on 15/05/23.
-//
-
 import Foundation
 import SwiftUI
 

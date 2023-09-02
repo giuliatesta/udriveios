@@ -1,10 +1,3 @@
-//
-//  ReportView.swift
-//  udriveios
-//
-//  Created by Giulia Testa on 08/07/23.
-//
-
 import SwiftUI
 
 struct ReportView: View {

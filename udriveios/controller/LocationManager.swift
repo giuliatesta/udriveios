@@ -1,10 +1,3 @@
-//
-//  LocationManager.swift
-//  udriveios
-//
-//  Created by Giulia Testa on 20/07/23.
-//
-
 import Foundation
 import CoreLocation
 import SwiftUI

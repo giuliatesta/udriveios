@@ -1,28 +1,17 @@
-//
-//  File.swift
-//  udriveios
-//
-//  Created by Giulia Testa on 26/04/23.
-//
-
 import Foundation
 import SwiftUI
 import CoreMotion
 
-let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+let sensorFrequencyTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 let utils = Utils()
 
 struct HomePage: View {
     @State private var endDrive = false
     //Con una variabile per valore di accelerometro funzionava
     var motionManager = CMMotionManager()
-    @State private var accelerometerValues = SensorValues(sensorValues: (0,0,0))
-    @State private var gyroscopeValues = SensorValues(sensorValues: (0,0,0))
-    
-    @State var direction : Direction = Direction.LEFT
+    @State var direction : Direction = Direction.NONE
     @State var duration : Int = 0; 
-    var threshold : Double = 100
-    @State var thresholdSurpassed = false
+    @State var showAlert = false
     var classifier = Classifier()
     
     @State private var showStopAlert = false
@@ -51,6 +40,10 @@ struct HomePage: View {
                         primaryButton: Alert.Button.default(Text("OK"), action: {
                             endDrive = true
                             LocationManager.getInstance().stopRecordingLocations()
+                            // stops the timer and the classifier
+                            sensorFrequencyTimer.upstream.connect().cancel()
+                            
+                            // TODO save duration in CoreData
                         }),
                         secondaryButton: Alert.Button.destructive(Text("Annulla"))
                     )
@@ -62,9 +55,9 @@ struct HomePage: View {
                     EmptyView()
                 }
                 
-                //
+                // TODO save safe duration 
                 NavigationLink(destination: AlertView(direction: $direction),
-                    isActive: $thresholdSurpassed
+                    isActive: $showAlert
                 ){
                     EmptyView()
                 }
@@ -81,27 +74,29 @@ struct HomePage: View {
             motionManager.gyroUpdateInterval = 1
 
         }
-        .onReceive(timer) { input in
+        .onReceive(sensorFrequencyTimer) { input in
+            var accelerometer : (Double, Double, Double) = (0,0,0);
             if motionManager.isAccelerometerActive {
-                motionManager.startAccelerometerUpdates(to: OperationQueue.main) { data,error in
-                    self.accelerometerValues.sensorValues = ((data?.acceleration.x ?? 0,
-                                                        data?.acceleration.y ?? 0,
-                                                        data?.acceleration.z ?? 0))
-                    //print("ACC:" + accelerometerValues.getValuesToString())
-                }
+                motionManager.startAccelerometerUpdates(to: OperationQueue.main) {
+                    data, error in
+                    accelerometer = ((data?.acceleration.x ?? 0,
+                                      data?.acceleration.y ?? 0,
+                                      data?.acceleration.z ?? 0))
+                 }
             }
-            
-            if motionManager.isGyroActive{
-                motionManager.startGyroUpdates(to: OperationQueue.main){
-                    data,error in
-                    self.gyroscopeValues.sensorValues = ((data?.rotationRate.x ?? 0,
-                                                            data?.rotationRate.y ?? 0,
-                                                            data?.rotationRate.z ?? 0))
-                        //print("GYR:" + gyroscopeValues.getValuesToString())
-                }
+            var gyroscope : (Double, Double, Double) = (0,0,0);
+            if motionManager.isGyroActive {
+                motionManager.startGyroUpdates(to: OperationQueue.main) {
+                    data, error in
+                    gyroscope = ((data?.rotationRate.x ?? 0,
+                                  data?.rotationRate.y ?? 0,
+                                  data?.rotationRate.z ?? 0))
+                    }
             }
-            //TODO add sliding window technique
-            thresholdSurpassed = classifier.classify(values: accelerometerValues, threshold: threshold)
+            classifier.insert(sensorValues: SensorValues(accelerometer: accelerometer, gyroscope: gyroscope));
+            var classLabel = classifier.classify();
+            showAlert = Direction.isDangerous(label: classLabel);
+            direction = Direction.getDirection(label: classLabel)
         }
     }
 }
