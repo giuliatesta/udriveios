@@ -19,34 +19,17 @@ struct MapView: UIViewRepresentable {
         let coordinates = locations.map { location in
             CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
         }
-        
-        let coordinates2 = [
-            defaultLocation,
-            CLLocationCoordinate2D(latitude: 45.44587, longitude: 9.213108),
-            CLLocationCoordinate2D(latitude: 45.448494, longitude: 9.209380),
-            CLLocationCoordinate2D(latitude: 45.454847, longitude: 9.219996),
-            CLLocationCoordinate2D(latitude: 45.476471, longitude: 9.231198)
-        ]
-        
-        mapView.addOverlay(MKPolyline(coordinates: coordinates2, count: coordinates2.count), level: .aboveLabels)
+        mapView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count), level: .aboveLabels)
     
-        
         for dangerousLocation in dangerousLocations {
             var locations : [Location] = [];
             if(dangerousLocation.locations != nil) {
                 locations = dangerousLocation.locations!.allObjects as! [Location]
             }
-            let coordinates = locations.map { location in
+            var coordinates = locations.map { location in
                 CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             }
-            
-            let coordinates2 = [
-                defaultLocation,
-                CLLocationCoordinate2D(latitude: 45.44587, longitude: 9.213108),
-                CLLocationCoordinate2D(latitude: 45.476471, longitude: 9.231198)
-            ]
-            
-            mapView.addOverlay(MKPolyline(coordinates: coordinates2, count: coordinates2.count), level: .aboveLabels)
+            mapView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count), level: .aboveLabels)
             
             // TODO add additional information to the annotation (duration, direction)
             let middleIndex : Int = Int(locations.count / 2)

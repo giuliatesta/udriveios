@@ -27,8 +27,6 @@ class DangerousLocationManager : NSObject, CLLocationManagerDelegate {
     }
     
     func stopRecordingDangerousLocations(direction: Direction, duration: Int) {
-        print(duration)
-        print(direction)
         coreDataManager.saveEntityDangerousLocation(locations: _locations, direction: direction, duration: duration)
         dangerousLocationManager.stopUpdatingLocation();
     }
