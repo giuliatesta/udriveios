@@ -1,9 +1,9 @@
 import SwiftUI
 
-//Timer view to be used in Home and Alert Views
+/* View showing a timer (in seconds) to be used in Home and Alert Views*/
 struct TimerView: View {
     @State var isTimerRunning = false
-    @State private var startTime =  Date()  // seconds already passed from the start of TimerView
+    @State private var startTime =  Date()  // seconds already passed from the initialization of TimerView
     @Binding var duration: Int;
     @State private var timerString = "00:00:00"
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -14,6 +14,7 @@ struct TimerView: View {
             .onReceive(self.timer) { _ in
                 self.duration = startTime.durationToNow ?? 0
             }
+            //TODO check if stopTimer() can be called in onDisappear() instead
             .onAppear() {
                 // no need for UI updates at startup
                 self.stopTimer()

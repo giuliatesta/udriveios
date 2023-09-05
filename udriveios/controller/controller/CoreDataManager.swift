@@ -2,9 +2,10 @@ import Foundation
 import CoreData
 import CoreLocation
 
-
+/* Class used to correctly deal with instances created in the udriveDataModel */
 class CoreDataManager : ObservableObject {
     static private let instance = CoreDataManager()
+    
     private init() {
         self._context = persistentContainer.viewContext
     }
@@ -43,7 +44,6 @@ class CoreDataManager : ObservableObject {
             }
         }
     }
-
     
     func saveEntityLocations(locations: [CLLocation]) {
         for location in locations {
@@ -84,7 +84,7 @@ class CoreDataManager : ObservableObject {
                 _context.delete(objectData)
             }
         } catch let error {
-            print("Delete all data in \(entityName) error :", error)
+            print("Cannot delete data in \(entityName) error :", error)
         }
     }
     

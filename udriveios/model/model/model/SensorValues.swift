@@ -2,9 +2,9 @@ import Foundation
 import SwiftUI
 import CoreMotion
 
+/* Class that holds the accelerometer and gyroscope values. It conforms to the protocol Equatable in order to be
+ used in the onChange() method of the Home view.*/
 class SensorValues : Equatable {
-   
-    
     var accelerometerX : Double;
     var accelerometerY : Double;
     var accelerometerZ : Double;

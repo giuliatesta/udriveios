@@ -10,8 +10,7 @@ struct InvertColorModifier : ViewModifier{
         } else {
             content
         }
-    }
-    
+    }    
 }
 
 extension Image {

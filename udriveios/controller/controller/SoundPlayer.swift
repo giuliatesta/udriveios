@@ -1,7 +1,7 @@
 import Foundation
 import AVFoundation
 
-
+/* Class used to play a sound in a view */
 class SoundPlayer: NSObject, AVAudioPlayerDelegate {
     var player: AVAudioPlayer?
     let soundUrl: URL?
@@ -34,7 +34,6 @@ class SoundPlayer: NSObject, AVAudioPlayerDelegate {
     func stop() {
         player?.stop();
     }
-    
     
     // func from AVAudioPlayerDelegate - automatically called after play
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {

@@ -1,6 +1,7 @@
 import SwiftUI
 import WebKit
 
+/* View used to show any GIF asset */
 struct GifImage: UIViewRepresentable {
     private let name: String
 
@@ -26,7 +27,6 @@ struct GifImage: UIViewRepresentable {
     func updateUIView(_ uiView: WKWebView, context: Context) {
         uiView.reload()
     }
-
 }
 
 

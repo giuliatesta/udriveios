@@ -1,10 +1,10 @@
 import SwiftUI
 
+/* View that requests the location authorization to the user (if not already granted) */
 struct StartView: View {
     @State private var showStopAlert = false;
     @State var authorizationGranted: Bool = false;
     @State var authorizationDenied : Bool = false;
-    
     @State var canProceed : Bool = false;
 
     @State var locationManager : LocationManager!;
@@ -16,22 +16,21 @@ struct StartView: View {
             VStack{
                 Text("Rotate your phone vertically").font(fontSystem)
                 GifImage("rotate_phone").frame(width: 150, height: 150, alignment: .center)
-                   Button(action: {
-                       locationManager.requestLocationAuthorization()
-                       if(authorizationGranted) {
+                Button(action: {
+                        locationManager.requestLocationAuthorization()
+                        if(authorizationGranted) {
                            // TODO check assignment
                            CoreDataManager.getInstance().context = viewContext
                            locationManager.startRecordingLocations()
                            canProceed = true;
-                       } else {
+                        } else {
                            canProceed = false;
-                       }
-                       
+                        }
                     })
-                    {
-                        Text("Start Driving!")
-                    }
-                    .padding()
+                {
+                    Text("Start Driving!")
+                }
+                .padding()
                 NavigationLink(destination: HomePage(), isActive: $canProceed) {
                     EmptyView()
                 }

@@ -1,7 +1,7 @@
 import Foundation
 import CoreMotion
 
-//The instance must be singleton
+/* Singleton instance of the CMMotionManager class */
 class MyCMMotionManager : CMMotionManager {
     static let instance = CMMotionManager()
 

@@ -3,6 +3,9 @@ import MapKit
 
 let defaultLocation = CLLocationCoordinate2D(latitude: 45.4642700, longitude: 9.1895100)
 
+/* View showing the user path recorded during the run, highlighting the zones where
+   dangerous behaviour was detected   */
+
 struct MapView: UIViewRepresentable {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Location.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Location.timestamp, ascending: true)]) var locations: FetchedResults<Location>
@@ -11,7 +14,7 @@ struct MapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
-
+        //The map region is created based on the location recorded
         let regionParameters = centerRegion(locations: locations)
         let region = MKCoordinateRegion(center: regionParameters.0, span: regionParameters.1)
         mapView.setRegion(region, animated: false)
@@ -19,8 +22,12 @@ struct MapView: UIViewRepresentable {
         let coordinates = locations.map { location in
             CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
         }
+        
+        //The path of the user is drawn using the locations recorded
         mapView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count), level: .aboveLabels)
-    
+        
+        //For each dangerous location object, another path is created using the locations in it to highlight
+        //the dangerous behaviour detected.
         for dangerousLocation in dangerousLocations {
             var locations : [Location] = [];
             if(dangerousLocation.locations != nil) {
@@ -51,6 +58,8 @@ struct MapView: UIViewRepresentable {
     
     
     func centerRegion(locations: FetchedResults<Location>) -> (CLLocationCoordinate2D, MKCoordinateSpan){
+        // The region is centered based on the minimum and maximum latitude and longitude detected in the
+        // locations recorded.
         if let firstLocation = locations.first {
             var minLat = firstLocation.latitude
             var maxLat = firstLocation.latitude

@@ -1,8 +1,7 @@
 import Foundation
 import SwiftUI
 
-//View Modifier to detect wether the view was loaded or not
-
+// View Modifier to detect wether the view was loaded or not
 struct ViewDidLoadModifier: ViewModifier {
 
     @State private var didLoad = false
