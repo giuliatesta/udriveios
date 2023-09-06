@@ -15,6 +15,7 @@ struct HomePage: View {
     
     @ObservedObject var sensorValuesManager = SensorValuesManager();
     
+    @Environment(\.managedObjectContext) private var viewContext
 
     var body: some View {
         NavigationView {
@@ -42,12 +43,14 @@ struct HomePage: View {
                             endDrive = true
                             sensorValuesManager.stopUpdates();
                             LocationManager.getInstance().stopRecordingLocations()
-                            // TODO save duration in CoreData
+                            
+                            // TODO refactoring (onDisappear not working -> we need to find something else)
+                            TimeIntervalManager.getInstance().saveTimeInterval(duration: duration, isDangerous: false)
                         }),
+                        
                         secondaryButton: Alert.Button.destructive(Text("Annulla"))
                     )
                 }
-                
                 NavigationLink(destination: ReportView(),
                     isActive: $endDrive
                 ){
@@ -58,7 +61,6 @@ struct HomePage: View {
                 NavigationLink(destination: AlertView(direction: $direction),
                     isActive: $showAlert
                 ){
-                    
                     EmptyView()
                 }
             }
@@ -67,14 +69,19 @@ struct HomePage: View {
         }
         .onChange(of: sensorValuesManager.sensorValues, perform: { newValue in
             print(sensorValuesManager.sensorValues.toString())
-                classifier.insert(sensorValues: sensorValuesManager.sensorValues);
-                let classLabel = classifier.classify();
-                direction = Direction.getDirection(label: classLabel)
-                showAlert = Direction.isDangerous(label: classLabel);
+            classifier.insert(sensorValues: sensorValuesManager.sensorValues);
+            let classLabel = classifier.classify();
+            direction = Direction.getDirection(label: classLabel)
+            showAlert = Direction.isDangerous(label: classLabel);
+            if(showAlert) {
+                TimeIntervalManager.getInstance().saveTimeInterval(duration: duration, isDangerous: false)
+            }
         })
         .navigationBarBackButtonHidden(true)
         .viewDidLoadModifier() {
             sensorValuesManager.startUpdates();
+            
+            CoreDataManager.getInstance().context = viewContext
         }
     }
 }

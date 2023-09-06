@@ -20,7 +20,6 @@ struct ViewDidLoadModifier: ViewModifier {
             }
         }
     }
-
 }
 
 extension View {

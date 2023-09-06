@@ -8,7 +8,6 @@ struct ReportView: View {
             }
         }.navigationBarBackButtonHidden(true)
         .navigationTitle("uDrive")
-
     }
 }
 

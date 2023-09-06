@@ -77,6 +77,7 @@ struct AlertView : View{
             .onDisappear {
                 soundPlayer.stop()
                 dangerousLocationManager.stopRecordingDangerousLocations(direction: direction, duration: duration)
+                TimeIntervalManager.getInstance().saveTimeInterval(duration: duration, isDangerous: true)
             }
     }
 }

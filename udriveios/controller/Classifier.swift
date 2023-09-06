@@ -50,8 +50,6 @@ class Classifier {
             return Int64(Direction.NONE.getInt());
         }
     }
-   
-
 }
 
 class SlidingWindow {
@@ -64,7 +62,6 @@ class SlidingWindow {
             return [];
         }
     }
-
     
     func add(newData : SensorValues) {
         if(_window.count >= WINDOW_SIZE) {

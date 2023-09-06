@@ -20,6 +20,7 @@
 		C6A16F4A2A5D9AA4005AED63 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A16F492A5D9AA4005AED63 /* AudioToolbox.framework */; };
 		C6A16F4E2A5D9F28005AED63 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A16F4C2A5D9F28005AED63 /* CoreLocation.framework */; };
 		C6A16F4F2A5D9F28005AED63 /* CoreLocationUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A16F4D2A5D9F28005AED63 /* CoreLocationUI.framework */; };
+		C6C388C72AA8C7BF006D4482 /* TimeIntervalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C388C62AA8C7BF006D4482 /* TimeIntervalManager.swift */; };
 		C6D2B65329F966BE0030A8AC /* udriveiosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */; };
 		C6D2B65529F966BE0030A8AC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B65429F966BE0030A8AC /* ContentView.swift */; };
 		C6D2B65729F966BF0030A8AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6D2B65629F966BF0030A8AC /* Assets.xcassets */; };
@@ -79,6 +80,7 @@
 		C6A16F4B2A5D9BC5005AED63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C6A16F4C2A5D9F28005AED63 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C6A16F4D2A5D9F28005AED63 /* CoreLocationUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocationUI.framework; path = System/Library/Frameworks/CoreLocationUI.framework; sourceTree = SDKROOT; };
+		C6C388C62AA8C7BF006D4482 /* TimeIntervalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalManager.swift; sourceTree = "<group>"; };
 		C6D2B64F29F966BE0030A8AC /* udriveios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = udriveios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = udriveiosApp.swift; sourceTree = "<group>"; };
 		C6D2B65429F966BE0030A8AC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -102,7 +104,7 @@
 		F59997F12A24DBAE005D2677 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		F5A043E92A2E2BFD00D647E1 /* Classifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
 		F5B5E1CD2A0926F400C7730F /* SensorValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SensorValues.swift; path = udriveios/model/model/SensorValues.swift; sourceTree = SOURCE_ROOT; };
-		F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CMMotionManager.swift; path = udriveios/model/model/CMMotionManager.swift; sourceTree = SOURCE_ROOT; };
+		F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CMMotionManager.swift; path = udriveios/controller/CMMotionManager.swift; sourceTree = SOURCE_ROOT; };
 		F5C65DCA2A125B8D00A1D906 /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
 		F5FE2B282A3362B5002A1ED2 /* LaunchScreenStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenStep.swift; sourceTree = "<group>"; };
 		F5FE2B2A2A3362D6002A1ED2 /* LaunchScreenStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenStateManager.swift; sourceTree = "<group>"; };
@@ -161,12 +163,14 @@
 				F5FE2B282A3362B5002A1ED2 /* LaunchScreenStep.swift */,
 				F5FE2B2A2A3362D6002A1ED2 /* LaunchScreenStateManager.swift */,
 				F5C65DCA2A125B8D00A1D906 /* ViewDidLoadModifier.swift */,
-				F547D7932A20ED7B00B23FD4 /* Utils.swift */,
 				F5A043E92A2E2BFD00D647E1 /* Classifier.swift */,
 				C6FCD6422A657FE200700AD9 /* SoundPlayer.swift */,
 				C698FC132A6978B90061ABE7 /* LocationManager.swift */,
 				C6E649112AA626A700808BB2 /* SensorValuesManager.swift */,
+				C6F756B42A979973004895A7 /* CoreDataManager.swift */,
+				F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */,
 				C6E6490A2AA334EC00808BB2 /* DangerousLocationManager.swift */,
+				C6C388C62AA8C7BF006D4482 /* TimeIntervalManager.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -249,10 +253,9 @@
 		F564549C2A127B3000E881FF /* model */ = {
 			isa = PBXGroup;
 			children = (
-				F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */,
+				F547D7932A20ED7B00B23FD4 /* Utils.swift */,
 				C6E6490D2AA37D3500808BB2 /* Direction.swift */,
 				F5B5E1CD2A0926F400C7730F /* SensorValues.swift */,
-				C6F756B42A979973004895A7 /* CoreDataManager.swift */,
 			);
 			name = model;
 			path = model/model;
@@ -414,6 +417,7 @@
 				C6E649102AA61F7600808BB2 /* UdriveClassifer.mlpackage in Sources */,
 				C63603142A597514001A2084 /* ReportView.swift in Sources */,
 				F5C65DCB2A125B8D00A1D906 /* ViewDidLoadModifier.swift in Sources */,
+				C6C388C72AA8C7BF006D4482 /* TimeIntervalManager.swift in Sources */,
 				F5FE2B2D2A336A54002A1ED2 /* StartView.swift in Sources */,
 				C6F756B82A979F5A004895A7 /* udriveDataModel.xcdatamodeld in Sources */,
 				C6246FE02A585D8700402F6C /* GifImage.swift in Sources */,

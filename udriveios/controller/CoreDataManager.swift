@@ -50,7 +50,7 @@ class CoreDataManager : ObservableObject {
             createLocationEntity(location: location)
             saveContext()
         }
-        print("Saved following locations: \(locations)");
+        // print("Saved following locations: \(locations)");
     }
     
     func createLocationEntity(location : CLLocation) -> Location {
@@ -61,18 +61,26 @@ class CoreDataManager : ObservableObject {
         return newLocationEntity;
     }
     
+    func saveEntityElapsedTime(duration: Int, isDangerous: Bool) {
+        let newElapsedTimeEntity = ElapsedTime(entity: NSEntityDescription.entity(forEntityName: "ElapsedTime", in: _context) ?? NSEntityDescription(), insertInto: _context)
+        newElapsedTimeEntity.seconds = Int64(duration)
+        newElapsedTimeEntity.isDangerous = isDangerous
+        saveContext()
+        print("Saved following time interval: \(newElapsedTimeEntity)");
+    }
+    
     func saveEntityDangerousLocation(locations: [CLLocation], direction: Direction, duration: Int) {
         let locationEntities : [Location] = locations.map { location in
             createLocationEntity(location: location)
         }
-        
         let newDangerousLocationEntity = DangerousLocation(entity: NSEntityDescription.entity(forEntityName: "DangerousLocation", in: _context) ?? NSEntityDescription(), insertInto: _context)
         newDangerousLocationEntity.locations = NSSet(array: locationEntities)
         newDangerousLocationEntity.direction = Int64(direction.getInt()) //check int or string
         newDangerousLocationEntity.duration = Int64(duration)
         saveContext()
-        print("Saved following dangerous location: \(newDangerousLocationEntity)");
+        // print("Saved following dangerous location: \(newDangerousLocationEntity)");
     }
+    
     
     func deleteEntity(entityName: String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
@@ -86,6 +94,22 @@ class CoreDataManager : ObservableObject {
         } catch let error {
             print("Delete all data in \(entityName) error :", error)
         }
+    }
+    
+    func getAll(entityName: String) -> [NSManagedObject] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        do {
+            var objects : [NSManagedObject] = []
+            let results = try _context.fetch(fetchRequest)
+            for object in results {
+            guard let objectData = object as? NSManagedObject else {continue}
+                objects.append(objectData)
+            }
+            return objects
+        } catch let error {
+            print("Delete all data in \(entityName) error :", error)
+        }
+        return []
     }
     
 }
