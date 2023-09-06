@@ -27,7 +27,12 @@
 		C6D2B66429F966C00030A8AC /* udriveiosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B66329F966C00030A8AC /* udriveiosTests.swift */; };
 		C6D2B66E29F966C00030A8AC /* udriveiosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B66D29F966C00030A8AC /* udriveiosUITests.swift */; };
 		C6D2B67029F966C00030A8AC /* udriveiosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B66F29F966C00030A8AC /* udriveiosUITestsLaunchTests.swift */; };
-		C6F756B12A97916D004895A7 /* FinalMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F756B02A97916D004895A7 /* FinalMapView.swift */; };
+		C6E6490B2AA334EC00808BB2 /* DangerousLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E6490A2AA334EC00808BB2 /* DangerousLocationManager.swift */; };
+		C6E6490E2AA37D3500808BB2 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E6490D2AA37D3500808BB2 /* Direction.swift */; };
+		C6E649102AA61F7600808BB2 /* UdriveClassifer.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = C6E6490F2AA61F7500808BB2 /* UdriveClassifer.mlpackage */; };
+		C6E649122AA626A700808BB2 /* SensorValuesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E649112AA626A700808BB2 /* SensorValuesManager.swift */; };
+		C6F277EC2AA0DF24008A7D1A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C6F277EB2AA0DF24008A7D1A /* .gitignore */; };
+		C6F756B12A97916D004895A7 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F756B02A97916D004895A7 /* MapView.swift */; };
 		C6F756B52A979973004895A7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F756B42A979973004895A7 /* CoreDataManager.swift */; };
 		C6F756B82A979F5A004895A7 /* udriveDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6F756B62A979F5A004895A7 /* udriveDataModel.xcdatamodeld */; };
 		C6FCD6432A657FE200700AD9 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FCD6422A657FE200700AD9 /* SoundPlayer.swift */; };
@@ -84,7 +89,12 @@
 		C6D2B66929F966C00030A8AC /* udriveiosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = udriveiosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D2B66D29F966C00030A8AC /* udriveiosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = udriveiosUITests.swift; sourceTree = "<group>"; };
 		C6D2B66F29F966C00030A8AC /* udriveiosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = udriveiosUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		C6F756B02A97916D004895A7 /* FinalMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalMapView.swift; sourceTree = "<group>"; };
+		C6E6490A2AA334EC00808BB2 /* DangerousLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerousLocationManager.swift; sourceTree = "<group>"; };
+		C6E6490D2AA37D3500808BB2 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		C6E6490F2AA61F7500808BB2 /* UdriveClassifer.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = UdriveClassifer.mlpackage; sourceTree = "<group>"; };
+		C6E649112AA626A700808BB2 /* SensorValuesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorValuesManager.swift; sourceTree = "<group>"; };
+		C6F277EB2AA0DF24008A7D1A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		C6F756B02A97916D004895A7 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		C6F756B42A979973004895A7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C6F756B72A979F5A004895A7 /* udriveDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = udriveDataModel.xcdatamodel; sourceTree = "<group>"; };
 		C6FCD6422A657FE200700AD9 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
@@ -136,10 +146,10 @@
 				C614A33F29FA844700A05F29 /* loading.swift */,
 				F5FE2B2C2A336A54002A1ED2 /* StartView.swift */,
 				C6246FDF2A585D8700402F6C /* GifImage.swift */,
+				C63603132A597514001A2084 /* ReportView.swift */,
 				C636030F2A595457001A2084 /* TimerView.swift */,
 				C63603112A595C40001A2084 /* ButtonsView.swift */,
-				C63603132A597514001A2084 /* ReportView.swift */,
-				C6F756B02A97916D004895A7 /* FinalMapView.swift */,
+				C6F756B02A97916D004895A7 /* MapView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -155,6 +165,8 @@
 				F5A043E92A2E2BFD00D647E1 /* Classifier.swift */,
 				C6FCD6422A657FE200700AD9 /* SoundPlayer.swift */,
 				C698FC132A6978B90061ABE7 /* LocationManager.swift */,
+				C6E649112AA626A700808BB2 /* SensorValuesManager.swift */,
+				C6E6490A2AA334EC00808BB2 /* DangerousLocationManager.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -172,6 +184,7 @@
 		C6D2B64629F966BE0030A8AC = {
 			isa = PBXGroup;
 			children = (
+				C6F277EB2AA0DF24008A7D1A /* .gitignore */,
 				C6F756B62A979F5A004895A7 /* udriveDataModel.xcdatamodeld */,
 				C6246FE32A58766100402F6C /* timer.gif */,
 				C6246FDD2A585CBC00402F6C /* rotate_phone.gif */,
@@ -197,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				C6A16F4B2A5D9BC5005AED63 /* Info.plist */,
+				C6E6490F2AA61F7500808BB2 /* UdriveClassifer.mlpackage */,
 				C68243EA29F97B2A00E9E0B0 /* controller */,
 				C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */,
 				F564549C2A127B3000E881FF /* model */,
@@ -236,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */,
+				C6E6490D2AA37D3500808BB2 /* Direction.swift */,
 				F5B5E1CD2A0926F400C7730F /* SensorValues.swift */,
 				C6F756B42A979973004895A7 /* CoreDataManager.swift */,
 			);
@@ -347,6 +362,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6F277EC2AA0DF24008A7D1A /* .gitignore in Resources */,
 				C6246FDE2A585CBC00402F6C /* rotate_phone.gif in Resources */,
 				C6D2B65A29F966BF0030A8AC /* Preview Assets.xcassets in Resources */,
 				C6246FE42A58766100402F6C /* timer.gif in Resources */,
@@ -382,10 +398,12 @@
 				C6D2B65329F966BE0030A8AC /* udriveiosApp.swift in Sources */,
 				F547D7942A20ED7B00B23FD4 /* Utils.swift in Sources */,
 				F5FE2B2B2A3362D6002A1ED2 /* LaunchScreenStateManager.swift in Sources */,
-				C6F756B12A97916D004895A7 /* FinalMapView.swift in Sources */,
+				C6F756B12A97916D004895A7 /* MapView.swift in Sources */,
 				C6FCD6432A657FE200700AD9 /* SoundPlayer.swift in Sources */,
+				C6E6490B2AA334EC00808BB2 /* DangerousLocationManager.swift in Sources */,
 				C63603102A595457001A2084 /* TimerView.swift in Sources */,
 				F59997F22A24DBAE005D2677 /* AlertView.swift in Sources */,
+				C6E649122AA626A700808BB2 /* SensorValuesManager.swift in Sources */,
 				C63603122A595C40001A2084 /* ButtonsView.swift in Sources */,
 				C6F756B52A979973004895A7 /* CoreDataManager.swift in Sources */,
 				F5B5E1D02A09293C00C7730F /* CMMotionManager.swift in Sources */,
@@ -393,11 +411,13 @@
 				F5A043EA2A2E2BFD00D647E1 /* Classifier.swift in Sources */,
 				C614A34029FA844700A05F29 /* loading.swift in Sources */,
 				C68243EC29F97B4900E9E0B0 /* InvertColorModifier.swift in Sources */,
+				C6E649102AA61F7600808BB2 /* UdriveClassifer.mlpackage in Sources */,
 				C63603142A597514001A2084 /* ReportView.swift in Sources */,
 				F5C65DCB2A125B8D00A1D906 /* ViewDidLoadModifier.swift in Sources */,
 				F5FE2B2D2A336A54002A1ED2 /* StartView.swift in Sources */,
 				C6F756B82A979F5A004895A7 /* udriveDataModel.xcdatamodeld in Sources */,
 				C6246FE02A585D8700402F6C /* GifImage.swift in Sources */,
+				C6E6490E2AA37D3500808BB2 /* Direction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
