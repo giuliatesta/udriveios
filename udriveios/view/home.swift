@@ -73,6 +73,8 @@ struct HomePage: View {
             let classLabel = classifier.classify();
             direction = Direction.getDirection(label: classLabel)
             showAlert = Direction.isDangerous(label: classLabel);
+        })
+        .onChange(of: showAlert, perform: { newValue in
             if(showAlert) {
                 TimeIntervalManager.getInstance().saveTimeInterval(duration: duration, isDangerous: false)
             }

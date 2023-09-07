@@ -3,6 +3,8 @@ import CoreML
 
 let WINDOW_SIZE : Int = 14;
 
+/* Class used as a wrapper between the UdriveClassifier component and the Home view.
+   Inputs are stored using a sliding window technique of size 14 and later classified */
 class Classifier {
     let model : UdriveClassifer;
     var slidingWindow : SlidingWindow = SlidingWindow();
@@ -55,6 +57,7 @@ class Classifier {
 class SlidingWindow {
     private var _window: [SensorValues] = [];
     
+    //If the window doesn't have enough values, an empty array is returned
     var window : [SensorValues] {
         if(_window.count == WINDOW_SIZE) {
             return _window;

@@ -2,7 +2,7 @@ import Foundation
 import CoreData
 import CoreLocation
 
-
+/* Class used to correctly deal with instances created in the udriveDataModel */
 class CoreDataManager : ObservableObject {
     static private let instance = CoreDataManager()
     private init() {
@@ -44,16 +44,15 @@ class CoreDataManager : ObservableObject {
         }
     }
 
-    
     func saveEntityLocations(locations: [CLLocation]) {
         for location in locations {
-            createLocationEntity(location: location)
+            createEntityLocation(location: location)
             saveContext()
         }
         // print("Saved following locations: \(locations)");
     }
     
-    func createLocationEntity(location : CLLocation) -> Location {
+    func createEntityLocation(location : CLLocation) -> Location {
         let newLocationEntity = Location(entity: NSEntityDescription.entity(forEntityName: "Location", in: _context) ?? NSEntityDescription(), insertInto: _context)
         newLocationEntity.latitude = location.coordinate.latitude
         newLocationEntity.longitude = location.coordinate.longitude
@@ -71,7 +70,7 @@ class CoreDataManager : ObservableObject {
     
     func saveEntityDangerousLocation(locations: [CLLocation], direction: Direction, duration: Int) {
         let locationEntities : [Location] = locations.map { location in
-            createLocationEntity(location: location)
+            createEntityLocation(location: location)
         }
         let newDangerousLocationEntity = DangerousLocation(entity: NSEntityDescription.entity(forEntityName: "DangerousLocation", in: _context) ?? NSEntityDescription(), insertInto: _context)
         newDangerousLocationEntity.locations = NSSet(array: locationEntities)
@@ -81,6 +80,12 @@ class CoreDataManager : ObservableObject {
         // print("Saved following dangerous location: \(newDangerousLocationEntity)");
     }
     
+    func saveEntityBestScore(totalSafeTime: Int, totalDangerousTime: Int ){
+        let newBestScoreEntity = BestScore(entity: NSEntityDescription.entity(forEntityName: "BestScore", in: _context) ?? NSEntityDescription(), insertInto: _context)
+        newBestScoreEntity.totalSafeTime = Int64(totalSafeTime) //check int or string
+        newBestScoreEntity.totalDangerousTime = Int64(totalDangerousTime) //check int or string
+        saveContext()
+    }
     
     func deleteEntity(entityName: String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
@@ -101,6 +106,9 @@ class CoreDataManager : ObservableObject {
         do {
             var objects : [NSManagedObject] = []
             let results = try _context.fetch(fetchRequest)
+            if(results.isEmpty){
+                return []
+            }
             for object in results {
             guard let objectData = object as? NSManagedObject else {continue}
                 objects.append(objectData)

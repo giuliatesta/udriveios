@@ -2,6 +2,8 @@ import Foundation
 import CoreLocation
 import SwiftUI
 
+/* Class used to manage the storage of CoreData's Location instances and the location
+ authorization request to the user */
 class LocationManager: NSObject, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     var coreDataManager : CoreDataManager;
@@ -13,7 +15,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         _authorizationGranted = authorizationGranted
         coreDataManager = CoreDataManager.getInstance();
         super.init()
-        locationManager.delegate = self     // must be done AFTER calling supe
+        locationManager.delegate = self     // must be done AFTER calling super
     }
     
     static private var instance : LocationManager?;

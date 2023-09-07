@@ -6,6 +6,9 @@ let blinkTimer = Timer.publish(every: 0.3, on: .main, in: .common).autoconnect()
 
 let soundUrl = URL(string: "/System/Library/Audio/UISounds/alarm.caf")
 
+
+/* View that shows the Direction of the dangerous behaviour along with a
+ timer indicating for how long the dangerous behaviour is mantained */
 struct AlertView : View{
     @Binding var direction: Direction
     @State var duration: Int = 0;
@@ -24,6 +27,7 @@ struct AlertView : View{
             VStack{
                 ZStack(alignment: .center){
                     VStack{
+                        // A different icon is shown based on the direction received by the HomeView
                         switch direction {
                             case .BREAK:
                                 Image(systemName: "arrow.down")
@@ -67,7 +71,7 @@ struct AlertView : View{
             }
             .onAppear {
                 
-                soundPlayer.play()
+                soundPlayer.play()      //Starts playing sound
                 
                 CoreDataManager.getInstance().context = viewContext
                 dangerousLocationManager.startRecordingDangerousLocations();
