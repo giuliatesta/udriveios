@@ -17,7 +17,7 @@ class TimeIntervalManager {
         coreDataManager.saveEntityElapsedTime(duration: duration, isDangerous: isDangerous)
     }
     
-    func saveBestScore(){
+    func saveBestScore() {
         coreDataManager.saveEntityBestScore(totalSafeTime: Int(self.getTotalSafeElapsedTime()), totalDangerousTime: Int(self.getTotalDangerousElapsedTime()))
     }
     
@@ -31,33 +31,28 @@ class TimeIntervalManager {
     }
     
     func getBestScore() -> Double {
-        let fetchedResults =  coreDataManager.getAll(entityName: "BestScore")
-        if (!fetchedResults.isEmpty){
+        let fetchedResults = coreDataManager.getAll(entityName: "BestScore")
+        if (!fetchedResults.isEmpty) {
             let bestScore = fetchedResults.first //It should be only one
             let totalSafeTime = (bestScore?.value(forKey: "totalSafeTime")) as? Int ?? 0
             let totalDangerousTime = (bestScore?.value(forKey: "totalDangerousTime")) as? Int ?? 0
             if(totalSafeTime + totalDangerousTime != 0) {
                 return 100.0 * (Double(totalSafeTime) / Double(totalSafeTime + totalDangerousTime));
-            }else {
-                return 0.0
             }
-        }else {
-            return 0.0
         }
+        return 0.0
     }
     
     func getCurrentScore() -> Double {
         let total = getTotalTime()
         print("Total time : \(total)")
-
-        if ( total != 0.0){
+        
+        if (total != 0.0) {
             let tot = 100.0 * (self.getTotalSafeElapsedTime() / total)
             print("Current score : \(tot)")
             return tot
-        }else{
-            return 0
         }
-        
+        return 0.0
     }
     
     func getTotalSafeElapsedTime() -> Double {
@@ -82,9 +77,5 @@ class TimeIntervalManager {
         }
         print ("Dangerous Elapsed time: \(seconds)")
         return Double(seconds)
-    }
-    
-    func getFormattedTime(seconds: Int) -> Date {
-        return Date (timeIntervalSinceNow: TimeInterval(seconds))
     }
 }

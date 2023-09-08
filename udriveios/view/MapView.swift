@@ -19,25 +19,38 @@ struct MapView: UIViewRepresentable {
         let coordinates = locations.map { location in
             CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
         }
+                
         mapView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count), level: .aboveLabels)
+        
+        if (coordinates.first != nil && coordinates.last != nil) {
+            context.coordinator.isDangerous = false
+            let start = MKPointAnnotation()
+            start.coordinate = CLLocationCoordinate2D(latitude: coordinates.first!.latitude, longitude: coordinates.first!.longitude)
+            mapView.addAnnotation(start)
+            
+            let end = MKPointAnnotation()
+            end.coordinate = CLLocationCoordinate2D(latitude: coordinates.last!.latitude, longitude: coordinates.last!.longitude)
+            mapView.addAnnotation(end)
+        }
     
         for dangerousLocation in dangerousLocations {
             var locations : [Location] = [];
             if(dangerousLocation.locations != nil) {
                 locations = dangerousLocation.locations!.allObjects as! [Location]
             }
-            var coordinates = locations.map { location in
+            let coordinates = locations.map { location in
                 CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             }
+            context.coordinator.isDangerous = true
             mapView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count), level: .aboveLabels)
             
-            // TODO add additional information to the annotation (duration, direction)
             let middleIndex : Int = Int(locations.count / 2)
             let medianLocation = locations[middleIndex]
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: medianLocation.latitude, longitude: medianLocation.longitude)
+            annotation.title = Direction.getName(direction: dangerousLocation.direction)
+            annotation.subtitle = Utils.getFormattedTime(duration: dangerousLocation.duration)
             mapView.addAnnotation(annotation)
-                                                    
         }
         return mapView
     }
@@ -95,7 +108,9 @@ struct FinalMapView_Previews: PreviewProvider {
 }
 
 class Coordinator: NSObject, MKMapViewDelegate {
+    
     var parent: MapView
+    var isDangerous : Bool = false
     
     init(_ parent: MapView) {
         self.parent = parent
@@ -104,11 +119,31 @@ class Coordinator: NSObject, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
       if let routePolyline = overlay as? MKPolyline {
         let renderer = MKPolylineRenderer(polyline: routePolyline)
-        renderer.strokeColor = UIColor.systemBlue
+          renderer.strokeColor = isDangerous ? UIColor.systemRed : UIColor.systemBlue
         renderer.lineWidth = 5
         return renderer
       }
       return MKOverlayRenderer()
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if !(annotation is MKPointAnnotation) {
+                    return nil
+        }
+        if (!isDangerous) {
+            let annotationIdentifier = "annotationIdentifier"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
+                
+            if annotationView == nil {
+               annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+                annotationView!.canShowCallout = true
+            } else {
+                annotationView!.annotation = annotation
+            }
+            annotationView!.image = UIImage(systemName: "flag.checkered")
+            return annotationView
+        }
+        return nil
     }
 }
 

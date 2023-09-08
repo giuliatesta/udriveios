@@ -32,7 +32,7 @@ struct StartView: View {
                         Text("Start Driving!")
                     }
                     .padding()
-                NavigationLink(destination: HomePage(), isActive: $canProceed) {
+                NavigationLink(destination: HomeView(), isActive: $canProceed) {
                     EmptyView()
                 }
             }

@@ -3,7 +3,7 @@ import SwiftUI
 
 let utils = Utils()
 
-struct HomePage: View {
+struct HomeView: View {
     @State private var endDrive = false
     @State var direction : Direction = Direction.NONE
     @State var duration : Int = 0;
@@ -25,9 +25,11 @@ struct HomePage: View {
                         .fillImageModifier()
                         .padding([.horizontal], 150)
                         .frame(width: 500,height: 300)
-                    TimerView(duration: $duration).padding([.top],30)
-                }.frame(height: 500)
-                
+                    TimerView(duration: $duration)
+                        .padding([.top],30)
+                }
+                .frame(height: 500)
+
                 Button(action: {showStopAlert = true}){
                     HStack{
                         Image(systemName: "stop.fill")
@@ -35,8 +37,7 @@ struct HomePage: View {
                     }
                 }
                 .buttonStyle(.borderedProminent)
-                
-                .alert(isPresented: $showStopAlert){
+                .alert(isPresented: $showStopAlert) {
                     Alert(
                         title: Text("Sei sicuro di voler terminare la guida?"),
                         primaryButton: Alert.Button.default(Text("OK"), action: {
@@ -51,14 +52,14 @@ struct HomePage: View {
                         secondaryButton: Alert.Button.destructive(Text("Annulla"))
                     )
                 }
+                
                 NavigationLink(destination: ReportView(),
                     isActive: $endDrive
                 ){
                     EmptyView()
                 }
                 
-                // TODO save safe duration 
-                NavigationLink(destination: AlertView(direction: $direction),
+                NavigationLink(destination: AlertView(direction: direction),
                     isActive: $showAlert
                 ){
                     EmptyView()
@@ -90,6 +91,6 @@ struct HomePage: View {
 
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
-        HomePage()
+        HomeView()
     }
 }

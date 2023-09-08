@@ -3,23 +3,25 @@ import SwiftUI
 /* Final View showing a report of the overall driving behavior of the user */
 struct ReportView: View {
     
-    @State var timeIntervalManager = TimeIntervalManager.getInstance()
-
     @State var showAlert = false;
     @State var showConfetti = false
     @State var exit = false
 
+    @State var currentScore : Double = 0.0;
+    @State var bestScore : Double = 0.0;
+    
     @Environment(\.managedObjectContext) private var viewContext
 
+    // TODO scroll view
     var body: some View {
         NavigationView(){
             VStack{
                 VStack{
                     Text("Punteggio Finale:")
-                    Text("\(timeIntervalManager.getCurrentScore(), specifier: "%.2f") %")
+                    Text("\(currentScore, specifier: "%.2f") %")
                     Text("Miglior Punteggio:")
-                    Text("\(timeIntervalManager.getBestScore(), specifier: "%.2f") %")
-                    if(showConfetti){
+                    Text("\(bestScore, specifier: "%.2f") %")
+                    if(showConfetti) {
                         Text("Complimenti, hai migliorato il tuo")
                         Text("miglior punteggio!")
                     }
@@ -54,7 +56,7 @@ struct ReportView: View {
                         }
                     }
                     .buttonStyle(.borderedProminent)
-                    .alert(isPresented: $exit){
+                    .alert(isPresented: $exit) {
                         Alert(
                             title: Text("Sei sicuro di voler uscire?"),
                             primaryButton: Alert.Button.default(Text("OK"), action: {
@@ -65,13 +67,19 @@ struct ReportView: View {
                     }
                 }
             }
-        }.navigationBarBackButtonHidden(true)
+        }
+        .navigationBarBackButtonHidden(true)
         .navigationTitle("uDrive")
-        .onAppear(){
+        .onAppear() {
             CoreDataManager.getInstance().context = viewContext
-            if(timeIntervalManager.getBestScore() < timeIntervalManager.getCurrentScore()){
+            let timeIntervalManager = TimeIntervalManager.getInstance()
+            bestScore = timeIntervalManager.getBestScore()
+            currentScore = timeIntervalManager.getCurrentScore()
+            if(bestScore < currentScore) {
                 showConfetti = true
+                timeIntervalManager.saveBestScore()
             }
+             
         }
     }
 }

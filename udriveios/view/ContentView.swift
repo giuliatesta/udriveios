@@ -13,6 +13,7 @@ struct ContentView: View {
             coreDataManager.initManager()                                   // initialises the database
             coreDataManager.deleteEntity(entityName: "Location")            // empties the locations table -> only the current session is saved
             coreDataManager.deleteEntity(entityName: "DangerousLocation")   // empties the DangerousLocation table
+            coreDataManager.deleteEntity(entityName: "ElapsedTime")   // empties the ElapsedTime table
         }
     }
     

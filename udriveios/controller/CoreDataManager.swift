@@ -77,20 +77,21 @@ class CoreDataManager : ObservableObject {
         newDangerousLocationEntity.direction = Int64(direction.getInt()) //check int or string
         newDangerousLocationEntity.duration = Int64(duration)
         saveContext()
-        // print("Saved following dangerous location: \(newDangerousLocationEntity)");
+        print("Saved following dangerous location: \(newDangerousLocationEntity)");
     }
     
     func saveEntityBestScore(totalSafeTime: Int, totalDangerousTime: Int ){
         let newBestScoreEntity = BestScore(entity: NSEntityDescription.entity(forEntityName: "BestScore", in: _context) ?? NSEntityDescription(), insertInto: _context)
-        newBestScoreEntity.totalSafeTime = Int64(totalSafeTime) //check int or string
-        newBestScoreEntity.totalDangerousTime = Int64(totalDangerousTime) //check int or string
+        newBestScoreEntity.totalSafeTime = Int64(totalSafeTime)
+        newBestScoreEntity.totalDangerousTime = Int64(totalDangerousTime)
         saveContext()
+        print("Saved following new best score: \(newBestScoreEntity)")
     }
     
     func deleteEntity(entityName: String) {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        fetchRequest.returnsObjectsAsFaults = false     // their property data resides in the row cache until the fault is fired - lazy
         do {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            fetchRequest.returnsObjectsAsFaults = false     // their property data resides in the row cache until the fault is fired - lazy
             let results = try _context.fetch(fetchRequest)
             for object in results {
             guard let objectData = object as? NSManagedObject else {continue}
@@ -102,22 +103,18 @@ class CoreDataManager : ObservableObject {
     }
     
     func getAll(entityName: String) -> [NSManagedObject] {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        var objects : [NSManagedObject] = []
         do {
-            var objects : [NSManagedObject] = []
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
             let results = try _context.fetch(fetchRequest)
-            if(results.isEmpty){
-                return []
-            }
             for object in results {
             guard let objectData = object as? NSManagedObject else {continue}
                 objects.append(objectData)
             }
-            return objects
         } catch let error {
             print("Delete all data in \(entityName) error :", error)
         }
-        return []
+        return objects
     }
     
 }

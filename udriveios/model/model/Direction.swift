@@ -43,6 +43,23 @@ enum Direction {
         }
     }
     
+    static func getName(direction : Int64) -> String {
+        switch direction {
+        case 0:
+            return "Accelerazione";
+        case 1:
+            return "Curva a destra";
+        case 2:
+            return "Curva a sinistra";
+        case 3:
+            return "Frenata";
+        case 4:
+            return "Niente";
+        default:
+            fatalError("No direction available with \(direction)");
+        }
+    }
+    
     static func isDangerous(label: Int64) -> Bool{
         return label != Direction.NONE.getInt();
     }
