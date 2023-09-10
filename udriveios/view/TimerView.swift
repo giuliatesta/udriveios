@@ -1,6 +1,6 @@
 import SwiftUI
 
-//Timer view to be used in Home and Alert Views
+/* View showing a timer (in seconds) to be used in Home and Alert Views*/
 struct TimerView: View {
     @State var isTimerRunning = false
     @State private var startTime =  Date()  // seconds already passed from the start of TimerView

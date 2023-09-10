@@ -3,17 +3,21 @@ import SwiftUI
 
 let utils = Utils()
 
+/* View that shows a timer indicating for how long the safe driving behaviour is mantained.
+   It's also possible to terminate the driving session. */
 struct HomeView: View {
     @State private var endDrive = false
-    @State var direction : Direction = Direction.NONE
+    @State var direction : Direction = Direction.NONE       //Starting direction is initialized at NONE
     @State var duration : Int = 0;
     
     @State var showAlert = false;
     @State private var showStopAlert = false;
     
-    var classifier = Classifier()
+    var classifier = Classifier()       //Classifier object used to classify the current driving behaviour based on the sensorValues attribute
     
-    @ObservedObject var sensorValuesManager = SensorValuesManager();
+    
+    @ObservedObject var sensorValuesManager = SensorValuesManager();        //Observed object used to detect any changes in accelerometer or gyroscope values of the device
+    
     
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -42,8 +46,8 @@ struct HomeView: View {
                         title: Text("Sei sicuro di voler terminare la guida?"),
                         primaryButton: Alert.Button.default(Text("OK"), action: {
                             endDrive = true
-                            sensorValuesManager.stopUpdates();
-                            LocationManager.getInstance().stopRecordingLocations()
+                            sensorValuesManager.stopUpdates();                          //Stops updating accelerometer and gyroscope values
+                            LocationManager.getInstance().stopRecordingLocations()      //Stops recording location
                             
                             // TODO refactoring (onDisappear not working -> we need to find something else)
                             TimeIntervalManager.getInstance().saveTimeInterval(duration: duration, isDangerous: false)
@@ -68,10 +72,12 @@ struct HomeView: View {
             .navigationTitle("uDrive")
             .padding(10)
         }
+        //This method detects any changes to the @ObservedObject sensorValuesManager.sensorValues
+        //in order to update the view to show the AlertView if needed
         .onChange(of: sensorValuesManager.sensorValues, perform: { newValue in
             print(sensorValuesManager.sensorValues.toString())
-            classifier.insert(sensorValues: sensorValuesManager.sensorValues);
-            let classLabel = classifier.classify();
+            classifier.insert(sensorValues: sensorValuesManager.sensorValues);      //Adds the new values in the classifier's sliding window
+            let classLabel = classifier.classify();                                 //Behaviour classification
             direction = Direction.getDirection(label: classLabel)
             showAlert = Direction.isDangerous(label: classLabel);
         })

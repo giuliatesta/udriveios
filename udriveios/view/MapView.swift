@@ -3,6 +3,8 @@ import MapKit
 
 let defaultLocation = CLLocationCoordinate2D(latitude: 45.4642700, longitude: 9.1895100)
 
+/* View showing the user path recorded during the run, highlighting the zones where
+   dangerous behaviour was detected   */
 struct MapView: UIViewRepresentable {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Location.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Location.timestamp, ascending: true)]) var locations: FetchedResults<Location>
@@ -11,7 +13,8 @@ struct MapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
-
+        
+        //The map region is created based on the location recorded
         let regionParameters = centerRegion(locations: locations)
         let region = MKCoordinateRegion(center: regionParameters.0, span: regionParameters.1)
         mapView.setRegion(region, animated: false)
@@ -22,8 +25,9 @@ struct MapView: UIViewRepresentable {
                 
         mapView.addOverlay(MKPolyline(coordinates: coordinates, count: coordinates.count), level: .aboveLabels)
         
+        context.coordinator.isDangerous = false
         if (coordinates.first != nil && coordinates.last != nil) {
-            context.coordinator.isDangerous = false
+            print("first and last coordinates: \(coordinates.first)\(coordinates.last)")
             let start = MKPointAnnotation()
             start.coordinate = CLLocationCoordinate2D(latitude: coordinates.first!.latitude, longitude: coordinates.first!.longitude)
             mapView.addAnnotation(start)
@@ -32,7 +36,8 @@ struct MapView: UIViewRepresentable {
             end.coordinate = CLLocationCoordinate2D(latitude: coordinates.last!.latitude, longitude: coordinates.last!.longitude)
             mapView.addAnnotation(end)
         }
-    
+        
+        /*For each dangerous location object, another path is created using the locations in it to highlight the dangerous behaviour detected.*/
         for dangerousLocation in dangerousLocations {
             var locations : [Location] = [];
             if(dangerousLocation.locations != nil) {
@@ -62,7 +67,7 @@ struct MapView: UIViewRepresentable {
         return MKPolyline(coordinates: coordinates, count: coordinates.count)
     }
     
-    
+    /* The region is centered based on the minimum and maximum latitude and longitude detected in the locations recorded. */
     func centerRegion(locations: FetchedResults<Location>) -> (CLLocationCoordinate2D, MKCoordinateSpan){
         if let firstLocation = locations.first {
             var minLat = firstLocation.latitude
@@ -127,10 +132,12 @@ class Coordinator: NSObject, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        print("Dangerous: \(isDangerous)\n annotation: \(annotation)")
+
         if !(annotation is MKPointAnnotation) {
-                    return nil
+            return nil
         }
-        if (!isDangerous) {
+        if (self.isDangerous == false) {
             let annotationIdentifier = "annotationIdentifier"
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
                 

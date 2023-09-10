@@ -1,10 +1,10 @@
 import SwiftUI
 
+/* View that requests the location authorization to the user (if not already granted) */
 struct StartView: View {
     @State private var showStopAlert = false;
     @State var authorizationGranted: Bool = false;
     @State var authorizationDenied : Bool = false;
-    
     @State var canProceed : Bool = false;
 
     @State var locationManager : LocationManager!;
@@ -14,8 +14,9 @@ struct StartView: View {
     var body: some View {
         NavigationView{
             VStack{
-                Text("Rotate your phone vertically").font(fontSystem)
                 GifImage("rotate_phone").frame(width: 150, height: 150, alignment: .center)
+                Text("Rotate your phone vertically").font(fontSystem)
+
                    Button(action: {
                        locationManager.requestLocationAuthorization()
                        if(authorizationGranted) {
@@ -26,12 +27,12 @@ struct StartView: View {
                        } else {
                            canProceed = false;
                        }
-                       
                     })
                     {
-                        Text("Start Driving!")
+                        Text("Start Driving!").font(.title)
                     }
                     .padding()
+                    .buttonStyle(.borderedProminent)
                 NavigationLink(destination: HomeView(), isActive: $canProceed) {
                     EmptyView()
                 }
@@ -56,8 +57,8 @@ struct StartView: View {
     }
 }
 
-/*struct StartView_Previews: PreviewProvider {
+struct StartView_Previews: PreviewProvider {
     static var previews: some View {
         StartView()
     }
-}*/
+}

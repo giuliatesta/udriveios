@@ -3,6 +3,7 @@ import CoreMotion
 
 let UPDATE_INTERVAL : Double = 1.0
 
+/* Class used to detect the changes in the device's motion updates (accelerometer and gyroscope values) */
 class SensorValuesManager : ObservableObject {
     private let motionManager = CMMotionManager()
     
