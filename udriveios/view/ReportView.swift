@@ -9,7 +9,7 @@ struct ReportView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
 
-    @State private var goToStart = false
+    @State var goToStart = false
     @State private var newBestscore = false
     
     @State private var currentScore : Double = 0.0;
@@ -111,21 +111,27 @@ struct ReportView: View {
                         MapView().frame(minHeight: 500, maxHeight: 500)
                             .padding([.horizontal])
                     }
-                    Button(action: {goToStart = true}) {
+                    Button(action: {
+                        goToStart = true
+                        print("clicked...\(goToStart)")
+
+                        
+                    }) {
                         Text("Nuova Guida")
                     }
                     .buttonStyle(.borderedProminent)
                     .font(.title)
+                    .padding([.vertical])
                 }
             }
             .navigationTitle("uDrive")  // It must be here. Otherwise, weird behaviour with ScrollView
-            .navigationDestination(isPresented: $goToStart) {
-                StartView()
-            }
         }
         .confettiCannon(counter: $counter, num: 150)
         .padding([.horizontal], 10)
         .navigationBarBackButtonHidden(true)
+        .navigationDestination(isPresented: $goToStart) {
+            StartView()
+        }
         .onAppear() {
             CoreDataManager.getInstance().context = viewContext
             let timeIntervalManager = TimeIntervalManager.getInstance()
@@ -137,7 +143,6 @@ struct ReportView: View {
             }
         }
     }
-    
     
     private func celebrateNewBestScore() {
         soundPlayer.play()

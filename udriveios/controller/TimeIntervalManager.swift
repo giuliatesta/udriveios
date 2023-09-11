@@ -40,7 +40,8 @@ class TimeIntervalManager {
         print("Total time : \(total)")
         
         if (total != 0) {
-            let tot = 100.0 * Double(self.getTotalTime(dangerous: false) / total)
+            let safeTime = self.getTotalTime(dangerous: false)
+            let tot = 100.0 * (Double(safeTime) / Double(total))
             print("Current score : \(tot)")
             return tot
         }
