@@ -8,16 +8,12 @@ class Utils {
     }
     
     static func getFormattedTime(duration: Int64) -> String {
-        var formatter = DateComponentsFormatter()
+        let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
         formatter.unitsStyle = .positional
         formatter.zeroFormattingBehavior = .pad
         return formatter.string(from: TimeInterval(duration)) ?? ""
-        // return "\(hours):\(minutes):\(seconds)";
-        
-        
     }
-
 }
 
 

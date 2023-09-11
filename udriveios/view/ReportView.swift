@@ -1,110 +1,148 @@
 import SwiftUI
+import ConfettiSwiftUI
 
-var clapSoundUrl = URL(string: "/System/Library/Audio/UISounds/New/Fanfare.caf")
+
+let clapSoundUrl = URL(string: "/System/Library/Audio/UISounds/New/Fanfare.caf")
+
 /* Final View showing a report of the overall driving behavior of the user */
 struct ReportView: View {
-
-    @State var showAlert = false
-    @State var showConfetti = true
-    @State var restart = false
-
-    @State var currentScore : Double = 0.0;
-    @State var bestScore : Double = 0.0;
-    @State var bestScoreColor : Color = Color(hex: "9ff227").opacity(0.2)
-    @State var finalScoreColor : Color = Color(hex: "f25727").opacity(0.2)
-    
-    var soundPlayer: SoundPlayer = SoundPlayer(soundUrl: clapSoundUrl, silenceDuration: 0, repeatSound: false)
     
     @Environment(\.managedObjectContext) private var viewContext
 
+    @State private var goToStart = false
+    @State private var newBestscore = false
+    
+    @State private var currentScore : Double = 0.0;
+    @State private var bestScore : Double = 0.0;
+    @State private var counter = 0
+
+    let soundPlayer: SoundPlayer = SoundPlayer(soundUrl: clapSoundUrl, silenceDuration: 0, repeatSound: false)
+    
+    let greenColor : Color = Color(hex: "9ff227").opacity(0.2)
+    let redColor : Color = Color(hex: "f25727").opacity(0.2)
+    
     var body: some View {
-        NavigationView(){
-            ScrollView{
-                VStack{
-                    if(showConfetti) {
-                        HStack{
+        NavigationStack() {
+            VStack {
+                ScrollView {
+                    if(newBestscore) {
+                        HStack {
                             Text("Complimenti!\nHai ottenuto un nuovo record!").font(.title2)
                                 .multilineTextAlignment(.center)
                                 .padding()
-
-                        }.frame(minWidth: 0, maxWidth: .infinity)
-                            .border(.yellow)
-                            .padding([.horizontal])
+                                .onTapGesture {
+                                    celebrateNewBestScore()
+                                }
+                        }
+                        .frame(minWidth: 2, maxWidth: .infinity)
+                        .border(.green, width: 5)
+                        .padding([.horizontal])
                     }
- 
-                    HStack(alignment: .top, spacing: 0){
-                        VStack(alignment: .center, spacing: 1){
+                    HStack(alignment: .top, spacing: 0) {
+                        VStack(alignment: .center, spacing: 1) {
+                            if (newBestscore) {
+                                Text("👑").font(.title2)
+                            }
                             Text("Punteggio Finale:")
                                 .makeHeadline()
                             Text("\(currentScore, specifier: "%.2f") / 100").makeHeadline().monospaced()
                         }
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .padding()
-                            .background(finalScoreColor)
-                        
-                        VStack(){
+                        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
+                        .padding()
+                        .background(newBestscore ? greenColor : redColor)
+                        VStack() {
+                            if (!newBestscore) {
+                                Text("👑").font(.title2)
+                            }
                             Text("Miglior Punteggio:")
                                 .makeHeadline()
                             Text("\(bestScore, specifier: "%.2f") / 100").makeHeadline().monospaced()
                         }
-                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
                         .padding()
-                        .background(bestScoreColor)
+                        .background(newBestscore ? redColor : greenColor)
                     }
-                        .padding([.horizontal, .top])
-
-                    VStack{
-                        //Text("Il tuo percorso: ").makeHeadline().padding([.top])
-                        
-                        /* Mappa che mostra il percorso fatto e i punti in cui si è
-                         avuto un dangerous behaviour di guida */
-                        MapView().frame( minHeight: 500 , maxHeight: 500)
-                            .padding()
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding([.horizontal, .top])
+                    VStack(alignment: .center, spacing: 1) {
+                        Text("La tua guida è durata:")
+                            .font(.title2)
+                            .bold()
+                        Text(Utils.getFormattedTime(duration: Int64(TimeIntervalManager.getInstance().getTotalTime())))
+                            .font(.title2)
+                            .monospaced()
                     }
-                    Button(action: {showAlert = true}){
-                        HStack{
-                            //Image(systemName: "stop.fill")
-                            Text("Nuova Guida")
+                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
+                    .padding()
+                    HStack(alignment: .top, spacing: 0) {
+                        VStack() {
+                            Text("😇").font(.title2)
+                            Text("Guida sicura: ")
+                                .makeHeadline()
+                            Text(Utils.getFormattedTime(duration: Int64(
+                                TimeIntervalManager.getInstance()
+                                    .getTotalTime(dangerous: false))))
+                            .makeHeadline()
+                            .monospaced()
                         }
+                        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
+                        .padding()
+                        .background(greenColor)
+                        VStack() {
+                            Text("😈").font(.title2)
+                            Text("Guida pericolosa: ")
+                                .makeHeadline()
+                            Text(Utils.getFormattedTime(duration: Int64(
+                                TimeIntervalManager.getInstance()
+                                    .getTotalTime(dangerous: true))))
+                            .makeHeadline()
+                            .monospaced()
+                        }
+                        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
+                        .padding()
+                        .background(redColor)
+                    }
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding([.horizontal])
+                    VStack (alignment: .leading) {
+                        Text("Il tuo percorso: ")
+                            .padding([.leading, .top])
+                            .font(.title)
+                        MapView().frame(minHeight: 500, maxHeight: 500)
+                            .padding([.horizontal])
+                    }
+                    Button(action: {goToStart = true}) {
+                        Text("Nuova Guida")
                     }
                     .buttonStyle(.borderedProminent)
                     .font(.title)
-                    .alert(isPresented: $showAlert){
-                        Alert(
-                            title: Text("Sei sicuro di voler iniziare una nuova guida?"),
-                            primaryButton: Alert.Button.default(Text("OK"), action: {
-                            }),
-                            
-                            secondaryButton: Alert.Button.destructive(Text("Annulla"))
-                        )
-                    }
                 }
             }
+            .navigationTitle("uDrive")  // It must be here. Otherwise, weird behaviour with ScrollView
+            .navigationDestination(isPresented: $goToStart) {
+                StartView()
+            }
         }
+        .confettiCannon(counter: $counter, num: 150)
         .padding([.horizontal], 10)
         .navigationBarBackButtonHidden(true)
-        .navigationTitle("uDrive")
         .onAppear() {
             CoreDataManager.getInstance().context = viewContext
             let timeIntervalManager = TimeIntervalManager.getInstance()
             bestScore = timeIntervalManager.getBestScore()
             currentScore = timeIntervalManager.getCurrentScore()
             if(bestScore < currentScore) {
-                showConfetti = true
+                celebrateNewBestScore()
                 timeIntervalManager.saveBestScore()
-                //I due colori di background dei punteggi si scambiano
-                var changeCols = finalScoreColor
-                finalScoreColor = bestScoreColor
-                bestScoreColor = changeCols
-                soundPlayer.play()
             }
-            /*//PER DEBUG
-            if(showConfetti){
-                var changeCols = finalScoreColor
-                finalScoreColor = bestScoreColor
-                bestScoreColor = changeCols
-            }*/
         }
+    }
+    
+    
+    private func celebrateNewBestScore() {
+        soundPlayer.play()
+        counter += 1         // everytime counter changes the confetti are shot
+        newBestscore = true
     }
 }
 

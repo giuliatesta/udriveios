@@ -12,11 +12,12 @@ struct StartView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
-        NavigationView{
-            VStack{
+        NavigationView {
+            VStack (alignment: .center){
                 GifImage("rotate_phone").frame(width: 150, height: 150, alignment: .center)
-                Text("Rotate your phone vertically").font(fontSystem)
-
+                // TODO centrare la scritta
+                Text("Metti il tuo telefono in verticale")
+                    .font(fontSystem)
                    Button(action: {
                        locationManager.requestLocationAuthorization()
                        if(authorizationGranted) {
@@ -29,7 +30,7 @@ struct StartView: View {
                        }
                     })
                     {
-                        Text("Start Driving!").font(.title)
+                        Text("Inizia la guida").font(.title)
                     }
                     .padding()
                     .buttonStyle(.borderedProminent)
@@ -39,9 +40,9 @@ struct StartView: View {
             }
             .alert(isPresented: $authorizationDenied) {
                 Alert(
-                    title: Text("Location Access Denied"),
-                    message: Text("To use this app, we need access to your location."),
-                    primaryButton: .default(Text("Exit"), action: {
+                    title: Text("Accesso alla posizione negato"),
+                    message: Text("Per utilizzare la applicazione, è necessario dare l'accesso alla propria posizione. Vai nelle impostazioni per modificare."),
+                    primaryButton: .default(Text("Esci"), action: {
                         exit(0) // This will forcefully exit the app
                     }),
                     secondaryButton: .cancel()

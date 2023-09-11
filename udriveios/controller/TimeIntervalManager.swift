@@ -18,17 +18,9 @@ class TimeIntervalManager {
     }
     
     func saveBestScore() {
-        coreDataManager.saveEntityBestScore(totalSafeTime: Int(self.getTotalSafeElapsedTime()), totalDangerousTime: Int(self.getTotalDangerousElapsedTime()))
+        coreDataManager.saveEntityBestScore(totalSafeTime: Int(self.getTotalTime(dangerous: false)), totalDangerousTime: Int(self.getTotalTime(dangerous: false)))
     }
-    
-    func getTotalTime() -> Double {
-        let elapsedTimes = coreDataManager.getAll(entityName: "ElapsedTime");
-        var seconds = 0
-        seconds = elapsedTimes.reduce(into: seconds) {sum, elapsedTime in
-            sum += (elapsedTime.value(forKey: "seconds")) as? Int ?? 0;
-        }
-        return Double(seconds)
-    }
+
     
     func getBestScore() -> Double {
         let fetchedResults = coreDataManager.getAll(entityName: "BestScore")
@@ -47,35 +39,23 @@ class TimeIntervalManager {
         let total = getTotalTime()
         print("Total time : \(total)")
         
-        if (total != 0.0) {
-            let tot = 100.0 * (self.getTotalSafeElapsedTime() / total)
+        if (total != 0) {
+            let tot = 100.0 * Double(self.getTotalTime(dangerous: false) / total)
             print("Current score : \(tot)")
             return tot
         }
         return 0.0
     }
     
-    func getTotalSafeElapsedTime() -> Double {
-        var seconds = 0
-
-        seconds = coreDataManager.getAll(entityName: "ElapsedTime").filter({ elapsedTime in
-            elapsedTime.value(forKey: "isDangerous") as? Bool == false
-        }).reduce(into: seconds) {sum, elapsedTime in
+    func getTotalTime(dangerous: Bool? = nil) -> Int {
+        var managedObject = coreDataManager.getAll(entityName: "ElapsedTime")
+        if(dangerous != nil) {
+            managedObject = managedObject.filter({ elapsedTime in
+                elapsedTime.value(forKey: "isDangerous") as? Bool == dangerous})
+        }
+        let seconds = managedObject.reduce(into: 0) {sum, elapsedTime in
             sum += (elapsedTime.value(forKey: "seconds")) as? Int ?? 0;
         }
-        print ("Safe Elapsed time: \(seconds)")
-        return Double(seconds)
-    }
-    
-    func getTotalDangerousElapsedTime() -> Double {
-        var seconds = 0
-
-        seconds = coreDataManager.getAll(entityName: "ElapsedTime").filter({ elapsedTime in
-            elapsedTime.value(forKey: "isDangerous") as? Bool == true
-        }).reduce(into: 0) {sum, elapsedTime in
-            sum += (elapsedTime.value(forKey: "seconds")) as? Int ?? 0;
-        }
-        print ("Dangerous Elapsed time: \(seconds)")
-        return Double(seconds)
+        return seconds
     }
 }

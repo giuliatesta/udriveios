@@ -37,7 +37,7 @@ struct HomeView: View {
                 Button(action: {showStopAlert = true}){
                     HStack{
                         Image(systemName: "stop.fill")
-                        Text("STOP")
+                        Text("TERMINA")
                     }
                 }
                 .buttonStyle(.borderedProminent)
