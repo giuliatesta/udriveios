@@ -16,7 +16,7 @@ struct AlertView : View{
     @State var backgroundColor = Color.red
     @State private var showHome = false
     
-    let soundPlayer: SoundPlayer = SoundPlayer(soundUrl: soundUrl, silenceDuration: 3)
+    var soundPlayer: SoundPlayer = SoundPlayer(soundUrl: soundUrl, silenceDuration: 3)
     
     @State var dangerousLocationManager = DangerousLocationManager.getInstance();
 

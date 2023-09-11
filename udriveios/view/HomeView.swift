@@ -18,11 +18,10 @@ struct HomeView: View {
     
     @ObservedObject var sensorValuesManager = SensorValuesManager();        //Observed object used to detect any changes in accelerometer or gyroscope values of the device
     
-    
     @Environment(\.managedObjectContext) private var viewContext
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack{
                 VStack{
                     Image(systemName: "timer")
@@ -56,22 +55,17 @@ struct HomeView: View {
                         secondaryButton: Alert.Button.destructive(Text("Annulla"))
                     )
                 }
-                
-                NavigationLink(destination: ReportView(),
-                    isActive: $endDrive
-                ){
-                    EmptyView()
-                }
-                
-                NavigationLink(destination: AlertView(direction: direction),
-                    isActive: $showAlert
-                ){
-                    EmptyView()
-                }
+            }
+            .navigationDestination(isPresented: $endDrive) {
+                ReportView()
+            }
+            .navigationDestination(isPresented: $showAlert) {
+                AlertView(direction: direction)
             }
             .navigationTitle("uDrive")
             .padding(10)
         }
+
         //This method detects any changes to the @ObservedObject sensorValuesManager.sensorValues
         //in order to update the view to show the AlertView if needed
         .onChange(of: sensorValuesManager.sensorValues, perform: { newValue in

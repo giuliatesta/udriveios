@@ -15,6 +15,8 @@ struct TimerView: View {
                 self.duration = startTime.durationToNow ?? 0
             }
             .onAppear() {
+                // reset timer
+                startTime = Date();
                 // no need for UI updates at startup
                 self.stopTimer()
             }
