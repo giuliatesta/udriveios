@@ -1,16 +1,19 @@
 import SwiftUI
 
+var clapSoundUrl = URL(string: "/System/Library/Audio/UISounds/New/Fanfare.caf")
 /* Final View showing a report of the overall driving behavior of the user */
 struct ReportView: View {
-    
+
     @State var showAlert = false
-    @State var showConfetti = false
+    @State var showConfetti = true
     @State var restart = false
 
     @State var currentScore : Double = 0.0;
     @State var bestScore : Double = 0.0;
     @State var bestScoreColor : Color = Color(hex: "9ff227").opacity(0.2)
     @State var finalScoreColor : Color = Color(hex: "f25727").opacity(0.2)
+    
+    var soundPlayer: SoundPlayer = SoundPlayer(soundUrl: clapSoundUrl, silenceDuration: 0, repeatSound: false)
     
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -20,17 +23,20 @@ struct ReportView: View {
                 VStack{
                     if(showConfetti) {
                         HStack{
-                            Text("Complimenti!\nHai ottenuto un nuovo record!").font(.title)
+                            Text("Complimenti!\nHai ottenuto un nuovo record!").font(.title2)
                                 .multilineTextAlignment(.center)
                                 .padding()
-                        }.border(.yellow)
+
+                        }.frame(minWidth: 0, maxWidth: .infinity)
+                            .border(.yellow)
+                            .padding([.horizontal])
                     }
  
                     HStack(alignment: .top, spacing: 0){
                         VStack(alignment: .center, spacing: 1){
                             Text("Punteggio Finale:")
                                 .makeHeadline()
-                            Text("\(currentScore, specifier: "%.2f") %").makeHeadline().monospaced()
+                            Text("\(currentScore, specifier: "%.2f") / 100").makeHeadline().monospaced()
                         }
                             .frame(minWidth: 0, maxWidth: .infinity)
                             .padding()
@@ -39,7 +45,7 @@ struct ReportView: View {
                         VStack(){
                             Text("Miglior Punteggio:")
                                 .makeHeadline()
-                            Text("\(bestScore, specifier: "%.2f") %").makeHeadline().monospaced()
+                            Text("\(bestScore, specifier: "%.2f") / 100").makeHeadline().monospaced()
                         }
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .padding()
@@ -90,14 +96,14 @@ struct ReportView: View {
                 var changeCols = finalScoreColor
                 finalScoreColor = bestScoreColor
                 bestScoreColor = changeCols
-            }/*
-            //PER DEBUG
+                soundPlayer.play()
+            }
+            /*//PER DEBUG
             if(showConfetti){
                 var changeCols = finalScoreColor
                 finalScoreColor = bestScoreColor
                 bestScoreColor = changeCols
             }*/
-             
         }
     }
 }

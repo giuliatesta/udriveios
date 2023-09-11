@@ -9,6 +9,8 @@ struct ContentView: View {
             try? await getDataFromApi()
             try? await Task.sleep(for: Duration.seconds(1))
             self.launchScreenState.dismiss()
+            // Stops the IOS screen sleeping
+            UIApplication.shared.isIdleTimerDisabled = true
             let coreDataManager = CoreDataManager.getInstance();
             coreDataManager.initManager()                                   // initialises the database
             coreDataManager.deleteEntity(entityName: "Location")            // empties the locations table -> only the current session is saved
@@ -22,7 +24,7 @@ struct ContentView: View {
         let (_,_) = try await URLSession.shared.data(from: googleURL)
     }
 }
-
+/*
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
@@ -33,4 +35,4 @@ struct ContentView_Previews: PreviewProvider {
         
         
     }
-}
+}*/

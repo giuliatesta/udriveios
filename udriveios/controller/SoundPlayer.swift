@@ -6,12 +6,14 @@ class SoundPlayer: NSObject, AVAudioPlayerDelegate {
     var player: AVAudioPlayer?
     let soundUrl: URL?
     var silenceDuration: Double
+    var repeatSound: Bool
     let decreaseSilenceInterval: Double
     
-    init(soundUrl: URL?, silenceDuration: Double = 3.0, decreaseSilenceInterval: Double = 30.0) {
+    init(soundUrl: URL?, silenceDuration: Double = 3.0, decreaseSilenceInterval: Double = 30.0, repeatSound: Bool = true) {
         self.soundUrl = soundUrl
         self.silenceDuration = silenceDuration
         self.decreaseSilenceInterval = decreaseSilenceInterval
+        self.repeatSound = repeatSound
         do {
             self.player = try AVAudioPlayer(contentsOf: soundUrl!)
         } catch {
@@ -39,7 +41,11 @@ class SoundPlayer: NSObject, AVAudioPlayerDelegate {
     // func from AVAudioPlayerDelegate - automatically called after play
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now()+silenceDuration) {
-            player.play();
+            if(self.repeatSound){
+                player.play();
+            }else{
+                self.stop()
+            }
         }
     }
     
