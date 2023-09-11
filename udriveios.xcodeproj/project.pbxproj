@@ -28,6 +28,7 @@
 		C6D2B66429F966C00030A8AC /* udriveiosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B66329F966C00030A8AC /* udriveiosTests.swift */; };
 		C6D2B66E29F966C00030A8AC /* udriveiosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B66D29F966C00030A8AC /* udriveiosUITests.swift */; };
 		C6D2B67029F966C00030A8AC /* udriveiosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B66F29F966C00030A8AC /* udriveiosUITestsLaunchTests.swift */; };
+		C6E2FA1D2AAF4A7A006CB7EC /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C6E2FA1C2AAF4A7A006CB7EC /* ConfettiSwiftUI */; };
 		C6E6490B2AA334EC00808BB2 /* DangerousLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E6490A2AA334EC00808BB2 /* DangerousLocationManager.swift */; };
 		C6E6490E2AA37D3500808BB2 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E6490D2AA37D3500808BB2 /* Direction.swift */; };
 		C6E649102AA61F7600808BB2 /* UdriveClassifer.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = C6E6490F2AA61F7500808BB2 /* UdriveClassifer.mlpackage */; };
@@ -118,6 +119,7 @@
 			files = (
 				C6A16F4E2A5D9F28005AED63 /* CoreLocation.framework in Frameworks */,
 				C6A16F4F2A5D9F28005AED63 /* CoreLocationUI.framework in Frameworks */,
+				C6E2FA1D2AAF4A7A006CB7EC /* ConfettiSwiftUI in Frameworks */,
 				C6A16F4A2A5D9AA4005AED63 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,6 +279,9 @@
 			dependencies = (
 			);
 			name = udriveios;
+			packageProductDependencies = (
+				C6E2FA1C2AAF4A7A006CB7EC /* ConfettiSwiftUI */,
+			);
 			productName = udriveios;
 			productReference = C6D2B64F29F966BE0030A8AC /* udriveios.app */;
 			productType = "com.apple.product-type.application";
@@ -349,6 +354,9 @@
 				Base,
 			);
 			mainGroup = C6D2B64629F966BE0030A8AC;
+			packageReferences = (
+				C6E2FA1B2AAF4A7A006CB7EC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+			);
 			productRefGroup = C6D2B65029F966BE0030A8AC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -581,7 +589,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"udriveios/Preview Content\"";
-				DEVELOPMENT_TEAM = 2YLCDUHPNV;
+				DEVELOPMENT_TEAM = 48JSG55QLH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = udriveios/Info.plist;
@@ -600,7 +608,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				NSMotionUsageDescription = "";
-				PRODUCT_BUNDLE_IDENTIFIER = it.unimi.udriveios;
+				PRODUCT_BUNDLE_IDENTIFIER = "it.unimi.udriveios-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -758,6 +766,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C6E2FA1B2AAF4A7A006CB7EC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C6E2FA1C2AAF4A7A006CB7EC /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6E2FA1B2AAF4A7A006CB7EC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C6F756B62A979F5A004895A7 /* udriveDataModel.xcdatamodeld */ = {
