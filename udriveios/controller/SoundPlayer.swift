@@ -35,6 +35,7 @@ class SoundPlayer: NSObject, AVAudioPlayerDelegate {
 
     func stop() {
         player?.stop();
+        player?.delegate
     }
     
     
@@ -43,8 +44,6 @@ class SoundPlayer: NSObject, AVAudioPlayerDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now()+silenceDuration) {
             if(self.repeatSound){
                 player.play();
-            }else{
-                self.stop()
             }
         }
     }
