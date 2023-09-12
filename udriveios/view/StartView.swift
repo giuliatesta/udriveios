@@ -3,40 +3,39 @@ import SwiftUI
 /* View that requests the location authorization to the user (if not already granted) */
 struct StartView: View {
     @State private var showStopAlert = false;
-    @State var authorizationGranted: Bool = false;
     @State var authorizationDenied : Bool = false;
     @State var canProceed : Bool = false;
-
-    @State var locationManager : LocationManager!;
     
     @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
-        NavigationView {
-            VStack (alignment: .center){
+        NavigationStack {
+            VStack (alignment: .center) {
                 GifImage("rotate_phone").frame(width: 150, height: 150, alignment: .center)
                 // TODO centrare la scritta
                 Text("Metti il tuo telefono in verticale")
                     .font(fontSystem)
-                   Button(action: {
-                       locationManager.requestLocationAuthorization()
-                       if(authorizationGranted) {
-                           // TODO check assignment
+                Button(action: {
+                    let locationManager = LocationManager.getInstance()
+                    locationManager.requestLocationAuthorization()
+                    if(locationManager.isAuthorizationGranted()) {
                            CoreDataManager.getInstance().context = viewContext
                            locationManager.startRecordingLocations()
                            canProceed = true;
                        } else {
+                           authorizationDenied = true
                            canProceed = false;
                        }
+                       print("canProceed action: \(canProceed)")
                     })
                     {
                         Text("Inizia la guida").font(.title)
                     }
                     .padding()
                     .buttonStyle(.borderedProminent)
-                NavigationLink(destination: HomeView(), isActive: $canProceed) {
-                    EmptyView()
-                }
+            }
+            .navigationDestination(isPresented: $canProceed) {
+                HomeView()
             }
             .alert(isPresented: $authorizationDenied) {
                 Alert(
@@ -48,9 +47,6 @@ struct StartView: View {
                     secondaryButton: .cancel()
                 )
             }
-        }
-        .onAppear() {
-            locationManager = LocationManager.getInstance(authorizationDenied: $authorizationDenied, authorizationGranted: $authorizationGranted);
         }
         .navigationBarTitle("")
         .navigationBarHidden(true)

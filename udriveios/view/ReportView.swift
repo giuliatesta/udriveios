@@ -113,9 +113,8 @@ struct ReportView: View {
                     }
                     Button(action: {
                         goToStart = true
-                        print("clicked...\(goToStart)")
-
-                        
+                        // empties data for a new ride
+                        CoreDataManager.getInstance().resetData()
                     }) {
                         Text("Nuova Guida")
                     }
@@ -124,14 +123,15 @@ struct ReportView: View {
                     .padding([.vertical])
                 }
             }
-            .navigationTitle("uDrive")  // It must be here. Otherwise, weird behaviour with ScrollView
+            .navigationDestination(isPresented: $goToStart) {       // must be called before title...
+                StartView()
+            }
+            .navigationTitle("uDrive")  // it must be here. Otherwise, weird behaviour with ScrollView
         }
         .confettiCannon(counter: $counter, num: 150)
         .padding([.horizontal], 10)
         .navigationBarBackButtonHidden(true)
-        .navigationDestination(isPresented: $goToStart) {
-            StartView()
-        }
+        
         .onAppear() {
             CoreDataManager.getInstance().context = viewContext
             let timeIntervalManager = TimeIntervalManager.getInstance()

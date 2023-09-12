@@ -12,10 +12,8 @@ struct ContentView: View {
             // Stops the IOS screen sleeping
             UIApplication.shared.isIdleTimerDisabled = true
             let coreDataManager = CoreDataManager.getInstance();
-            coreDataManager.initManager()                                   // initialises the database
-            coreDataManager.deleteEntity(entityName: "Location")            // empties the locations table -> only the current session is saved
-            coreDataManager.deleteEntity(entityName: "DangerousLocation")   // empties the DangerousLocation table
-            coreDataManager.deleteEntity(entityName: "ElapsedTime")   // empties the ElapsedTime table
+            coreDataManager.initManager()       // initialises the database
+            coreDataManager.resetData()
         }
     }
     

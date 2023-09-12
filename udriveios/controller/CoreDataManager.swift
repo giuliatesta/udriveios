@@ -117,4 +117,11 @@ class CoreDataManager : ObservableObject {
         return objects
     }
     
+    // only the current session is saved
+    func resetData() {
+        deleteEntity(entityName: "Location")      // empties the locations table
+        deleteEntity(entityName: "DangerousLocation")   // empties the DangerousLocation table
+        deleteEntity(entityName: "ElapsedTime")   // empties the ElapsedTime table
+    }
+    
 }
