@@ -9,7 +9,7 @@ struct StartView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack (alignment: .center) {
                 GifImage("rotate_phone").frame(width: 150, height: 150, alignment: .center)
                 // TODO centrare la scritta
@@ -33,9 +33,9 @@ struct StartView: View {
                     }
                     .padding()
                     .buttonStyle(.borderedProminent)
-            }
-            .navigationDestination(isPresented: $canProceed) {
-                HomeView()
+                NavigationLink(destination: HomeView(), isActive: $canProceed) {
+                    EmptyView()
+                }
             }
             .alert(isPresented: $authorizationDenied) {
                 Alert(

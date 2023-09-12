@@ -4,12 +4,22 @@ import AVFoundation
 /* Class used to play a sound in a view */
 class SoundPlayer: NSObject, AVAudioPlayerDelegate {
     var player: AVAudioPlayer?
-    let soundUrl: URL?
-    var silenceDuration: Double
-    var repeatSound: Bool
-    let decreaseSilenceInterval: Double
+    var soundUrl: URL?
+    var silenceDuration: Double = 3.0
+    var repeatSound: Bool = true
+    var decreaseSilenceInterval: Double = 30.0
     
-    init(soundUrl: URL?, silenceDuration: Double = 3.0, decreaseSilenceInterval: Double = 30.0, repeatSound: Bool = true) {
+    static private var instance : SoundPlayer = SoundPlayer();
+    
+    static func getInstance() -> SoundPlayer {
+        return instance;
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    func initSoundPlayer(soundUrl: URL?, silenceDuration: Double = 3.0, decreaseSilenceInterval: Double = 30.0, repeatSound: Bool = true) {
         self.soundUrl = soundUrl
         self.silenceDuration = silenceDuration
         self.decreaseSilenceInterval = decreaseSilenceInterval

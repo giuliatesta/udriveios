@@ -16,13 +16,13 @@ struct ReportView: View {
     @State private var bestScore : Double = 0.0;
     @State private var counter = 0
 
-    let soundPlayer: SoundPlayer = SoundPlayer(soundUrl: clapSoundUrl, silenceDuration: 0, repeatSound: false)
+    let soundPlayer: SoundPlayer = SoundPlayer.getInstance();
     
     let greenColor : Color = Color(hex: "9ff227").opacity(0.2)
     let redColor : Color = Color(hex: "f25727").opacity(0.2)
     
     var body: some View {
-        NavigationStack() {
+        NavigationView {
             VStack {
                 ScrollView {
                     if(newBestscore) {
@@ -122,9 +122,9 @@ struct ReportView: View {
                     .font(.title)
                     .padding([.vertical])
                 }
-            }
-            .navigationDestination(isPresented: $goToStart) {       // must be called before title...
-                StartView()
+                NavigationLink(destination: StartView(), isActive: $goToStart) {
+                    EmptyView()
+                }
             }
             .navigationTitle("uDrive")  // it must be here. Otherwise, weird behaviour with ScrollView
         }
@@ -133,6 +133,8 @@ struct ReportView: View {
         .navigationBarBackButtonHidden(true)
         
         .onAppear() {
+            soundPlayer.initSoundPlayer(soundUrl: clapSoundUrl, silenceDuration: 0, repeatSound: false)
+            
             CoreDataManager.getInstance().context = viewContext
             let timeIntervalManager = TimeIntervalManager.getInstance()
             bestScore = timeIntervalManager.getBestScore()

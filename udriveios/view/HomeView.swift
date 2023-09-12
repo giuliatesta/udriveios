@@ -21,9 +21,9 @@ struct HomeView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     var body: some View {
-        NavigationStack {
-            VStack{
-                VStack{
+        NavigationView {
+            VStack {
+                VStack {
                     Image(systemName: "timer")
                         .fillImageModifier()
                         .padding([.horizontal], 150)
@@ -32,7 +32,6 @@ struct HomeView: View {
                         .padding([.top],30)
                 }
                 .frame(height: 500)
-
                 Button(action: {showStopAlert = true}){
                     HStack{
                         Image(systemName: "stop.fill")
@@ -47,25 +46,25 @@ struct HomeView: View {
                             endDrive = true
                             sensorValuesManager.stopUpdates();                          //Stops updating accelerometer and gyroscope values
                             LocationManager.getInstance().stopRecordingLocations()      //Stops recording location
-                            
-                            // TODO refactoring (onDisappear not working -> we need to find something else)
                             TimeIntervalManager.getInstance().saveTimeInterval(duration: duration, isDangerous: false)
                         }),
                         
                         secondaryButton: Alert.Button.destructive(Text("Annulla"))
                     )
                 }
-            }
-            .navigationDestination(isPresented: $endDrive) {
-                ReportView()
-            }
-            .navigationDestination(isPresented: $showAlert) {
-                AlertView(direction: direction)
+                NavigationLink(destination: AlertView(direction: $direction), isActive: $showAlert)
+                {
+                    EmptyView()
+                }
+                NavigationLink(destination: ReportView(), isActive: $endDrive)
+                {
+                    EmptyView()
+                }
             }
             .navigationTitle("uDrive")
             .padding(10)
+           
         }
-
         //This method detects any changes to the @ObservedObject sensorValuesManager.sensorValues
         //in order to update the view to show the AlertView if needed
         .onChange(of: sensorValuesManager.sensorValues, perform: { newValue in
