@@ -20,6 +20,7 @@
 		C6A16F4A2A5D9AA4005AED63 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A16F492A5D9AA4005AED63 /* AudioToolbox.framework */; };
 		C6A16F4E2A5D9F28005AED63 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A16F4C2A5D9F28005AED63 /* CoreLocation.framework */; };
 		C6A16F4F2A5D9F28005AED63 /* CoreLocationUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A16F4D2A5D9F28005AED63 /* CoreLocationUI.framework */; };
+		C6B9D6242AB0BC4300D28CA6 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B9D6232AB0BC4300D28CA6 /* ClockView.swift */; };
 		C6C388C72AA8C7BF006D4482 /* TimeIntervalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C388C62AA8C7BF006D4482 /* TimeIntervalManager.swift */; };
 		C6D2B65329F966BE0030A8AC /* udriveiosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */; };
 		C6D2B65529F966BE0030A8AC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D2B65429F966BE0030A8AC /* ContentView.swift */; };
@@ -81,6 +82,7 @@
 		C6A16F4B2A5D9BC5005AED63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C6A16F4C2A5D9F28005AED63 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C6A16F4D2A5D9F28005AED63 /* CoreLocationUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocationUI.framework; path = System/Library/Frameworks/CoreLocationUI.framework; sourceTree = SDKROOT; };
+		C6B9D6232AB0BC4300D28CA6 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		C6C388C62AA8C7BF006D4482 /* TimeIntervalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalManager.swift; sourceTree = "<group>"; };
 		C6D2B64F29F966BE0030A8AC /* udriveios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = udriveios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = udriveiosApp.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				C636030F2A595457001A2084 /* TimerView.swift */,
 				C63603112A595C40001A2084 /* ButtonsView.swift */,
 				C6F756B02A97916D004895A7 /* MapView.swift */,
+				C6B9D6232AB0BC4300D28CA6 /* ClockView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				C6E649102AA61F7600808BB2 /* UdriveClassifer.mlpackage in Sources */,
 				C63603142A597514001A2084 /* ReportView.swift in Sources */,
 				F5C65DCB2A125B8D00A1D906 /* ViewDidLoadModifier.swift in Sources */,
+				C6B9D6242AB0BC4300D28CA6 /* ClockView.swift in Sources */,
 				C6C388C72AA8C7BF006D4482 /* TimeIntervalManager.swift in Sources */,
 				F5FE2B2D2A336A54002A1ED2 /* StartView.swift in Sources */,
 				C6F756B82A979F5A004895A7 /* udriveDataModel.xcdatamodeld in Sources */,

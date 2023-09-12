@@ -3,18 +3,21 @@ import SwiftUI
 
 let utils = Utils()
 
+var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
+
 /* View that shows a timer indicating for how long the safe driving behaviour is mantained.
    It's also possible to terminate the driving session. */
 struct HomeView: View {
     @State private var endDrive = false
     @State var direction : Direction = Direction.NONE       //Starting direction is initialized at NONE
-    @State var duration : Int = 0;
+    @State var duration : Int = 0;      // needed not by TimerView, but by HomeView to know safe time
     
     @State var showAlert = false;
     @State private var showStopAlert = false;
     
-    var classifier = Classifier()       //Classifier object used to classify the current driving behaviour based on the sensorValues attribute
-    
+    //Classifier object used to classify the current driving behaviour based on the sensorValues attribute
+    var classifier = Classifier()
     
     @ObservedObject var sensorValuesManager = SensorValuesManager();        //Observed object used to detect any changes in accelerometer or gyroscope values of the device
     
@@ -24,10 +27,12 @@ struct HomeView: View {
         NavigationView {
             VStack {
                 VStack {
-                    Image(systemName: "timer")
+                    /*Image(systemName: "timer")
                         .fillImageModifier()
                         .padding([.horizontal], 150)
                         .frame(width: 500,height: 300)
+                     */
+                    ClockView()
                     TimerView(duration: $duration)
                         .padding([.top],30)
                 }

@@ -2,23 +2,19 @@ import SwiftUI
 
 /* View showing a timer (in seconds) to be used in Home and Alert Views*/
 struct TimerView: View {
-    @State var isTimerRunning = false
     @State private var startTime =  Date()  // seconds already passed from the start of TimerView
     @Binding var duration: Int;
     @State private var timerString = "00:00:00"
-    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         Text(self.duration.formatted(allowedUnits: [.hour, .minute, .second]) ?? "")
             .font(fontSystem)
-            .onReceive(self.timer) { _ in
+            .onReceive(timer) { _ in
                 self.duration = startTime.durationToNow ?? 0
             }
             .onAppear() {
                 // reset timer
                 startTime = Date();
-                // no need for UI updates at startup
-                self.stopTimer()
             }
             .onDisappear() {
                 // reset timer
@@ -26,17 +22,10 @@ struct TimerView: View {
             }
     }
     
-    // TODO check if isTimerRunning is necessary
     func stopTimer() {
-        if(isTimerRunning){
-            self.timer.upstream.connect().cancel()
-        }
+        timer.upstream.connect().cancel()
     }
-    
-    func startTimer() {
-        self.timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    }
-    
+        
     func getDuration() -> Int {
         return self.duration;
     }

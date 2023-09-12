@@ -9,9 +9,9 @@ let soundUrl = URL(string: "/System/Library/Audio/UISounds/alarm.caf")
 
 /* View that shows the Direction of the dangerous behaviour along with a
  timer indicating for how long the dangerous behaviour is mantained */
-struct AlertView : View{
+struct AlertView : View {
     @Binding var direction: Direction
-    @State var duration: Int = 0;
+    @State var duration: Int = 0; // needed not by TimerView, but by HomeView to know dangerous time
     
     @State var backgroundColor = Color.red
     @State private var showHome = false
