@@ -7,7 +7,7 @@ struct Clock: Shape {
     let tickerScale: Double = 0.7
     
     var angleMultiplier: Double {
-        return (Double(self.timeInterval.remainder(dividingBy: 60.0)) / 60.0)
+        return (Double((self.timeInterval-1).remainder(dividingBy: 60.0)) / 60.0)
     }
     
     func path(in rect: CGRect) -> Path {
@@ -16,15 +16,15 @@ struct Clock: Shape {
         let center = CGPoint(x: rect.midX, y: rect.midY)
         path.move(to: center)
         let angle = Double.pi / 2 - .pi * 2 * angleMultiplier
-        path.addLine(to: CGPoint(x: rect.midX + cos(angle) * length * tickerScale,
-                                 y: rect.midY - sin(angle) * length * tickerScale))
+        path.addLine(to: CGPoint(
+            x: rect.midX + cos(angle) * length * tickerScale,
+            y: rect.midY - sin(angle) * length * tickerScale))
         return path
     }
 }
 
 struct ClockView: View {
-    @State private var startTime =  Date()  // seconds already passed from the start of Timer
-    @State var duration: Int = -1;      // must be -1 for some weird rounding during angle computations...
+    @Binding var duration: Int
 
     var body: some View {
         ZStack {
@@ -56,7 +56,7 @@ struct ClockView: View {
                      }
                  }
                 
-            Clock(timeInterval: TimeInterval(duration))
+            Clock(timeInterval: TimeInterval(duration))      // must be -1 for some weird rounding during angle computations...
                  .stroke(
                     Color.red,
                     style: StrokeStyle(
@@ -64,20 +64,8 @@ struct ClockView: View {
                         lineCap: .round,
                         lineJoin: .round))
                  .rotationEffect(Angle.degrees(360/60))
-                 
             }
             .frame(width: 350, height: 350, alignment: .center)
-            .onReceive(timer) { _ in
-                duration = startTime.durationToNow ?? 0
-            }
-            .onAppear() {
-                // reset timer
-               startTime = Date();
-            }
-            .onDisappear() {
-                // reset timer
-                startTime = Date();
-            }
     }
     
     
@@ -90,10 +78,4 @@ struct ClockView: View {
                    Spacer()
            }.rotationEffect(Angle.degrees(Double(tick)/(60) * 360))
     }
-}
-
-struct ClockView_Previews: PreviewProvider {
-   static var previews: some View {
-       ClockView()
-   }
 }

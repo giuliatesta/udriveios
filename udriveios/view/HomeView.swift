@@ -11,7 +11,6 @@ var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 struct HomeView: View {
     @State private var endDrive = false
     @State var direction : Direction = Direction.NONE       //Starting direction is initialized at NONE
-    @State var duration : Int = 0;      // needed not by TimerView, but by HomeView to know safe time
     
     @State var showAlert = false;
     @State private var showStopAlert = false;
@@ -21,13 +20,16 @@ struct HomeView: View {
     
     @ObservedObject var sensorValuesManager = SensorValuesManager();        //Observed object used to detect any changes in accelerometer or gyroscope values of the device
     
+    @State var timerHandler : TimerHandler?;
+    @State var duration : Int = 0;
+    
     @Environment(\.managedObjectContext) private var viewContext
 
     var body: some View {
         NavigationView {
             VStack {
                 VStack {
-                    ClockView()
+                    ClockView(duration: $duration)
                     TimerView(duration: $duration)
                         .padding([.top],30)
                 }
@@ -40,13 +42,14 @@ struct HomeView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .alert(isPresented: $showStopAlert) {
-                    Alert(
+                    Alert (
                         title: Text("Sei sicuro di voler terminare la guida?"),
                         primaryButton: Alert.Button.default(Text("Ok"), action: {
                             endDrive = true
                             sensorValuesManager.stopUpdates();                          //Stops updating accelerometer and gyroscope values
                             LocationManager.getInstance().stopRecordingLocations()      //Stops recording location
-                            TimeIntervalManager.getInstance().saveTimeInterval(duration: duration, isDangerous: false)
+                            TimeIntervalManager.getInstance().saveTimeInterval(duration: timerHandler?.getDuration() ?? 0, isDangerous: false)
+                            timerHandler?.stopTimer()
                         }),
                         secondaryButton: Alert.Button.destructive(Text("Annulla"))
                     )
@@ -74,9 +77,17 @@ struct HomeView: View {
         })
         .onChange(of: showAlert, perform: { newValue in
             if(showAlert) {
-                TimeIntervalManager.getInstance().saveTimeInterval(duration: duration, isDangerous: false)
+                TimeIntervalManager.getInstance().saveTimeInterval(duration: timerHandler?.getDuration() ?? 0, isDangerous: false)
+                timerHandler?.stopTimer()  // reset timer counting safe time
+            } else {
+                timerHandler?.restartTimer()
             }
         })
+        .onAppear() {
+            timerHandler = TimerHandler(duration: $duration)
+            timerHandler!.startTimer()      // it is not nil since it has just been initilized
+        }
+
         .navigationBarBackButtonHidden(true)
         .viewDidLoadModifier() {
             sensorValuesManager.startUpdates();

@@ -14,6 +14,7 @@
 		C63603102A595457001A2084 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636030F2A595457001A2084 /* TimerView.swift */; };
 		C63603122A595C40001A2084 /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63603112A595C40001A2084 /* ButtonsView.swift */; };
 		C63603142A597514001A2084 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63603132A597514001A2084 /* ReportView.swift */; };
+		C65266A92AB205910052AD56 /* TimerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65266A82AB205910052AD56 /* TimerHandler.swift */; };
 		C68243E829F9792300E9E0B0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243E729F9792300E9E0B0 /* HomeView.swift */; };
 		C68243EC29F97B4900E9E0B0 /* UIModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243EB29F97B4900E9E0B0 /* UIModifiers.swift */; };
 		C698FC142A6978B90061ABE7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C698FC132A6978B90061ABE7 /* LocationManager.swift */; };
@@ -75,6 +76,7 @@
 		C636030F2A595457001A2084 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		C63603112A595C40001A2084 /* ButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
 		C63603132A597514001A2084 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		C65266A82AB205910052AD56 /* TimerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHandler.swift; sourceTree = "<group>"; };
 		C68243E729F9792300E9E0B0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C68243EB29F97B4900E9E0B0 /* UIModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIModifiers.swift; sourceTree = "<group>"; };
 		C698FC132A6978B90061ABE7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				F5B5E1CF2A09293C00C7730F /* CMMotionManager.swift */,
 				C6E6490A2AA334EC00808BB2 /* DangerousLocationManager.swift */,
 				C6C388C62AA8C7BF006D4482 /* TimeIntervalManager.swift */,
+				C65266A82AB205910052AD56 /* TimerHandler.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				C6F756B12A97916D004895A7 /* MapView.swift in Sources */,
 				C6FCD6432A657FE200700AD9 /* SoundPlayer.swift in Sources */,
 				C6E6490B2AA334EC00808BB2 /* DangerousLocationManager.swift in Sources */,
+				C65266A92AB205910052AD56 /* TimerHandler.swift in Sources */,
 				C63603102A595457001A2084 /* TimerView.swift in Sources */,
 				F59997F22A24DBAE005D2677 /* AlertView.swift in Sources */,
 				C6E649122AA626A700808BB2 /* SensorValuesManager.swift in Sources */,

@@ -11,7 +11,6 @@ let soundUrl = URL(string: "/System/Library/Audio/UISounds/alarm.caf")
  timer indicating for how long the dangerous behaviour is mantained */
 struct AlertView : View {
     @Binding var direction: Direction
-    @State var duration: Int = 0; // needed not by TimerView, but by HomeView to know dangerous time
     
     @State var backgroundColor = Color.red
     @State private var showHome = false
@@ -19,6 +18,10 @@ struct AlertView : View {
     let soundPlayer: SoundPlayer = SoundPlayer.getInstance();
     
     @State var dangerousLocationManager = DangerousLocationManager.getInstance();
+    
+    @State var timerHandler : TimerHandler?;
+    @State var duration : Int = 0;
+   
 
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -52,7 +55,7 @@ struct AlertView : View {
                         }
                     }.frame(height: 300)
                     VStack {
-                        TimerView(duration: $duration).bold()
+                         TimerView(duration: $duration).bold()
                         Text("ATTENZIONE!").font(.largeTitle).bold().monospacedDigit()
                     }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                         .padding([.bottom], 50)
@@ -76,11 +79,17 @@ struct AlertView : View {
             CoreDataManager.getInstance().context = viewContext
             dangerousLocationManager.startRecordingDangerousLocations();
             
+            timerHandler = TimerHandler(duration: $duration)
+            timerHandler!.startTimer()      // it is not nil since it has just been initilized
+        
+            
         }
         .onDisappear {
             soundPlayer.stop()
-            dangerousLocationManager.stopRecordingDangerousLocations(direction: direction, duration: duration)
+            dangerousLocationManager.stopRecordingDangerousLocations(direction: direction, duration: timerHandler?.getDuration() ?? 0)
             TimeIntervalManager.getInstance().saveTimeInterval(duration: duration, isDangerous:true)
+            
+            timerHandler?.stopTimer()
         }
     }
     

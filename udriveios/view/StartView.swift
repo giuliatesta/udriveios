@@ -52,6 +52,7 @@ struct StartView: View {
         .navigationBarHidden(true)
     
     }
+    
 }
 
 struct StartView_Previews: PreviewProvider {

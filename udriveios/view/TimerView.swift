@@ -3,30 +3,11 @@ import SwiftUI
 /* View showing a timer (in seconds) to be used in Home and Alert Views*/
 struct TimerView: View {
     @State private var startTime =  Date()  // seconds already passed from the start of TimerView
-    @Binding var duration: Int;
+    @Binding var duration : Int
     
     var body: some View {
-        Text(self.duration.formatted(allowedUnits: [.hour, .minute, .second]) ?? "")
+        Text(duration.formatted(allowedUnits: [.hour, .minute, .second]) ?? "")
             .font(.largeTitle)
-            .onReceive(timer) { _ in
-                self.duration = startTime.durationToNow ?? 0
-            }
-            .onAppear() {
-                // reset timer
-                startTime = Date();
-            }
-            .onDisappear() {
-                // reset timer
-                startTime = Date();
-            }
-    }
-    
-    func stopTimer() {
-        timer.upstream.connect().cancel()
-    }
-        
-    func getDuration() -> Int {
-        return self.duration;
     }
 }
 
