@@ -27,33 +27,27 @@ struct HomeView: View {
         NavigationView {
             VStack {
                 VStack {
-                    /*Image(systemName: "timer")
-                        .fillImageModifier()
-                        .padding([.horizontal], 150)
-                        .frame(width: 500,height: 300)
-                     */
                     ClockView()
                     TimerView(duration: $duration)
                         .padding([.top],30)
                 }
-                .frame(height: 500)
-                Button(action: {showStopAlert = true}){
-                    HStack{
+                Button(action: {showStopAlert = true}) {
+                    HStack {
                         Image(systemName: "stop.fill")
                         Text("TERMINA")
+                            .font(.title)
                     }
                 }
                 .buttonStyle(.borderedProminent)
                 .alert(isPresented: $showStopAlert) {
                     Alert(
                         title: Text("Sei sicuro di voler terminare la guida?"),
-                        primaryButton: Alert.Button.default(Text("OK"), action: {
+                        primaryButton: Alert.Button.default(Text("Ok"), action: {
                             endDrive = true
                             sensorValuesManager.stopUpdates();                          //Stops updating accelerometer and gyroscope values
                             LocationManager.getInstance().stopRecordingLocations()      //Stops recording location
                             TimeIntervalManager.getInstance().saveTimeInterval(duration: duration, isDangerous: false)
                         }),
-                        
                         secondaryButton: Alert.Button.destructive(Text("Annulla"))
                     )
                 }
@@ -67,7 +61,6 @@ struct HomeView: View {
                 }
             }
             .navigationTitle("uDrive")
-            .padding(10)
            
         }
         //This method detects any changes to the @ObservedObject sensorValuesManager.sensorValues

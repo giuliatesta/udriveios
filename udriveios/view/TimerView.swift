@@ -4,11 +4,10 @@ import SwiftUI
 struct TimerView: View {
     @State private var startTime =  Date()  // seconds already passed from the start of TimerView
     @Binding var duration: Int;
-    @State private var timerString = "00:00:00"
-
+    
     var body: some View {
         Text(self.duration.formatted(allowedUnits: [.hour, .minute, .second]) ?? "")
-            .font(fontSystem)
+            .font(.largeTitle)
             .onReceive(timer) { _ in
                 self.duration = startTime.durationToNow ?? 0
             }

@@ -4,19 +4,18 @@ import Combine
 
 struct Clock: Shape {
     let timeInterval: TimeInterval
-    let tickerScale: CGFloat = 0.8
+    let tickerScale: Double = 0.7
     
-    var angleMultiplier: CGFloat {
-        return CGFloat(self.timeInterval.remainder(dividingBy: 60)) / 60
+    var angleMultiplier: Double {
+        return (Double(self.timeInterval.remainder(dividingBy: 60.0)) / 60.0)
     }
     
     func path(in rect: CGRect) -> Path {
         var path = Path()
         let length = rect.width / 2
         let center = CGPoint(x: rect.midX, y: rect.midY)
-
         path.move(to: center)
-        let angle = CGFloat.pi / 2 - .pi * 2 * angleMultiplier
+        let angle = Double.pi / 2 - .pi * 2 * angleMultiplier
         path.addLine(to: CGPoint(x: rect.midX + cos(angle) * length * tickerScale,
                                  y: rect.midY - sin(angle) * length * tickerScale))
         return path
@@ -25,40 +24,49 @@ struct Clock: Shape {
 
 struct ClockView: View {
     @State private var startTime =  Date()  // seconds already passed from the start of Timer
-    @State var duration: Int = 0;
+    @State var duration: Int = -1;      // must be -1 for some weird rounding during angle computations...
 
     var body: some View {
         ZStack {
-                 ForEach(0..<60) { tick in
+               ForEach(0..<60) { tick in
                      self.tick(at: tick)
                  }
                  GeometryReader { geometry in
                      ZStack {
                          HStack {
                              Text("9")
+                                 .font(.title)
                              Spacer()
                              Text("3")
+                                 .font(.title)
                              EmptyView()
                          }
-                         .padding()
+                         .padding(25)
                          VStack {
                              EmptyView()
                              Text("12")
+                                 .font(.title)
                              Spacer()
                              Text("6")
+                                 .font(.title)
                              EmptyView()
                          }
-                         .padding()
+                         .padding(20)
                         
-                     }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                     }
                  }
                 
             Clock(timeInterval: TimeInterval(duration))
-                 .stroke(Color.red, style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
+                 .stroke(
+                    Color.red,
+                    style: StrokeStyle(
+                        lineWidth: 3,
+                        lineCap: .round,
+                        lineJoin: .round))
                  .rotationEffect(Angle.degrees(360/60))
                  
             }
-            .frame(width: 200, height: 200, alignment: .center)
+            .frame(width: 350, height: 350, alignment: .center)
             .onReceive(timer) { _ in
                 duration = startTime.durationToNow ?? 0
             }
@@ -76,9 +84,9 @@ struct ClockView: View {
     func tick(at tick: Int) -> some View {
                VStack {
                    Rectangle()
-                       .fill(Color.primary)
-                       .opacity(tick % 5 == 0 ? 1 : 0.4)
-                       .frame(width: 2, height: tick % 5 == 0 ? 15 : 7)
+                       .fill(.blue)
+                       .opacity(tick % 5 == 0 ? 1 : 0.5)
+                       .frame(width: 3, height: tick % 5 == 0 ? 20 : 10)
                    Spacer()
            }.rotationEffect(Angle.degrees(Double(tick)/(60) * 360))
     }
