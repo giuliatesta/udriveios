@@ -1,5 +1,8 @@
 import SwiftUI
 
+let dropShadow = Color(hex: "aeaec0").opacity(0.4)
+let dropLight = Color(hex: "ffffff")
+
 /* View that requests the location authorization to the user (if not already granted) */
 struct StartView: View {
     @State private var showStopAlert = false;
@@ -10,32 +13,36 @@ struct StartView: View {
     
     var body: some View {
         NavigationView {
-            VStack (alignment: .center) {
-                GifImage("rotate_phone").frame(width: 150, height: 150, alignment: .center)
-                // TODO centrare la scritta
-                Text("Metti il tuo telefono in verticale")
-                    .font(fontSystem)
-                Button(action: {
-                    let locationManager = LocationManager.getInstance()
-                    locationManager.requestLocationAuthorization()
-                    if(locationManager.isAuthorizationGranted()) {
-                           CoreDataManager.getInstance().context = viewContext
-                           locationManager.startRecordingLocations()
-                           canProceed = true;
-                       } else {
-                           authorizationDenied = true
-                           canProceed = false;
-                       }
-                       print("canProceed action: \(canProceed)")
+            VStack {
+                GifImage("car_animation")
+                    .frame(width: 550,
+                           height: 300,
+                           alignment: .topLeading)
+                
+                VStack (alignment: .center) {
+                   /* Text("Metti il tuo telefono in verticale")
+                     .font(fontSystem) */
+                    Button("Inizia la guida", action: {
+                        let locationManager = LocationManager.getInstance()
+                        locationManager.requestLocationAuthorization()
+                        if(locationManager.isAuthorizationGranted()) {
+                            CoreDataManager.getInstance().context = viewContext
+                            locationManager.startRecordingLocations()
+                            canProceed = true;
+                        } else {
+                            authorizationDenied = true
+                            canProceed = false;
+                        }
+                        print("canProceed action: \(canProceed)")
                     })
-                    {
-                        Text("Inizia la guida").font(.title)
-                    }
-                    .padding()
-                    .buttonStyle(.borderedProminent)
+                    .buttonStyle(CustomButtonStyle())
+                    .font(.largeTitle)
+                }
+                Spacer()
                 NavigationLink(destination: HomeView(), isActive: $canProceed) {
                     EmptyView()
                 }
+                .navigationBarTitle("uDrive")
             }
             .alert(isPresented: $authorizationDenied) {
                 Alert(
@@ -48,9 +55,6 @@ struct StartView: View {
                 )
             }
         }
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
-    
     }
     
 }

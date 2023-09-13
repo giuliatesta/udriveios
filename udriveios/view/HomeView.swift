@@ -40,7 +40,7 @@ struct HomeView: View {
                             .font(.title)
                     }
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(CustomButtonStyle())
                 .alert(isPresented: $showStopAlert) {
                     Alert (
                         title: Text("Sei sicuro di voler terminare la guida?"),

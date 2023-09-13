@@ -12,9 +12,10 @@
 		C6246FE02A585D8700402F6C /* GifImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6246FDF2A585D8700402F6C /* GifImage.swift */; };
 		C6246FE42A58766100402F6C /* timer.gif in Resources */ = {isa = PBXBuildFile; fileRef = C6246FE32A58766100402F6C /* timer.gif */; };
 		C63603102A595457001A2084 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636030F2A595457001A2084 /* TimerView.swift */; };
-		C63603122A595C40001A2084 /* ButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63603112A595C40001A2084 /* ButtonsView.swift */; };
 		C63603142A597514001A2084 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63603132A597514001A2084 /* ReportView.swift */; };
 		C65266A92AB205910052AD56 /* TimerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65266A82AB205910052AD56 /* TimerHandler.swift */; };
+		C65266AE2AB213BF0052AD56 /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = C65266AD2AB213BF0052AD56 /* SwiftyGif */; };
+		C65266B12AB216170052AD56 /* car_animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = C65266B02AB216170052AD56 /* car_animation.gif */; };
 		C68243E829F9792300E9E0B0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243E729F9792300E9E0B0 /* HomeView.swift */; };
 		C68243EC29F97B4900E9E0B0 /* UIModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243EB29F97B4900E9E0B0 /* UIModifiers.swift */; };
 		C698FC142A6978B90061ABE7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C698FC132A6978B90061ABE7 /* LocationManager.swift */; };
@@ -74,9 +75,9 @@
 		C6246FDF2A585D8700402F6C /* GifImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifImage.swift; sourceTree = "<group>"; };
 		C6246FE32A58766100402F6C /* timer.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = timer.gif; sourceTree = "<group>"; };
 		C636030F2A595457001A2084 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		C63603112A595C40001A2084 /* ButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
 		C63603132A597514001A2084 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		C65266A82AB205910052AD56 /* TimerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHandler.swift; sourceTree = "<group>"; };
+		C65266B02AB216170052AD56 /* car_animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = car_animation.gif; path = ../../Downloads/car_animation.gif; sourceTree = "<group>"; };
 		C68243E729F9792300E9E0B0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C68243EB29F97B4900E9E0B0 /* UIModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIModifiers.swift; sourceTree = "<group>"; };
 		C698FC132A6978B90061ABE7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -125,6 +126,7 @@
 				C6A16F4F2A5D9F28005AED63 /* CoreLocationUI.framework in Frameworks */,
 				C6E2FA1D2AAF4A7A006CB7EC /* ConfettiSwiftUI in Frameworks */,
 				C6A16F4A2A5D9AA4005AED63 /* AudioToolbox.framework in Frameworks */,
+				C65266AE2AB213BF0052AD56 /* SwiftyGif in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +147,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C65266AF2AB214290052AD56 /* gif */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = gif;
+			sourceTree = "<group>";
+		};
 		C68243E629F9790200E9E0B0 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,7 +165,6 @@
 				C6246FDF2A585D8700402F6C /* GifImage.swift */,
 				C63603132A597514001A2084 /* ReportView.swift */,
 				C636030F2A595457001A2084 /* TimerView.swift */,
-				C63603112A595C40001A2084 /* ButtonsView.swift */,
 				C6F756B02A97916D004895A7 /* MapView.swift */,
 				C6B9D6232AB0BC4300D28CA6 /* ClockView.swift */,
 			);
@@ -196,9 +204,11 @@
 		C6D2B64629F966BE0030A8AC = {
 			isa = PBXGroup;
 			children = (
+				C65266AF2AB214290052AD56 /* gif */,
 				C6F277EB2AA0DF24008A7D1A /* .gitignore */,
 				C6F756B62A979F5A004895A7 /* udriveDataModel.xcdatamodeld */,
 				C6246FE32A58766100402F6C /* timer.gif */,
+				C65266B02AB216170052AD56 /* car_animation.gif */,
 				C6246FDD2A585CBC00402F6C /* rotate_phone.gif */,
 				C6D2B65129F966BE0030A8AC /* udriveios */,
 				C6D2B66229F966C00030A8AC /* udriveiosTests */,
@@ -287,6 +297,7 @@
 			name = udriveios;
 			packageProductDependencies = (
 				C6E2FA1C2AAF4A7A006CB7EC /* ConfettiSwiftUI */,
+				C65266AD2AB213BF0052AD56 /* SwiftyGif */,
 			);
 			productName = udriveios;
 			productReference = C6D2B64F29F966BE0030A8AC /* udriveios.app */;
@@ -362,6 +373,7 @@
 			mainGroup = C6D2B64629F966BE0030A8AC;
 			packageReferences = (
 				C6E2FA1B2AAF4A7A006CB7EC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+				C65266AC2AB213BF0052AD56 /* XCRemoteSwiftPackageReference "SwiftyGif" */,
 			);
 			productRefGroup = C6D2B65029F966BE0030A8AC /* Products */;
 			projectDirPath = "";
@@ -380,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6F277EC2AA0DF24008A7D1A /* .gitignore in Resources */,
+				C65266B12AB216170052AD56 /* car_animation.gif in Resources */,
 				C6246FDE2A585CBC00402F6C /* rotate_phone.gif in Resources */,
 				C6D2B65A29F966BF0030A8AC /* Preview Assets.xcassets in Resources */,
 				C6246FE42A58766100402F6C /* timer.gif in Resources */,
@@ -422,7 +435,6 @@
 				C63603102A595457001A2084 /* TimerView.swift in Sources */,
 				F59997F22A24DBAE005D2677 /* AlertView.swift in Sources */,
 				C6E649122AA626A700808BB2 /* SensorValuesManager.swift in Sources */,
-				C63603122A595C40001A2084 /* ButtonsView.swift in Sources */,
 				C6F756B52A979973004895A7 /* CoreDataManager.swift in Sources */,
 				F5B5E1D02A09293C00C7730F /* CMMotionManager.swift in Sources */,
 				C698FC142A6978B90061ABE7 /* LocationManager.swift in Sources */,
@@ -776,6 +788,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C65266AC2AB213BF0052AD56 /* XCRemoteSwiftPackageReference "SwiftyGif" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kirualex/SwiftyGif.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		C6E2FA1B2AAF4A7A006CB7EC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI.git";
@@ -787,6 +807,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C65266AD2AB213BF0052AD56 /* SwiftyGif */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C65266AC2AB213BF0052AD56 /* XCRemoteSwiftPackageReference "SwiftyGif" */;
+			productName = SwiftyGif;
+		};
 		C6E2FA1C2AAF4A7A006CB7EC /* ConfettiSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C6E2FA1B2AAF4A7A006CB7EC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;

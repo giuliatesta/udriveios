@@ -111,14 +111,12 @@ struct ReportView: View {
                         MapView().frame(minHeight: 500, maxHeight: 500)
                             .padding([.horizontal])
                     }
-                    Button(action: {
+                    Button("Nuova Guida", action: {
                         goToStart = true
                         // empties data for a new ride
                         CoreDataManager.getInstance().resetData()
-                    }) {
-                        Text("Nuova Guida")
-                    }
-                    .buttonStyle(.borderedProminent)
+                    })
+                    .buttonStyle(CustomButtonStyle())
                     .font(.title)
                     .padding([.vertical])
                 }

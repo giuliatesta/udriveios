@@ -19,7 +19,7 @@ struct GifImage: UIViewRepresentable {
             baseURL: url.deletingLastPathComponent()
         )
         webView.scrollView.isScrollEnabled = false
-        webView.contentMode = UIView.ContentMode.scaleAspectFit
+        webView.contentMode = .scaleAspectFill
         return webView
     }
 

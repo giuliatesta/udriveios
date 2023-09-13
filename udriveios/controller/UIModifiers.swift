@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 
-struct InvertColorModifier : ViewModifier{
+struct InvertColorModifier : ViewModifier {
     @Environment (\.colorScheme) var colorScheme
     
     func body(content: Content) -> some View {
@@ -15,13 +15,40 @@ struct InvertColorModifier : ViewModifier{
     
 }
 
-struct TextModifier : ViewModifier{
-    
+struct TextModifier : ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.headline)
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
+    }
+}
+
+struct CustomButtonStyle : ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .buttonStyle(.borderedProminent)
+            .padding()
+            .background(.blue, in: RoundedRectangle(cornerSize: CGSize(width: 20, height: 20), style: .continuous))
+            .foregroundColor(.white)
+            .opacity(configuration.isPressed ? 0.5 : 1)
+            .shadow(color: dropShadow,
+                    radius: configuration.isPressed ? 7: 10,
+                    x: configuration.isPressed ? -5: -10,
+                    y: configuration.isPressed ? -5: -10)
+            .shadow(color: dropLight,
+                    radius: configuration.isPressed ? 7: 10,
+                    x: configuration.isPressed ? 5: 10,
+                    y: configuration.isPressed ? 5: 10)
+    }
+}
+
+struct CustomButtonStyle_Previews: PreviewProvider {
+    static var previews: some View {
+        Button(action: { print("Pressed") }) {
+            Label("Premi qui", systemImage: "star")
+        }
+        .buttonStyle(CustomButtonStyle())
     }
 }
 
@@ -45,7 +72,7 @@ extension View {
     }
 }
 
-extension Text{
+extension Text {
     func makeHeadline() -> some View {
         modifier(TextModifier())
     }
