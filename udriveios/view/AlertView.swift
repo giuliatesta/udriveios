@@ -49,9 +49,7 @@ struct AlertView : View {
                                 .fitImageModifier()
                                 .padding([.horizontal], 70)
                         case .NONE:
-                            Image(systemName: "arrow.up")
-                                .fitImageModifier()
-                                .padding([.horizontal], 70)
+                            EmptyView()
                         }
                     }.frame(height: 300)
                     VStack {
@@ -92,6 +90,12 @@ struct AlertView : View {
             timerHandler?.stopTimer()
         }
     }
-    
+}
+
+
+struct AlertView_Previews: PreviewProvider {
+    static var previews: some View {
+        AlertView(direction: .constant(Direction.ACCELERATION))
+    }
 }
 

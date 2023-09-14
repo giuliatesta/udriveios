@@ -6,10 +6,14 @@ let dropLight = Color(hex: "ffffff")
 /* View that requests the location authorization to the user (if not already granted) */
 struct StartView: View {
     @State private var showStopAlert = false;
+    @State var authorizationGranted: Bool = false;
     @State var authorizationDenied : Bool = false;
+
     @State var canProceed : Bool = false;
     
     @Environment(\.managedObjectContext) private var viewContext
+    
+    @State var locationManager : LocationManager!;
     
     var body: some View {
         NavigationView {
@@ -18,23 +22,15 @@ struct StartView: View {
                     .frame(width: 550,
                            height: 300,
                            alignment: .topLeading)
-                
                 VStack (alignment: .center) {
-                   /* Text("Metti il tuo telefono in verticale")
-                     .font(fontSystem) */
+                    Text("Metti il telefono in verticale")
+                        .multilineTextAlignment(.center)
+                     .font(fontSystem)
+                     .padding([.top], 20)
                     Button("Inizia la guida", action: {
-                        let locationManager = LocationManager.getInstance()
                         locationManager.requestLocationAuthorization()
-                        if(locationManager.isAuthorizationGranted()) {
-                            CoreDataManager.getInstance().context = viewContext
-                            locationManager.startRecordingLocations()
-                            canProceed = true;
-                        } else {
-                            authorizationDenied = true
-                            canProceed = false;
-                        }
-                        print("canProceed action: \(canProceed)")
                     })
+                    .padding([.top], 50)
                     .buttonStyle(CustomButtonStyle())
                     .font(.largeTitle)
                 }
@@ -44,7 +40,21 @@ struct StartView: View {
                 }
                 .navigationBarTitle("uDrive")
             }
-            .alert(isPresented: $authorizationDenied) {
+            .onAppear() {
+                locationManager = LocationManager.getInstance(
+                    authorizationDenied: $authorizationDenied,
+                    authorizationGranted: $authorizationGranted);
+            }
+            .onChange(of: authorizationGranted, perform: { newValue in
+                if(newValue) {
+                    CoreDataManager.getInstance().context = viewContext
+                    locationManager.startRecordingLocations()
+                    canProceed = true;
+                } else {
+                    canProceed = false;
+                }
+            })
+        .alert(isPresented: $authorizationDenied) {
                 Alert(
                     title: Text("Accesso alla posizione negato"),
                     message: Text("Per utilizzare la applicazione, è necessario dare l'accesso alla propria posizione. Vai nelle impostazioni per modificare."),
@@ -56,6 +66,8 @@ struct StartView: View {
             }
         }
     }
+    
+    
     
 }
 

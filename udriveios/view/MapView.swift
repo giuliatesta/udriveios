@@ -27,13 +27,15 @@ struct MapView: UIViewRepresentable {
         
         context.coordinator.isDangerous = false
         if (coordinates.first != nil && coordinates.last != nil) {
-            print("first and last coordinates: \(coordinates.first)\(coordinates.last)")
+            print("first and last coordinates: \(String(describing: coordinates.first)), \(String(describing: coordinates.last))")
             let start = MKPointAnnotation()
             start.coordinate = CLLocationCoordinate2D(latitude: coordinates.first!.latitude, longitude: coordinates.first!.longitude)
+            start.title = "inizio"
             mapView.addAnnotation(start)
             
             let end = MKPointAnnotation()
             end.coordinate = CLLocationCoordinate2D(latitude: coordinates.last!.latitude, longitude: coordinates.last!.longitude)
+            end.title = "fine"
             mapView.addAnnotation(end)
         }
         
@@ -55,8 +57,10 @@ struct MapView: UIViewRepresentable {
             annotation.coordinate = CLLocationCoordinate2D(latitude: medianLocation.latitude, longitude: medianLocation.longitude)
             annotation.title = Direction.getName(direction: dangerousLocation.direction)
             annotation.subtitle = Utils.getFormattedTime(duration: dangerousLocation.duration)
+            print("dangerous annotation")
             mapView.addAnnotation(annotation)
         }
+        context.coordinator.isDangerous = false
         return mapView
     }
     
@@ -132,12 +136,12 @@ class Coordinator: NSObject, MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        print("Dangerous: \(isDangerous)\n annotation: \(annotation)")
+        print("Dangerous: \(isDangerous) \n annotation: \(annotation)")
 
         if !(annotation is MKPointAnnotation) {
             return nil
         }
-        if (self.isDangerous == false) {
+        if (!isDangerous) {
             let annotationIdentifier = "annotationIdentifier"
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
                 
