@@ -18,14 +18,14 @@ struct ReportView: View {
 
     let soundPlayer: SoundPlayer = SoundPlayer.getInstance();
     
-    let greenColor : Color = Color(hex: "9ff227").opacity(0.2)
-    let redColor : Color = Color(hex: "f25727").opacity(0.2)
+    let greenColor : Color = Color(hex: "DAFFCC")
+    let redColor : Color = Color(hex: "FFCCCC")
     
     var body: some View {
         NavigationView {
             VStack {
                 ScrollView {
-                    if(newBestscore) {
+                    if(true || newBestscore) {
                         HStack {
                             Text("Complimenti!\nHai ottenuto un nuovo record!").font(.title2)
                                 .multilineTextAlignment(.center)
@@ -42,6 +42,8 @@ struct ReportView: View {
                         VStack(alignment: .center, spacing: 1) {
                             if (newBestscore) {
                                 Text("👑").font(.title2)
+                            } else {
+                                Text("☠️").font(.title2)
                             }
                             Text("Punteggio Finale:")
                                 .makeHeadline()
@@ -51,7 +53,9 @@ struct ReportView: View {
                         .padding()
                         .background(newBestscore ? greenColor : redColor)
                         VStack() {
-                            if (!newBestscore) {
+                            if (newBestscore) {
+                                Text("☠️").font(.title2)
+                            } else {
                                 Text("👑").font(.title2)
                             }
                             Text("Miglior Punteggio:")
@@ -64,16 +68,6 @@ struct ReportView: View {
                     }
                     .fixedSize(horizontal: false, vertical: true)
                     .padding([.horizontal, .top])
-                    VStack(alignment: .center, spacing: 1) {
-                        Text("La tua guida è durata:")
-                            .font(.title2)
-                            .bold()
-                        Text(Utils.getFormattedTime(duration: Int64(TimeIntervalManager.getInstance().getTotalTime())))
-                            .font(.title2)
-                            .monospaced()
-                    }
-                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
-                    .padding()
                     HStack(alignment: .top, spacing: 0) {
                         VStack() {
                             Text("😇").font(.title2)
@@ -87,7 +81,7 @@ struct ReportView: View {
                         }
                         .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
                         .padding()
-                        .background(greenColor)
+                        .background(Color(hex: "CCF3FF"))
                         VStack() {
                             Text("😈").font(.title2)
                             Text("Guida pericolosa: ")
@@ -100,10 +94,20 @@ struct ReportView: View {
                         }
                         .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
                         .padding()
-                        .background(redColor)
+                        .background(Color(hex: "E2CCFF"))
                     }
                     .fixedSize(horizontal: false, vertical: true)
                     .padding([.horizontal])
+                    VStack(alignment: .center, spacing: 1) {
+                        Text("La tua guida è durata:")
+                            .font(.title2)
+                            .bold()
+                        Text(Utils.getFormattedTime(duration: Int64(TimeIntervalManager.getInstance().getTotalTime())))
+                            .font(.title2)
+                            .monospaced()
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
+                    .padding()
                     VStack (alignment: .leading) {
                         Text("Il tuo percorso: ")
                             .padding([.leading, .top])
