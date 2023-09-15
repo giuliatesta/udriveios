@@ -5,64 +5,36 @@ import SwiftUI
 /* Class used to manage the storage of CoreData's Location instances and the location
  authorization request to the user */
 class LocationManager: NSObject, CLLocationManagerDelegate {
-    var locationManager = CLLocationManager()
-    var coreDataManager : CoreDataManager;
+    private var locationManager = CLLocationManager()
+    private var coreDataManager : CoreDataManager;
     
-    @Binding var authorizationDenied : Bool;
-    @Binding var authorizationGranted : Bool;
-
-    private init(authorizationDenied : Binding<Bool>, authorizationGranted : Binding<Bool>) {
-        _authorizationDenied = authorizationDenied          // must be done BEFORE calling super
-        _authorizationGranted = authorizationGranted
+    
+    private override init() {
         coreDataManager = CoreDataManager.getInstance();
         super.init()
         locationManager.delegate = self     // must be done AFTER calling super
     }
-    
     static private var instance : LocationManager?;
     
-    static func getInstance(authorizationDenied : Binding<Bool>, authorizationGranted : Binding<Bool>) -> LocationManager {
+    static func getInstance() -> LocationManager {
         if(instance == nil) {
-            instance = LocationManager(authorizationDenied: authorizationDenied, authorizationGranted: authorizationGranted);
+            instance = LocationManager();
         }
         return instance!;
     }
-    
-    static func getInstance() -> LocationManager {
-        return instance!;
+        
+    var status : CLAuthorizationStatus {
+        return locationManager.authorizationStatus
     }
     
+    var authorized : Bool {
+        return status == .authorizedAlways || status == .authorizedWhenInUse
+    }
 
     func requestLocationAuthorization() {
-        if locationManager.authorizationStatus == .notDetermined {
-            locationManager.requestWhenInUseAuthorization()
-        } else {
-            handleAuthorizationStatus(locationManager.authorizationStatus)
-        }
+        locationManager.requestWhenInUseAuthorization()
     }
 
-    func handleAuthorizationStatus(_ status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedWhenInUse, .authorizedAlways:
-            authorizationGranted = true
-            break
-        case .denied, .restricted:
-            authorizationDenied = true;
-            break
-        default:
-            break
-        }
-    }
-   
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        handleAuthorizationStatus(locationManager.authorizationStatus)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        handleAuthorizationStatus(status)
-    }
-   
-   
     func startRecordingLocations() {
         locationManager.startUpdatingLocation();
     }
