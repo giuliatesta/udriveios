@@ -13,11 +13,9 @@ class TimerHandler {
         timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(1), repeats: true) {_ in
             self.tick()
         }
-        print("start timer: \(String(describing: timer))")
     }
     
     func stopTimer() {
-        print("stop timer: \(String(describing: timer))")
         timer?.invalidate()
     }
     

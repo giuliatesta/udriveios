@@ -56,7 +56,7 @@ struct ClockView: View {
                      }
                  }
                 
-            Clock(timeInterval: TimeInterval(duration))      // must be -1 for some weird rounding during angle computations...
+            Clock(timeInterval: TimeInterval(duration))
                  .stroke(
                     Color.red,
                     style: StrokeStyle(

@@ -1,20 +1,16 @@
 import SwiftUI
 
-let dropShadow = Color(hex: "aeaec0").opacity(0.4)
-let dropLight = Color(hex: "ffffff")
-
 /* View that requests the location authorization to the user (if not already granted) */
 struct StartView: View {
     @State private var showStopAlert = false;
-    
-    @State var canProceed : Bool = false;
+    @State var startDrive : Bool = false;
     
     @Environment(\.managedObjectContext) private var viewContext
     
     @State var locationManager : LocationManager = LocationManager.getInstance();
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 GifImage("car_animation")
                     .frame(width: 550,
@@ -39,10 +35,14 @@ struct StartView: View {
                     .font(.largeTitle)
                 }
                 Spacer()
-                NavigationLink(destination: HomeView(), isActive: $canProceed) {
+                /*NavigationLink(destination: HomeView(), isActive: $canProceed) {
                     EmptyView()
-                }
+                }*/
                 .navigationBarTitle("uDrive")
+                .navigationBarBackButtonHidden(true)
+                .navigationDestination(isPresented: $startDrive) {
+                    HomeView()
+                }
             }
             .alert(isPresented: $showStopAlert) {
                 Alert(
@@ -62,10 +62,10 @@ struct StartView: View {
         if (locationManager.authorized) {
             CoreDataManager.getInstance().context = viewContext
             locationManager.startRecordingLocations()
-            canProceed = true;
+            startDrive = true;
         } else {
             showStopAlert = true
-            canProceed = false;
+            startDrive = false;
         }
     }
     

@@ -1,9 +1,6 @@
 import SwiftUI
 import ConfettiSwiftUI
 
-
-let clapSoundUrl = URL(string: "/System/Library/Audio/UISounds/New/Fanfare.caf")
-
 /* Final View showing a report of the overall driving behavior of the user */
 struct ReportView: View {
     
@@ -22,7 +19,7 @@ struct ReportView: View {
     let redColor : Color = Color(hex: "FFCCCC")
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 ScrollView {
                     if(true || newBestscore) {
@@ -124,17 +121,18 @@ struct ReportView: View {
                     .font(.title)
                     .padding([.vertical])
                 }
-                NavigationLink(destination: StartView(), isActive: $goToStart) {
-                    EmptyView()
-                }
             }
             .navigationTitle("uDrive")  // it must be here. Otherwise, weird behaviour with ScrollView
+            .navigationDestination(isPresented: $goToStart) {
+                StartView()
+            }
+            
         }
         .confettiCannon(counter: $counter, num: 150)
         .padding([.horizontal], 10)
         .navigationBarBackButtonHidden(true)
-        
         .onAppear() {
+            let clapSoundUrl = URL(string: "/System/Library/Audio/UISounds/New/Fanfare.caf")
             soundPlayer.initSoundPlayer(soundUrl: clapSoundUrl, silenceDuration: 0, repeatSound: false)
             
             CoreDataManager.getInstance().context = viewContext

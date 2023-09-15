@@ -32,7 +32,7 @@ class SoundPlayer: NSObject, AVAudioPlayerDelegate {
     }
     
     func play() {
-        var timer = Timer.scheduledTimer(withTimeInterval: decreaseSilenceInterval, repeats: false, block: { timer in
+        Timer.scheduledTimer(withTimeInterval: decreaseSilenceInterval, repeats: false, block: { timer in
             self.increaseUrgency()
             timer.invalidate()
         });
@@ -45,7 +45,6 @@ class SoundPlayer: NSObject, AVAudioPlayerDelegate {
 
     func stop() {
         player?.stop();
-        player?.delegate
     }
     
     

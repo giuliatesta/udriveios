@@ -9,7 +9,7 @@ let soundUrl = URL(string: "/System/Library/Audio/UISounds/alarm.caf")
 
 /* View that shows the Direction of the dangerous behaviour along with a
  timer indicating for how long the dangerous behaviour is mantained */
-struct AlertView : View {
+struct DangerView : View {
     @Binding var direction: Direction
     
     @State var backgroundColor = Color.red
@@ -26,7 +26,7 @@ struct AlertView : View {
     @Environment(\.managedObjectContext) private var viewContext
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 ZStack(alignment: .center) {
                     VStack {
@@ -79,8 +79,6 @@ struct AlertView : View {
             
             timerHandler = TimerHandler(duration: $duration)
             timerHandler!.startTimer()      // it is not nil since it has just been initilized
-        
-            
         }
         .onDisappear {
             soundPlayer.stop()
@@ -95,7 +93,7 @@ struct AlertView : View {
 
 struct AlertView_Previews: PreviewProvider {
     static var previews: some View {
-        AlertView(direction: .constant(Direction.ACCELERATION))
+        DangerView(direction: .constant(Direction.ACCELERATION))
     }
 }
 

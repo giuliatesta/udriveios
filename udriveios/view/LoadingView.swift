@@ -14,10 +14,8 @@ struct LoadingView: View {
             .fitImageModifier()
             .padding([.horizontal], 70)
             .rotationEffect(firstAnimation ? Angle(degrees: 0): Angle(degrees: 720)) // Mark 4
-            //.rotationEffect(.degrees(isRotating))
             .scaleEffect(secondAnimation ? 0 : 1) // Mark 4
             .offset(y: secondAnimation ? 400 : 0) // Mark 4
-            //.rotationEffect(.degrees(isRotating))
         
             .onAppear() {
                 withAnimation(.linear(duration: 1).speed(0.25).repeatForever(autoreverses: false)) {
@@ -59,11 +57,9 @@ struct LoadingView: View {
                 }
             }
         case .finished:
-            // use this case to finish any work needed
             break
         }
     }
-
 }
 
 struct LaunchScreenView_Previews: PreviewProvider {

@@ -27,15 +27,14 @@ struct MapView: UIViewRepresentable {
         
         context.coordinator.isDangerous = false
         if (coordinates.first != nil && coordinates.last != nil) {
-            print("first and last coordinates: \(String(describing: coordinates.first)), \(String(describing: coordinates.last))")
             let start = MKPointAnnotation()
             start.coordinate = CLLocationCoordinate2D(latitude: coordinates.first!.latitude, longitude: coordinates.first!.longitude)
-            start.title = "inizio"
+            start.title = "🏁"
             mapView.addAnnotation(start)
             
             let end = MKPointAnnotation()
             end.coordinate = CLLocationCoordinate2D(latitude: coordinates.last!.latitude, longitude: coordinates.last!.longitude)
-            end.title = "fine"
+            end.title = "🏁"
             mapView.addAnnotation(end)
         }
         
@@ -57,7 +56,6 @@ struct MapView: UIViewRepresentable {
             annotation.coordinate = CLLocationCoordinate2D(latitude: medianLocation.latitude, longitude: medianLocation.longitude)
             annotation.title = Direction.getName(direction: dangerousLocation.direction)
             annotation.subtitle = Utils.getFormattedTime(duration: dangerousLocation.duration)
-            print("dangerous annotation")
             mapView.addAnnotation(annotation)
         }
         context.coordinator.isDangerous = false
@@ -117,7 +115,6 @@ struct FinalMapView_Previews: PreviewProvider {
 }
 
 class Coordinator: NSObject, MKMapViewDelegate {
-    
     var parent: MapView
     var isDangerous : Bool = false
     

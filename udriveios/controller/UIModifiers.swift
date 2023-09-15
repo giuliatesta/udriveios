@@ -25,6 +25,10 @@ struct TextModifier : ViewModifier {
 }
 
 struct CustomButtonStyle : ButtonStyle {
+    
+    let dropShadow = Color(hex: "aeaec0").opacity(0.4)
+    let dropLight = Color(hex: "ffffff")
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .buttonStyle(.borderedProminent)
