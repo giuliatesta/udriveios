@@ -26,7 +26,7 @@ struct HomeView : View {
         }
         // This method detects any changes to the @ObservedObject sensorValuesManager.sensorValues
         // in order to update the view to show the AlertView if needed
-        .onChange(of: sensorValuesManager.sensorValues, perform: { newValue in
+        .onChange(of: sensorValuesManager.sensorValues, perform: { _ in
             print(sensorValuesManager.sensorValues.toString())
             
             // Adds the new values in the classifier's sliding window

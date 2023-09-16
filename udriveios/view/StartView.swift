@@ -35,9 +35,7 @@ struct StartView: View {
                     .font(.largeTitle)
                 }
                 Spacer()
-                /*NavigationLink(destination: HomeView(), isActive: $canProceed) {
-                    EmptyView()
-                }*/
+                
                 .navigationBarTitle("uDrive")
                 .navigationBarBackButtonHidden(true)
                 .navigationDestination(isPresented: $startDrive) {

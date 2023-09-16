@@ -1,18 +1,20 @@
 import SwiftUI
 import ConfettiSwiftUI
 
+let clapSound = URL(string: "/System/Library/Audio/UISounds/New/Fanfare.caf")
+
 /* Final View showing a report of the overall driving behavior of the user */
 struct ReportView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @State var goToStart = false
     @State private var newBestscore = false
     
     @State private var currentScore : Double = 0.0;
     @State private var bestScore : Double = 0.0;
     @State private var counter = 0
-
+    
     let soundPlayer: SoundPlayer = SoundPlayer.getInstance();
     
     let greenColor : Color = Color(hex: "DAFFCC")
@@ -22,18 +24,12 @@ struct ReportView: View {
         NavigationStack {
             VStack {
                 ScrollView {
-                    if(true || newBestscore) {
-                        HStack {
-                            Text("Complimenti!\nHai ottenuto un nuovo record!").font(.title2)
-                                .multilineTextAlignment(.center)
-                                .padding()
-                                .onTapGesture {
-                                    celebrateNewBestScore()
-                                }
-                        }
-                        .frame(minWidth: 2, maxWidth: .infinity)
-                        .border(.green, width: 5)
-                        .padding([.horizontal])
+                    if(newBestscore) {
+                        FlashingText(text: "Complimenti!\nHai ottenuto un nuovo record!")
+                            .onTapGesture {
+                                celebrateNewBestScore()
+                            }
+                            .frame(minWidth: 2, maxWidth: .infinity)
                     }
                     HStack(alignment: .top, spacing: 0) {
                         VStack(alignment: .center, spacing: 1) {
@@ -122,18 +118,16 @@ struct ReportView: View {
                     .padding([.vertical])
                 }
             }
-            .navigationTitle("uDrive")  // it must be here. Otherwise, weird behaviour with ScrollView
+            .navigationTitle("uDrive")
             .navigationDestination(isPresented: $goToStart) {
                 StartView()
             }
-            
         }
         .confettiCannon(counter: $counter, num: 150)
         .padding([.horizontal], 10)
         .navigationBarBackButtonHidden(true)
         .onAppear() {
-            let clapSoundUrl = URL(string: "/System/Library/Audio/UISounds/New/Fanfare.caf")
-            soundPlayer.initSoundPlayer(soundUrl: clapSoundUrl, silenceDuration: 0, repeatSound: false)
+            soundPlayer.initSoundPlayer(soundUrl: clapSound, silenceDuration: 0, repeatSound: false)
             
             CoreDataManager.getInstance().context = viewContext
             let timeIntervalManager = TimeIntervalManager.getInstance()
@@ -156,5 +150,28 @@ struct ReportView: View {
 struct ReportView_Previews: PreviewProvider {
     static var previews: some View {
         ReportView()
+    }
+}
+
+struct FlashingText: View {
+    var text : String;
+    
+    @State private var isFlashing = false
+    
+    var body: some View {
+        Text(text)
+            .font(.title2)
+            .multilineTextAlignment(.center)
+            .padding()
+            .background(
+                Rectangle()
+                    .strokeBorder(isFlashing ? Color.green : Color.clear, lineWidth: 5)
+                    .cornerRadius(10)
+                    .onAppear() {
+                        withAnimation(.easeInOut(duration:0.5).repeatForever()) {
+                            self.isFlashing.toggle()
+                        }
+                    }
+            )
     }
 }
