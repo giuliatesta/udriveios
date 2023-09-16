@@ -149,13 +149,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C65266AF2AB214290052AD56 /* gif */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = gif;
-			sourceTree = "<group>";
-		};
 		C68243E629F9790200E9E0B0 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,7 +200,6 @@
 		C6D2B64629F966BE0030A8AC = {
 			isa = PBXGroup;
 			children = (
-				C65266AF2AB214290052AD56 /* gif */,
 				C6F277EB2AA0DF24008A7D1A /* .gitignore */,
 				C6F756B62A979F5A004895A7 /* udriveDataModel.xcdatamodeld */,
 				C6246FE32A58766100402F6C /* timer.gif */,

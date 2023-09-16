@@ -27,9 +27,9 @@ struct DangerView : View {
 
     var body: some View {
         NavigationStack {
-            VStack {
-                ZStack(alignment: .center) {
-                    VStack {
+            VStack(alignment: .center) {
+                VStack(alignment: .center) {
+                    HStack(alignment: .center) {
                         // A different icon is shown based on the direction received by the HomeView
                         switch direction {
                         case .BREAK:
@@ -51,15 +51,24 @@ struct DangerView : View {
                         case .NONE:
                             EmptyView()
                         }
-                    }.frame(height: 300)
+                    }
+                    .frame(height: 300)
+                    .padding([.top], 75)
                     VStack {
-                         TimerView(duration: $duration).bold()
-                        Text("ATTENZIONE!").font(.largeTitle).bold().monospacedDigit()
-                    }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                        .padding([.bottom], 50)
+                        TimerView(duration: $duration)
+                            .bold()
+                            .font(.title)
+                        Text("ATTENZIONE!")
+                            .font(.largeTitle)
+                            .bold()
+                            .monospacedDigit()
+                            .padding([.top], 5)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding([.bottom], 50)
                 }
-                .background(backgroundColor)
             }
+            .background(backgroundColor)
         }
         .navigationBarBackButtonHidden(true)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

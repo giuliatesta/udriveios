@@ -2,7 +2,7 @@ import SwiftUI
 
 struct HomeView : View {
     @State var danger : Bool = false
-    @State var direction : Direction = Direction.NONE    // starting direction is initialized at NONE
+    @State var direction : Direction = Direction.NONE    // initial direction is NONE
     
     // It classifies the current driving behaviour based on the sensorValues attribute
     var classifier = Classifier()
