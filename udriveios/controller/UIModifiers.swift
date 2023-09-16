@@ -25,10 +25,7 @@ struct TextModifier : ViewModifier {
 }
 
 struct CustomButtonStyle : ButtonStyle {
-    
-    let dropShadow = Color(hex: "aeaec0").opacity(0.4)
-    let dropLight = Color(hex: "ffffff")
-    
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .buttonStyle(.borderedProminent)
@@ -36,15 +33,7 @@ struct CustomButtonStyle : ButtonStyle {
             .background(.blue, in: RoundedRectangle(cornerSize: CGSize(width: 20, height: 20), style: .continuous))
             .foregroundColor(.white)
             .opacity(configuration.isPressed ? 0.5 : 1)
-            .shadow(color: dropShadow,
-                    radius: configuration.isPressed ? 7: 10,
-                    x: configuration.isPressed ? -5: -10,
-                    y: configuration.isPressed ? -5: -10)
-            .shadow(color: dropLight,
-                    radius: configuration.isPressed ? 7: 10,
-                    x: configuration.isPressed ? 5: 10,
-                    y: configuration.isPressed ? 5: 10)
-    }
+        }
 }
 
 struct CustomButtonStyle_Previews: PreviewProvider {

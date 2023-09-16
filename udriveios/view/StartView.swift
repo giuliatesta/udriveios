@@ -16,6 +16,7 @@ struct StartView: View {
                     .frame(width: 550,
                            height: 300,
                            alignment: .topLeading)
+                    .background(.clear)
                 VStack (alignment: .center) {
                     Text("Metti il telefono in verticale")
                         .multilineTextAlignment(.center)

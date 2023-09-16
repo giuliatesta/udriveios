@@ -17,8 +17,8 @@ struct ReportView: View {
     
     let soundPlayer: SoundPlayer = SoundPlayer.getInstance();
     
-    let greenColor : Color = Color(hex: "DAFFCC")
-    let redColor : Color = Color(hex: "FFCCCC")
+    @Environment(\.colorScheme) var colorScheme
+    
     
     var body: some View {
         NavigationStack {
@@ -44,7 +44,7 @@ struct ReportView: View {
                         }
                         .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
                         .padding()
-                        .background(newBestscore ? greenColor : redColor)
+                        .background(getScoreColor(bestScore: true))
                         VStack() {
                             if (newBestscore) {
                                 Text("☠️").font(.title2)
@@ -57,7 +57,7 @@ struct ReportView: View {
                         }
                         .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
                         .padding()
-                        .background(newBestscore ? redColor : greenColor)
+                        .background(getScoreColor())
                     }
                     .fixedSize(horizontal: false, vertical: true)
                     .padding([.horizontal, .top])
@@ -74,7 +74,7 @@ struct ReportView: View {
                         }
                         .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
                         .padding()
-                        .background(Color(hex: "CCF3FF"))
+                        .background(safeColor)
                         VStack() {
                             Text("😈").font(.title2)
                             Text("Guida pericolosa: ")
@@ -87,7 +87,7 @@ struct ReportView: View {
                         }
                         .frame(minWidth: 0, maxWidth: .infinity, maxHeight: .infinity)
                         .padding()
-                        .background(Color(hex: "E2CCFF"))
+                        .background(dangerColor)
                     }
                     .fixedSize(horizontal: false, vertical: true)
                     .padding([.horizontal])
@@ -144,6 +144,24 @@ struct ReportView: View {
         soundPlayer.play()
         counter += 1         // everytime counter changes the confetti are shot
         newBestscore = true
+    }
+    
+    private func getScoreColor(bestScore: Bool = false) -> Color {
+        let greenColor : Color = colorScheme == .light ? Color(hex: "DAFFCC") : Color(hex: "4EB826")
+        let redColor : Color = colorScheme == .light ? Color(hex: "FFCCCC") : Color(hex: "B82525")
+        if (newBestscore) {
+            return bestScore ? greenColor : redColor
+        } else {
+            return bestScore ? redColor : greenColor
+        }
+    }
+    
+    private var safeColor : Color {
+        colorScheme == .light ? Color(hex: "CCF3FF") : Color(hex: "2696B8")
+    }
+        
+    private var dangerColor : Color {
+        colorScheme == .light ? Color(hex: "E2CCFF") : Color(hex: "6527B8")
     }
 }
 

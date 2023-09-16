@@ -25,6 +25,8 @@ struct Clock: Shape {
 
 struct ClockView: View {
     @Binding var duration: Int
+    
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         ZStack {
@@ -72,7 +74,7 @@ struct ClockView: View {
     func tick(at tick: Int) -> some View {
                VStack {
                    Rectangle()
-                       .fill(.blue)
+                       .fill(colorScheme == .dark ? .cyan : .blue)
                        .opacity(tick % 5 == 0 ? 1 : 0.5)
                        .frame(width: 3, height: tick % 5 == 0 ? 20 : 10)
                    Spacer()
