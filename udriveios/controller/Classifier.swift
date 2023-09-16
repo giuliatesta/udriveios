@@ -24,8 +24,9 @@ class Classifier {
     
     private func createInput() -> MLMultiArray? {
         let multiArray = try! MLMultiArray(shape: [NSNumber(1), NSNumber(value: WINDOW_SIZE), NSNumber(6)], dataType: .double)
-        if(slidingWindow.window.count == WINDOW_SIZE) {
-            for (index, sensorValues) in slidingWindow.window.enumerated() {
+        let window = Filter.median2D(input: slidingWindow.window)
+        if(window.count == WINDOW_SIZE) {
+            for (index, sensorValues) in window.enumerated() {
                 multiArray[index * 6 + 0] = NSNumber(value: sensorValues.gyroscopeX)
                 multiArray[index * 6 + 1] = NSNumber(value: sensorValues.gyroscopeY)
                 multiArray[index * 6 + 2] = NSNumber(value: sensorValues.gyroscopeZ)
@@ -57,13 +58,9 @@ class Classifier {
 class SlidingWindow {
     private var _window: [SensorValues] = [];
     
-    //If the window doesn't have enough values, an empty array is returned
+    // if the window doesn't have enough values, an empty array is returned
     var window : [SensorValues] {
-        if(_window.count == WINDOW_SIZE) {
-            return _window;
-        } else {
-            return [];
-        }
+        return _window.count == WINDOW_SIZE ? _window : [SensorValues]();
     }
     
     func add(newData : SensorValues) {
@@ -72,5 +69,45 @@ class SlidingWindow {
         }
         _window.append(newData);
     }
-    
 }
+
+class Filter {
+   
+    // one-dimensional median filter
+    static func median(input: [Double]) -> [Double] {
+        let halfWindow = WINDOW_SIZE / 2
+        var filtered = [Double]()
+        for (i, _) in input.enumerated() {
+            input
+            let lowerBound = max(0, i - halfWindow)
+            let upperBound = min(WINDOW_SIZE - 1, i + halfWindow)
+            var window = Array(input[lowerBound...upperBound])
+            window.sort()
+            filtered.append(window[halfWindow])
+        }
+        return filtered
+    }
+    
+    // apply one-dimensional median filter to each column of the window
+    static func median2D(input: [SensorValues]) -> [SensorValues] {
+        if(input.isEmpty) {
+            return []
+        }
+        
+        // initialises an empty 14x6 matrix of zeros
+        var filtered =  Array(repeating: Array(repeating: 0.0, count: 6), count: WINDOW_SIZE)
+        
+        for col in 0..<5 {
+            let column = input.map { value in
+                value[col] ?? 0.0       // should never be 0
+            }
+            let filteredColumn = median(input: column)
+            // for each row adds the corresponding value from the filtered column
+            for (i, val) in filteredColumn.enumerated() {
+                filtered[i][col] = val
+            }
+        }
+        return SensorValues.cast(input: filtered)
+    }
+}
+
