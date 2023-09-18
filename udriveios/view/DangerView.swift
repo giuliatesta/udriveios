@@ -11,7 +11,7 @@ let soundUrl = URL(string: "/System/Library/Audio/UISounds/alarm.caf")
  timer indicating for how long the dangerous behaviour is mantained */
 struct DangerView : View {
     @Binding var direction: Direction
-    
+    @State private var _directionToBeSaved : Direction?
     @State var backgroundColor = Color.red
     @State private var showHome = false
     
@@ -88,10 +88,12 @@ struct DangerView : View {
             
             timerHandler = TimerHandler(duration: $duration)
             timerHandler!.startTimer()      // it is not nil since it has just been initilized
+            
+            _directionToBeSaved = direction
         }
         .onDisappear {
             soundPlayer.stop()
-            dangerousLocationManager.stopRecordingDangerousLocations(direction: direction, duration: timerHandler?.getDuration() ?? 0)
+            dangerousLocationManager.stopRecordingDangerousLocations(direction: _directionToBeSaved!, duration: timerHandler?.getDuration() ?? 0)
             TimeIntervalManager.getInstance().saveTimeInterval(duration: duration, isDangerous:true)
             
             timerHandler?.stopTimer()

@@ -8,14 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		C614A34029FA844700A05F29 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C614A33F29FA844700A05F29 /* LoadingView.swift */; };
-		C6246FDE2A585CBC00402F6C /* rotate_phone.gif in Resources */ = {isa = PBXBuildFile; fileRef = C6246FDD2A585CBC00402F6C /* rotate_phone.gif */; };
 		C6246FE02A585D8700402F6C /* GifImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6246FDF2A585D8700402F6C /* GifImage.swift */; };
-		C6246FE42A58766100402F6C /* timer.gif in Resources */ = {isa = PBXBuildFile; fileRef = C6246FE32A58766100402F6C /* timer.gif */; };
 		C63603102A595457001A2084 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636030F2A595457001A2084 /* TimerView.swift */; };
 		C63603142A597514001A2084 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63603132A597514001A2084 /* ReportView.swift */; };
 		C65266A92AB205910052AD56 /* TimerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65266A82AB205910052AD56 /* TimerHandler.swift */; };
 		C65266AE2AB213BF0052AD56 /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = C65266AD2AB213BF0052AD56 /* SwiftyGif */; };
-		C65266B12AB216170052AD56 /* car_animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = C65266B02AB216170052AD56 /* car_animation.gif */; };
 		C68243E829F9792300E9E0B0 /* SafeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243E729F9792300E9E0B0 /* SafeView.swift */; };
 		C68243EC29F97B4900E9E0B0 /* UIModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68243EB29F97B4900E9E0B0 /* UIModifiers.swift */; };
 		C698FC142A6978B90061ABE7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C698FC132A6978B90061ABE7 /* LocationManager.swift */; };
@@ -37,6 +34,7 @@
 		C6E649102AA61F7600808BB2 /* UdriveClassifer.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = C6E6490F2AA61F7500808BB2 /* UdriveClassifer.mlpackage */; };
 		C6E649122AA626A700808BB2 /* SensorValuesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E649112AA626A700808BB2 /* SensorValuesManager.swift */; };
 		C6EF261C2AB4C09E0000B6CB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EF261B2AB4C09E0000B6CB /* HomeView.swift */; };
+		C6EFDA002AB897E9001443C8 /* car_animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = C6EFD9FF2AB897E8001443C8 /* car_animation.gif */; };
 		C6F277EC2AA0DF24008A7D1A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C6F277EB2AA0DF24008A7D1A /* .gitignore */; };
 		C6F756B12A97916D004895A7 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F756B02A97916D004895A7 /* MapView.swift */; };
 		C6F756B52A979973004895A7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F756B42A979973004895A7 /* CoreDataManager.swift */; };
@@ -72,13 +70,10 @@
 
 /* Begin PBXFileReference section */
 		C614A33F29FA844700A05F29 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		C6246FDD2A585CBC00402F6C /* rotate_phone.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = rotate_phone.gif; sourceTree = "<group>"; };
 		C6246FDF2A585D8700402F6C /* GifImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifImage.swift; sourceTree = "<group>"; };
-		C6246FE32A58766100402F6C /* timer.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = timer.gif; sourceTree = "<group>"; };
 		C636030F2A595457001A2084 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		C63603132A597514001A2084 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		C65266A82AB205910052AD56 /* TimerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerHandler.swift; sourceTree = "<group>"; };
-		C65266B02AB216170052AD56 /* car_animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = car_animation.gif; path = ../../Downloads/car_animation.gif; sourceTree = "<group>"; };
 		C68243E729F9792300E9E0B0 /* SafeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeView.swift; sourceTree = "<group>"; };
 		C68243EB29F97B4900E9E0B0 /* UIModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIModifiers.swift; sourceTree = "<group>"; };
 		C698FC132A6978B90061ABE7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -103,6 +98,7 @@
 		C6E6490F2AA61F7500808BB2 /* UdriveClassifer.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = UdriveClassifer.mlpackage; sourceTree = "<group>"; };
 		C6E649112AA626A700808BB2 /* SensorValuesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorValuesManager.swift; sourceTree = "<group>"; };
 		C6EF261B2AB4C09E0000B6CB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C6EFD9FF2AB897E8001443C8 /* car_animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = car_animation.gif; sourceTree = "<group>"; };
 		C6F277EB2AA0DF24008A7D1A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C6F756B02A97916D004895A7 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		C6F756B42A979973004895A7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -174,7 +170,6 @@
 				F5FE2B282A3362B5002A1ED2 /* LaunchScreenStep.swift */,
 				F5FE2B2A2A3362D6002A1ED2 /* LaunchScreenStateManager.swift */,
 				F5C65DCA2A125B8D00A1D906 /* ViewDidLoadModifier.swift */,
-				F5A043E92A2E2BFD00D647E1 /* Classifier.swift */,
 				C6FCD6422A657FE200700AD9 /* SoundPlayer.swift */,
 				C698FC132A6978B90061ABE7 /* LocationManager.swift */,
 				C6E649112AA626A700808BB2 /* SensorValuesManager.swift */,
@@ -202,9 +197,7 @@
 			children = (
 				C6F277EB2AA0DF24008A7D1A /* .gitignore */,
 				C6F756B62A979F5A004895A7 /* udriveDataModel.xcdatamodeld */,
-				C6246FE32A58766100402F6C /* timer.gif */,
-				C65266B02AB216170052AD56 /* car_animation.gif */,
-				C6246FDD2A585CBC00402F6C /* rotate_phone.gif */,
+				C6EFD9FF2AB897E8001443C8 /* car_animation.gif */,
 				C6D2B65129F966BE0030A8AC /* udriveios */,
 				C6D2B66229F966C00030A8AC /* udriveiosTests */,
 				C6D2B66C29F966C00030A8AC /* udriveiosUITests */,
@@ -266,6 +259,7 @@
 		F564549C2A127B3000E881FF /* model */ = {
 			isa = PBXGroup;
 			children = (
+				F5A043E92A2E2BFD00D647E1 /* Classifier.swift */,
 				F547D7932A20ED7B00B23FD4 /* Utils.swift */,
 				C6E6490D2AA37D3500808BB2 /* Direction.swift */,
 				F5B5E1CD2A0926F400C7730F /* SensorValues.swift */,
@@ -387,10 +381,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6F277EC2AA0DF24008A7D1A /* .gitignore in Resources */,
-				C65266B12AB216170052AD56 /* car_animation.gif in Resources */,
-				C6246FDE2A585CBC00402F6C /* rotate_phone.gif in Resources */,
 				C6D2B65A29F966BF0030A8AC /* Preview Assets.xcassets in Resources */,
-				C6246FE42A58766100402F6C /* timer.gif in Resources */,
+				C6EFDA002AB897E9001443C8 /* car_animation.gif in Resources */,
 				C6D2B65729F966BF0030A8AC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -599,7 +591,7 @@
 		C6D2B67429F966C00030A8AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_3;
+				ASSETCATALOG_COMPILER_APPICON_NAME = app_logo_blue;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -638,7 +630,7 @@
 		C6D2B67529F966C00030A8AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_3;
+				ASSETCATALOG_COMPILER_APPICON_NAME = app_logo_blue;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;

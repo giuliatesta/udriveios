@@ -56,7 +56,7 @@ class SensorValues : Equatable {
         }
     }
     
-    // creating the [] operator to be used as it is used in arrayss
+    // creating the [] operator to be used as it is used in arrays
     subscript(index: Int) -> Double? {
         switch (index) {
         case 0:
@@ -78,9 +78,4 @@ class SensorValues : Equatable {
     }
 }
 
-extension Double {
-    func truncate() -> Double {
-       return self.rounded(toPlaces: 7)
-    }
-}
 

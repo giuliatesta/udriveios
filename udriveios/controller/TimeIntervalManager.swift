@@ -18,7 +18,7 @@ class TimeIntervalManager {
     }
     
     func saveBestScore() {
-        coreDataManager.saveEntityBestScore(totalSafeTime: Int(self.getTotalTime(dangerous: false)), totalDangerousTime: Int(self.getTotalTime(dangerous: false)))
+        coreDataManager.saveEntityBestScore(totalSafeTime: Int(self.getTotalTime(dangerous: false)), totalDangerousTime: Int(self.getTotalTime(dangerous: true)))
     }
 
     

@@ -1,7 +1,7 @@
 import Foundation
 import CoreMotion
 
-let UPDATE_INTERVAL : Double = 0.2
+let UPDATE_INTERVAL : Double = 0.5
 
 /* Class used to detect the changes in the device's motion updates (accelerometer and gyroscope values) */
 class SensorValuesManager : ObservableObject {

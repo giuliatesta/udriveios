@@ -6,7 +6,7 @@ struct StartView: View {
     @State var startDrive : Bool = false;
     
     @Environment(\.managedObjectContext) private var viewContext
-    
+
     @State var locationManager : LocationManager = LocationManager.getInstance();
     
     var body: some View {
@@ -16,7 +16,8 @@ struct StartView: View {
                     .frame(width: 550,
                            height: 300,
                            alignment: .topLeading)
-                    .background(.clear)
+                    .invertColorModifier()
+                    .padding()
                 VStack (alignment: .center) {
                     Text("Metti il telefono in verticale")
                         .multilineTextAlignment(.center)

@@ -20,6 +20,7 @@ struct GifImage: UIViewRepresentable {
         )
         webView.scrollView.isScrollEnabled = false
         webView.contentMode = .scaleAspectFill
+        webView.backgroundColor = .systemPink
         return webView
     }
 

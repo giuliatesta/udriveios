@@ -24,7 +24,7 @@ class Classifier {
     
     private func createInput() -> MLMultiArray? {
         let multiArray = try! MLMultiArray(shape: [NSNumber(1), NSNumber(value: WINDOW_SIZE), NSNumber(6)], dataType: .double)
-        let window = Filter.median2D(input: slidingWindow.window)
+        let window = slidingWindow.window //Filter.lowPass(input: slidingWindow.window)
         if(window.count == WINDOW_SIZE) {
             for (index, sensorValues) in window.enumerated() {
                 multiArray[index * 6 + 0] = NSNumber(value: sensorValues.gyroscopeX)
@@ -78,7 +78,6 @@ class Filter {
         let halfWindow = WINDOW_SIZE / 2
         var filtered = [Double]()
         for (i, _) in input.enumerated() {
-            input
             let lowerBound = max(0, i - halfWindow)
             let upperBound = min(WINDOW_SIZE - 1, i + halfWindow)
             var window = Array(input[lowerBound...upperBound])
@@ -109,5 +108,49 @@ class Filter {
         }
         return SensorValues.cast(input: filtered)
     }
+    
+    static func lowPass(input: [SensorValues], alpha: Double = 0.4, normalize: Bool = true) -> [SensorValues] {
+        if(input.isEmpty) {
+            return []
+        }
+        
+        // initialises an empty 14x6 matrix of zeros
+        var filtered =  Array(repeating: Array(repeating: 0.0, count: 6), count: WINDOW_SIZE)
+        
+        for col in 0..<5 {
+            let column = input.map { value in
+                value[col] ?? 0.0       // should never be 0
+            }
+            
+            var initialVal = column[0]
+            var filteredColumn = column.map { val in
+                initialVal = alpha * val + (1.0 - alpha) * initialVal
+                return initialVal
+            }
+            
+            if(normalize) {
+                filteredColumn = Normalization.zScore(input: filteredColumn)
+            }
+            // for each row adds the corresponding value from the filtered column
+            for (i, val) in filteredColumn.enumerated() {
+                filtered[i][col] = val
+            }
+        }
+        return SensorValues.cast(input: filtered)
+    }
+}
+
+
+class Normalization {
+    static func zScore(input: [Double]) -> [Double] {
+        let size = Double(input.count)
+        let mean = input.reduce(0, +) / size
+        let standardDeviation = sqrt(input.map { pow($0 - mean, 2) }.reduce(0, +) / size )
+        
+        return input.map { val in
+            (val - mean) / standardDeviation
+        }
+    }
+
 }
 

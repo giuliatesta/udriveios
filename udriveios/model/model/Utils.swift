@@ -28,6 +28,11 @@ extension Double {
     func toString() -> String {
         return "\(self.rounded(toPlaces :3))"
     }
+    
+    func truncate() -> Double {
+        return self.rounded(toPlaces: 7)
+    }
+    
 }
 
 

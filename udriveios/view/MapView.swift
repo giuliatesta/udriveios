@@ -29,12 +29,12 @@ struct MapView: UIViewRepresentable {
         if (coordinates.first != nil && coordinates.last != nil) {
             let start = MKPointAnnotation()
             start.coordinate = CLLocationCoordinate2D(latitude: coordinates.first!.latitude, longitude: coordinates.first!.longitude)
-            start.title = "🏁"
+            start.title = "Partenza"
             mapView.addAnnotation(start)
             
             let end = MKPointAnnotation()
             end.coordinate = CLLocationCoordinate2D(latitude: coordinates.last!.latitude, longitude: coordinates.last!.longitude)
-            end.title = "🏁"
+            end.title = "Arrivo"
             mapView.addAnnotation(end)
         }
         
@@ -130,28 +130,6 @@ class Coordinator: NSObject, MKMapViewDelegate {
         return renderer
       }
       return MKOverlayRenderer()
-    }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        print("Dangerous: \(isDangerous) \n annotation: \(annotation)")
-
-        if !(annotation is MKPointAnnotation) {
-            return nil
-        }
-        if (!isDangerous) {
-            let annotationIdentifier = "annotationIdentifier"
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier)
-                
-            if annotationView == nil {
-               annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-                annotationView!.canShowCallout = true
-            } else {
-                annotationView!.annotation = annotation
-            }
-            annotationView!.image = UIImage(systemName: "flag.checkered")
-            return annotationView
-        }
-        return nil
     }
 }
 
