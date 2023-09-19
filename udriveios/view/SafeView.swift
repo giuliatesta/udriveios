@@ -32,6 +32,7 @@ struct SafeView: View {
                     Alert (
                         title: Text("Sei sicuro di voler terminare la guida?"),
                         primaryButton: Alert.Button.default(Text("Ok"), action: {
+                            print("Termina la guida")
                             endDrive = true
                             SensorValuesManager().stopUpdates();       // Stops updating accelerometer and gyroscope values
                             LocationManager.getInstance().stopRecordingLocations()      //Stops recording location

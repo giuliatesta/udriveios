@@ -9,10 +9,13 @@ class SoundPlayer: NSObject, AVAudioPlayerDelegate {
     var repeatSound: Bool = true
     var decreaseSilenceInterval: Double = 30.0
     
-    static private var instance : SoundPlayer = SoundPlayer();
+    static private var instance : SoundPlayer?;
     
     static func getInstance() -> SoundPlayer {
-        return instance;
+        if(instance == nil) {
+            instance = SoundPlayer()
+        }
+        return instance!;
     }
     
     override init() {
@@ -45,13 +48,14 @@ class SoundPlayer: NSObject, AVAudioPlayerDelegate {
 
     func stop() {
         player?.stop();
+        repeatSound = false     // needed for offset created by silenceDuration after audioPlayerDidFinishPlayer
     }
     
     
     // func from AVAudioPlayerDelegate - automatically called after play
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         DispatchQueue.main.asyncAfter(deadline: .now()+silenceDuration) {
-            if(self.repeatSound){
+            if(self.repeatSound) {
                 player.play();
             }
         }

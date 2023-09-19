@@ -63,6 +63,7 @@ struct StartView: View {
             CoreDataManager.getInstance().context = viewContext
             locationManager.startRecordingLocations()
             startDrive = true;
+            print("Inizia la guida")
         } else {
             showStopAlert = true
             startDrive = false;

@@ -31,10 +31,10 @@
 		C6E2FA1D2AAF4A7A006CB7EC /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C6E2FA1C2AAF4A7A006CB7EC /* ConfettiSwiftUI */; };
 		C6E6490B2AA334EC00808BB2 /* DangerousLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E6490A2AA334EC00808BB2 /* DangerousLocationManager.swift */; };
 		C6E6490E2AA37D3500808BB2 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E6490D2AA37D3500808BB2 /* Direction.swift */; };
-		C6E649102AA61F7600808BB2 /* UdriveClassifer.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = C6E6490F2AA61F7500808BB2 /* UdriveClassifer.mlpackage */; };
 		C6E649122AA626A700808BB2 /* SensorValuesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E649112AA626A700808BB2 /* SensorValuesManager.swift */; };
 		C6EF261C2AB4C09E0000B6CB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EF261B2AB4C09E0000B6CB /* HomeView.swift */; };
 		C6EFDA002AB897E9001443C8 /* car_animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = C6EFD9FF2AB897E8001443C8 /* car_animation.gif */; };
+		C6EFDA102AB9D23B001443C8 /* UdriveClassifier.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = C6EFDA0F2AB9D23B001443C8 /* UdriveClassifier.mlpackage */; };
 		C6F277EC2AA0DF24008A7D1A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C6F277EB2AA0DF24008A7D1A /* .gitignore */; };
 		C6F756B12A97916D004895A7 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F756B02A97916D004895A7 /* MapView.swift */; };
 		C6F756B52A979973004895A7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F756B42A979973004895A7 /* CoreDataManager.swift */; };
@@ -95,10 +95,10 @@
 		C6D2B66F29F966C00030A8AC /* udriveiosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = udriveiosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C6E6490A2AA334EC00808BB2 /* DangerousLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerousLocationManager.swift; sourceTree = "<group>"; };
 		C6E6490D2AA37D3500808BB2 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
-		C6E6490F2AA61F7500808BB2 /* UdriveClassifer.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = UdriveClassifer.mlpackage; sourceTree = "<group>"; };
 		C6E649112AA626A700808BB2 /* SensorValuesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorValuesManager.swift; sourceTree = "<group>"; };
 		C6EF261B2AB4C09E0000B6CB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C6EFD9FF2AB897E8001443C8 /* car_animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = car_animation.gif; sourceTree = "<group>"; };
+		C6EFDA0F2AB9D23B001443C8 /* UdriveClassifier.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = UdriveClassifier.mlpackage; sourceTree = "<group>"; };
 		C6F277EB2AA0DF24008A7D1A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C6F756B02A97916D004895A7 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		C6F756B42A979973004895A7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -219,8 +219,8 @@
 		C6D2B65129F966BE0030A8AC /* udriveios */ = {
 			isa = PBXGroup;
 			children = (
+				C6EFDA0F2AB9D23B001443C8 /* UdriveClassifier.mlpackage */,
 				C6A16F4B2A5D9BC5005AED63 /* Info.plist */,
-				C6E6490F2AA61F7500808BB2 /* UdriveClassifer.mlpackage */,
 				C68243EA29F97B2A00E9E0B0 /* controller */,
 				C6D2B65229F966BE0030A8AC /* udriveiosApp.swift */,
 				F564549C2A127B3000E881FF /* model */,
@@ -421,6 +421,7 @@
 				C6E6490B2AA334EC00808BB2 /* DangerousLocationManager.swift in Sources */,
 				C65266A92AB205910052AD56 /* TimerHandler.swift in Sources */,
 				C63603102A595457001A2084 /* TimerView.swift in Sources */,
+				C6EFDA102AB9D23B001443C8 /* UdriveClassifier.mlpackage in Sources */,
 				F59997F22A24DBAE005D2677 /* DangerView.swift in Sources */,
 				C6E649122AA626A700808BB2 /* SensorValuesManager.swift in Sources */,
 				C6F756B52A979973004895A7 /* CoreDataManager.swift in Sources */,
@@ -429,7 +430,6 @@
 				F5A043EA2A2E2BFD00D647E1 /* Classifier.swift in Sources */,
 				C614A34029FA844700A05F29 /* LoadingView.swift in Sources */,
 				C68243EC29F97B4900E9E0B0 /* UIModifiers.swift in Sources */,
-				C6E649102AA61F7600808BB2 /* UdriveClassifer.mlpackage in Sources */,
 				C63603142A597514001A2084 /* ReportView.swift in Sources */,
 				F5C65DCB2A125B8D00A1D906 /* ViewDidLoadModifier.swift in Sources */,
 				C6B9D6242AB0BC4300D28CA6 /* ClockView.swift in Sources */,

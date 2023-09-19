@@ -1,18 +1,18 @@
 import Foundation
 import CoreML
 
-let WINDOW_SIZE : Int = 14;
+let WINDOW_SIZE : Int = 28;
 
 /* Class used as a wrapper between the UdriveClassifier component and the Home view.
    Inputs are stored using a sliding window technique of size 14 and later classified */
 class Classifier {
-    let model : UdriveClassifer;
+    let model : UdriveClassifier;
     var slidingWindow : SlidingWindow = SlidingWindow();
     
     init() {
         do {
             //TODO check configuration and try?
-            self.model = try UdriveClassifer(configuration: MLModelConfiguration());
+            self.model = try UdriveClassifier(configuration: MLModelConfiguration());
         } catch {
             fatalError("Failed to load Core ML model")
         }
@@ -24,7 +24,7 @@ class Classifier {
     
     private func createInput() -> MLMultiArray? {
         let multiArray = try! MLMultiArray(shape: [NSNumber(1), NSNumber(value: WINDOW_SIZE), NSNumber(6)], dataType: .double)
-        let window = slidingWindow.window //Filter.lowPass(input: slidingWindow.window)
+        let window = slidingWindow.window //Normalization.minMaxScaling(input: slidingWindow.window)
         if(window.count == WINDOW_SIZE) {
             for (index, sensorValues) in window.enumerated() {
                 multiArray[index * 6 + 0] = NSNumber(value: sensorValues.gyroscopeX)
@@ -43,7 +43,7 @@ class Classifier {
     func classify() -> Int64 {
         let multiArray : MLMultiArray? = createInput();
         if(multiArray != nil) {
-        let input : UdriveClassiferInput = UdriveClassiferInput(conv1d_input: multiArray!);
+        let input : UdriveClassifierInput = UdriveClassifierInput(conv1d_input: multiArray!);
             guard let prediction = try? model.prediction(input: input) else {
                 fatalError("Failed to make prediction")
             }
@@ -150,6 +150,39 @@ class Normalization {
         return input.map { val in
             (val - mean) / standardDeviation
         }
+    }
+    
+    static func zScore2D(input: [SensorValues]) -> [SensorValues] {
+        var scaled = Array(repeating: Array(repeating: 0.0, count: 6), count: WINDOW_SIZE)
+        for col in 0..<5 {
+            let column = Normalization.zScore(input: input.map { value in
+                value[col] ?? 0.0       // should never be 0
+            })
+            // for each row adds the corresponding value from the filtered column
+            for (i, val) in column.enumerated() {
+                scaled[i][col] = val
+            }
+        }
+        return SensorValues.cast(input: scaled)
+    }
+    
+    static func minMaxScaling(input: [SensorValues]) -> [SensorValues] {
+        var scaled = Array(repeating: Array(repeating: 0.0, count: 6), count: WINDOW_SIZE)
+        for col in 0..<5 {
+            let column = input.map { value in
+                value[col] ?? 0.0       // should never be 0
+            }
+            let min = column.min() ?? 0.0
+            let max = column.max() ?? 1.0
+            let scaledColumn = column.map { val in
+                (val - min) / (max - min)
+            }
+            // for each row adds the corresponding value from the filtered column
+            for (i, val) in scaledColumn.enumerated() {
+                scaled[i][col] = val
+            }
+        }
+        return SensorValues.cast(input: scaled)
     }
 
 }
